@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "NEXON Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("NEXON"), url("/font/NEXON Lv2 Gothic OTF Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "NEXON Medium";
+  font-style: normal;
+  font-weight: normal;
+  src: local("NEXON"), url("/font/NEXON Lv2 Gothic OTF Medium.otf") format("opentype");
+}
+@font-face {
+  font-family: "NEXON Light";
+  font-style: normal;
+  font-weight: normal;
+  src: local("NEXON"), url("/font/NEXON Lv2 Gothic OTF Light.otf") format("opentype");
+}
+@font-face {
+  font-family: "NEXON";
+  font-style: normal;
+  font-weight: normal;
+  src: local("NEXON"), url("/font/NEXON Lv2 Gothic OTF.otf") format("opentype");
+}
+
+.nexon-bold {
+  font-family: "NEXON Bold", sans-serif;
+}
+.nexon-medium {
+  font-family: "NEXON Medium", sans-serif;
+}
+.nexon-light {
+  font-family: "NEXON Light", sans-serif;
+}
+.nexon {
+  font-family: "NEXON", sans-serif;
+}
