@@ -1,7 +1,11 @@
+// tailwind.config.js
 module.exports = {
-    plugins: {
-      "@tailwindcss/postcss": {},
-      autoprefixer: {},
+  theme: {
+    extend: {
+      colors: {
+        'black4': '#444444',
+      },
     },
-  };
-  
+  },
+  plugins: [],
+};

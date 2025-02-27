@@ -1,9 +1,8 @@
+import LoginForm from "../components/login/LoginForm";
 
 const Login = ():JSX.Element=>{
     return(
-        <>
-            Login
-        </>
+        <LoginForm />
     )
 }
 
