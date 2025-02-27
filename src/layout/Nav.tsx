@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 const Nav = ():JSX.Element =>{
     return (
-        <div className="fixed top-0 left-0 w-full border-b border-[#e5e5e5]">
+
+        <div className="fixed top-0 left-0 w-full border-b border-[#e5e5e5] bg-white">
             <div className="w-[1200px] mx-auto flex justify-between items-center pt-[20px] pb-[20px]">
                 <div className="flex gap-6">
                     <Link to="/" className="text-xl nexon-bold">GrowTogether</Link>
@@ -39,6 +40,8 @@ const Nav = ():JSX.Element =>{
                         </li>
                     </ul>
                 </div>
+
+        
             </div>
 
         </div>
