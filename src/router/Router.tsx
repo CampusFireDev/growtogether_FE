@@ -5,8 +5,8 @@ import BootCamp from "../views/BootCamp";
 import Notice from "../views/Notice";
 import MyPage from "../main/MyPage";
 import Login from "../auth/Login";
-import SignUp from "../auth/SignUp";
 import Layout from "../layout/Layout";
+import SignUp from "../auth/SignUp";
 
 
 const Router = ():JSX.Element =>{

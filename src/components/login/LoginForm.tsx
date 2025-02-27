@@ -1,4 +1,4 @@
-import { FindIdAndPassword, FormButton, InputField } from './index';
+import { FindIdAndPasswordAndJoin, FormButton, InputField } from './index';
 import SnsLogin from './SnsLogin';
 
 const LoginForm = ():JSX.Element=>{
@@ -9,7 +9,7 @@ const LoginForm = ():JSX.Element=>{
                 <InputField className="mb-2" placeholder="아이디" />
                 <InputField type="password" className="mb-2" placeholder="비밀번호" />
                 <FormButton type="submit">로그인</FormButton>
-                <FindIdAndPassword />
+                <FindIdAndPasswordAndJoin />
                 <SnsLogin />
             </form>
         </div>
