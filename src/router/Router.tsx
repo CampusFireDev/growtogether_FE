@@ -5,8 +5,10 @@ import BootCamp from "../views/BootCamp";
 import Notice from "../views/Notice";
 import MyPage from "../main/MyPage";
 import Login from "../auth/Login";
-import SignUp from "../components/signup/SignUpStep1.tsx";
+import SignUp from "../auth/SignUp";
 import Layout from "../layout/Layout";
+import FindPassword from "../components/password/findPassword";
+import ResetPassword from "../components/password/resetPassword"; 
 import FindId from "../auth/FindId.tsx";
 
 const Router = ():JSX.Element =>{
@@ -16,6 +18,8 @@ const Router = ():JSX.Element =>{
                 <Route path="/" element={<Home/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup/:step?" element={<SignUp/>} />
+                <Route path="/findpassword" element={<FindPassword/>} />
+                <Route path="/resetpassword" element={<ResetPassword/>} />
                 <Route path="/study" element={<Study/>} />
                 <Route path="/bootcamp" element={<BootCamp/>} />
                 <Route path="/notice" element={<Notice/>} />
