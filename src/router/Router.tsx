@@ -9,6 +9,7 @@ import SignUp from "../auth/SignUp";
 import Layout from "../layout/Layout";
 import FindPassword from "../components/password/findPassword";
 import ResetPassword from "../components/password/resetPassword"; 
+import FindId from "../auth/FindId.tsx";
 
 const Router = ():JSX.Element =>{
     return(
@@ -23,6 +24,7 @@ const Router = ():JSX.Element =>{
                 <Route path="/bootcamp" element={<BootCamp/>} />
                 <Route path="/notice" element={<Notice/>} />
                 <Route path="/mypage" element={<MyPage/>} />
+                <Route path="/findId" element={<FindId />} />
             </Route>
         </Routes>
     )
