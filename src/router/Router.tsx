@@ -7,6 +7,7 @@ import MyPage from "../main/MyPage";
 import Login from "../auth/Login";
 import SignUp from "../components/signup/SignUpStep1.tsx";
 import Layout from "../layout/Layout";
+import FindId from "../auth/FindId.tsx";
 
 const Router = ():JSX.Element =>{
     return(
@@ -19,6 +20,7 @@ const Router = ():JSX.Element =>{
                 <Route path="/bootcamp" element={<BootCamp/>} />
                 <Route path="/notice" element={<Notice/>} />
                 <Route path="/mypage" element={<MyPage/>} />
+                <Route path="/findId" element={<FindId />} />
             </Route>
         </Routes>
     )
