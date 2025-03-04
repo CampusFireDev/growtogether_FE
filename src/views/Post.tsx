@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"
 import { IoEyeOutline } from "react-icons/io5";
 import FormButton from "../components/form/FormButton";
 import StudyTypeBadge from "../components/common/ui/StudyTypeBadge";
@@ -10,8 +11,9 @@ import LikeBtn from "../components/common/ui/LikeBtn";
 import Comment from "../components/common/ui/Comment";
 
 interface PostData {
+    id: number;
     type: string,
-    tite: string;
+    title: string;
     content: string;
     programCourse: string;
     bootcampName: string;
@@ -24,41 +26,39 @@ interface PostData {
 }
 
 const Post = ():JSX.Element =>{
+    const { id } = useParams<{ id?: string }>(); // URL에서 `id` 가져옴
     const [post, setPost] = useState<PostData | null>(null);
-    useEffect(()=>{
-        const timer = setTimeout(()=>{
-            console.log("Fetching data from /post");
-
-            fetch("/bootcamp",{
-                cache: "no-store",
-                headers: {
-                    "Accept": "application/json"
-                }
+    
+    useEffect(() => {
+          console.log("Fetching data from /bootcamp");
+    
+          fetch(`/bootcamp/${id}`, {
+            cache: "no-store",
+            headers: {
+              Accept: "application/json",
+            },
+          })
+            .then((res) => {
+              console.log("응답 상태: ", res.status);
+              console.log("응답 Content-Type", res.headers.get("Content-Type"));
+    
+              if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+              }
+    
+              return res.json();
             })
-            .then((res) =>{
-                console.log("응답 상태: ", res.status);
-                console.log("응답 Content-Type", res.headers.get("Content-Type"))
-
-                if(!res.ok) {
-                    throw new Error(`HTTP error! Status: ${res.status}`)
-                }
-
-                return res.json();
+            .then((data) => {
+              console.log("받은 데이터", data);
+              setPost(data); // 응답 데이터를 post 상태로 설정
             })
-            .then((data)=>{
-                console.log("받은 데이터", data);
-                setPost(data);
-            })
-            .catch((error)=>{
-                console.log("API 호출 실패: ", error);
-                // 오류 응답 내용 확인 (HTML인 경우)
-                if (error instanceof TypeError && error.message.includes('JSON')) {
-                    console.error("응답이 JSON이 아닙니다. HTML 응답일 가능성이 높습니다.");
-                }
-            })
-        }, 500);
-        return () => clearTimeout(timer);
-    },[]);
+            .catch((error) => {
+              console.error("API 호출 실패: ", error);
+              if (error instanceof TypeError && error.message.includes("JSON")) {
+                console.error("응답이 JSON이 아닙니다. HTML 응답일 가능성이 높습니다.");
+              }
+            });
+      }, [id]); 
 
     if(!post){
         return <Loading />
@@ -99,7 +99,7 @@ const Post = ():JSX.Element =>{
             {/* 후기 */}
             <div className="border-b border-gray5 py-5">
                 <p className="nexon-bold text-black4 text-[14px] lg:text-[17px] mb-3">후기</p>
-                <p className="nexon-bold text-[14px] lg:text-[17px] ">{post.tite}</p>
+                <p className="nexon-bold text-[14px] lg:text-[17px] ">{post.title}</p>
                 <p className="text-[13px] lg:text-[15px] my-2">{post.content}</p>
             </div>
 

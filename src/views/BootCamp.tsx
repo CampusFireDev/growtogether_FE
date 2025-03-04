@@ -1,8 +1,8 @@
-
+import BoardCardList from "../components/common/list/BoardCardList";
 const BootCamp = ():JSX.Element=>{
     return(
         <>
-            BootCamp
+            <BoardCardList />
         </>
     )
 }

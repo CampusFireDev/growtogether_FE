@@ -23,7 +23,7 @@ const Router = ():JSX.Element =>{
                 <Route path="/resetpassword" element={<ResetPassword/>} />
                 <Route path="/study" element={<Study/>} />
                 <Route path="/bootcamp" element={<BootCamp/>} />
-                <Route path="/post/:id?" element={<Post/>} />
+                <Route path="/bootcamp/:id" element={<Post/>} />
                 <Route path="/notice" element={<Notice/>} />
                 <Route path="/mypage" element={<MyPage/>} />
                 <Route path="/findId" element={<FindId />} />

@@ -28,11 +28,13 @@ export const handlers = [
     })
   }),
 
-  http.get("/bootcamp", async () => { 
-    console.log('[MSW] Intercepted GET /api/posts');
+  http.get("/bootcamp/:id", async ({params}) => { 
+    const { id } = params;
+    console.log(`[MSW] Intercepted GET /bootcamp/${id}`);
     return HttpResponse.json({
+      id: 1,
       type: "BOOTCAMP",
-      titie:"부트캠프 솔직 후기",
+      title:"부트캠프 솔직 후기",
       content: "정말 만족스러웠습니다.",
       programCourse: "백엔드",
       bootcampName: "제로베이스",
