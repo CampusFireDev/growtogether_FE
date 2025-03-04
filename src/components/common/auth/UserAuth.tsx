@@ -1,5 +1,5 @@
-import InputField  from "../form/InputField";
-import FormButton from "../form/FormButton";
+import InputField  from "../../form/InputField";
+import FormButton from "../../form/FormButton";
 
 interface UserAuthProps {
     btnTitle?: string;

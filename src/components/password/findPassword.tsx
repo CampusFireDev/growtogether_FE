@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import FormButton from "../form/FormButton";
 import InputField from "../form/InputField";
-import Modal from "../common/Modal";
+import Modal from "../common/modal/Modal";
 
 const FindPassword = ():JSX.Element =>{
     const [ showPopup, setShowPopup ] = useState<boolean>(false);

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import SignUpProcess from "./SignUpProcess";
-import UserAuth from "../common/UserAuth";
+import UserAuth from "../common/auth/UserAuth";
 
 const SignUpStep2 = ():JSX.Element=>{
     const navigate = useNavigate();
