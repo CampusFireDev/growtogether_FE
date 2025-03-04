@@ -18,7 +18,7 @@ const StatusBadge = ({ status }: { status: string }) => {
     const statusStyles: Record<StatusBadgeProps["status"], string> = {
       "모집중": "border-green-500 text-green-500",
       "진행중": "border-blue-500 text-blue-500",
-      "모집마감": "border-red-500 text-red-500",
+      "모집마감": "border-black9 text-black9",
     };
   
     return (
