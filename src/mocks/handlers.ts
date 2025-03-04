@@ -26,5 +26,29 @@ export const handlers = [
         "Accept": "application/json"
       }
     })
+  }),
+
+  http.get("/bootcamp", async () => { 
+    console.log('[MSW] Intercepted GET /api/posts');
+    return HttpResponse.json({
+      type: "BOOTCAMP",
+      titie:"부트캠프 솔직 후기",
+      content: "정말 만족스러웠습니다.",
+      programCourse: "백엔드",
+      bootcampName: "제로베이스",
+      bootcampStartDate: "2025-02-10",
+      bootcampEndDate: "2025-05-10",
+      learningLanguage: ["Spring"],
+      programSatisfaction: 4,
+      learningLevel: 3,
+      assistantSatisfaction: 5
+    },
+    {
+      headers: {
+        "Accept": "application/json"
+      }
+
+    })
+
   })
 ];
