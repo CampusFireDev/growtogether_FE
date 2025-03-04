@@ -10,6 +10,7 @@ import Layout from "../layout/Layout";
 import FindPassword from "../components/password/findPassword";
 import ResetPassword from "../components/password/resetPassword"; 
 import FindId from "../auth/FindId.tsx";
+import Post from "../views/Post.tsx";
 
 const Router = ():JSX.Element =>{
     return(
@@ -22,6 +23,7 @@ const Router = ():JSX.Element =>{
                 <Route path="/resetpassword" element={<ResetPassword/>} />
                 <Route path="/study" element={<Study/>} />
                 <Route path="/bootcamp" element={<BootCamp/>} />
+                <Route path="/post/:id?" element={<Post/>} />
                 <Route path="/notice" element={<Notice/>} />
                 <Route path="/mypage" element={<MyPage/>} />
                 <Route path="/findId" element={<FindId />} />
