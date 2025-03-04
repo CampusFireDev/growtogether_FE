@@ -14,8 +14,8 @@ const PostInfo = ({ label, value, labelWidth, labelMaxWidth, className }:PostInf
     return(
         <div className="flex flex-col gap-4">
             <div className={`grid grid-cols-[${labelWidth}_1fr] lg:grid-cols-[${labelMaxWidth}_1fr]`}>
-                <p className={`nexon-bold text-black4 ${className}`}>{label}</p>
-                <p className={`nexon-medium text-black6 ${className}`}>{value}</p>
+                <div className={`nexon-bold text-black4 ${className}`}>{label}</div>
+                <div className={`nexon-medium text-black6 ${className}`}>{value}</div>
             </div>
         </div>
     )
