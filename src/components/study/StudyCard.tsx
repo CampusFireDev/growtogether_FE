@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import StudyTypeBadge from "../ui/StudyTypeBadge";
-import StatusBadge from "../ui/StatusBadge";
-import TechStackList from "../ui/TechStackList";
+import StudyTypeBadge from "../common/ui/StudyTypeBadge";
+import StatusBadge from "../common/ui/StatusBadge";
+import TechStackList from "../common/ui/TechStackList";
 
 interface StudyData {
     type: string;
@@ -16,7 +16,12 @@ interface StudyData {
     writer: string
 }
 
-const StudyCard = ({ study }: { study: StudyData}): JSX.Element => {
+interface StudyCardProps {
+    study: StudyData;
+    showTechStack?: boolean; // 기술 스택 표시 여부 (현재 급상승 중인 게시글에는 안보임)
+}
+
+const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element => {
     return(
         <div className="border border-gray5 py-[25px] px-[30px] rounded-[10px]">
             <Link to="/">
@@ -30,8 +35,8 @@ const StudyCard = ({ study }: { study: StudyData}): JSX.Element => {
                     <p>{study.endDate}</p>
                 </div>
                 <strong className="text-xl/[31px] h-[64px] overflow-hidden line-clamp-2 nexon-bold mt-[6px] mb-[15px] text-black4">{study.title}</strong>
-                {/* 기술스택 */}
-                <TechStackList stacks={study.techStack}/>
+                {/* showTechStack이 true일 때만 기술 스택 표시*/}
+                {showTechStack && <TechStackList stacks={study.techStack}/>}
                 <div className="flex justify-between mt-[15px] pt-[15px] border-t border-gray5">
                     <div className="flex items-center gap-1">
                         <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5"></div>

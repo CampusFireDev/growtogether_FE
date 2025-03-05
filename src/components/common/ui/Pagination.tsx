@@ -8,7 +8,7 @@ interface PaginationProps {
 
 const Pagination = ({ currentPage, totalPages, nextPage, prevPage, goToPage }: PaginationProps) => {
     return (
-        <div>
+        <div className="mt-[50px]">
             <ul className="flex items-center justify-center gap-[6px]">
                 <li>
                     <button
