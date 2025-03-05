@@ -10,7 +10,7 @@ const TextArea = ({name, placeholder, className}:TextAreaProps):JSX.Element =>{
             <textarea 
                 name={name} 
                 placeholder={placeholder} 
-                className={`border border-[#e5e5e5] rounded-[5px] p-2 ${className}`}>
+                className={`w-full border border-[#e5e5e5] rounded-[5px] p-2 ${className}`}>
             </textarea>
         </>
     )

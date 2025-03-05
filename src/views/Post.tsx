@@ -65,7 +65,7 @@ const Post = ():JSX.Element =>{
     }
 
     return(
-        <div className="w-full w-max-[1200px]">  
+        <div className="w-full max-w-[1200px]">  
             <StudyTypeBadge type={post.type}/>
             <h2 className="nexon-bold text-[20px]">{post.bootcampName}</h2>
             <div className="border-y border-gray5 flex items-center justify-between">    
