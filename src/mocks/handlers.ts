@@ -3,15 +3,29 @@
 import { http, HttpResponse } from "msw";
 import fakeData from "../data/fakeData.json";
 
-
-
 interface Comment {
   id: number;
   author: string;
   content: string;
   date: string;
 }
+
+interface StudyPost {
+  id: number;
+  type: string;
+  title: string;
+  description: string;
+  maxSize: number;
+  startDate: string;
+  endDate: string;
+  techStack: string[];
+  viewCount: number;
+  studyStatus: string;
+}
+
 let comment: Comment[] = fakeData.comment;
+let study_post: StudyPost[] = fakeData.study_post;
+let boot_post = fakeData.boot_post;
 
 
 export const handlers = [
@@ -20,20 +34,19 @@ export const handlers = [
     console.log('Fetching user with ID "%s"', id)
   }),
 
-  http.get("/study/:id?", async () => {
+  http.get("/study/:id?", async ({ params }) => {
+    const { id } = params;
     console.log('[MSW] Intercepted GET /api/posts');
-    return HttpResponse.json({
-      id: 1,
-      type: "STUDY",
-      title: "Spring Boot 스터디 모집",
-      description: "매주 수요일 7시에 진행하는 스터디입니다.",
-      maxSize: 5,
-      startDate: "2025-02-21",
-      endDate: "2025-03-30",
-      techStack: ["React", "Spring"],
-      viewCount: 2223,
-      studyStatus: 'OPEN'
-    },
+
+    if (!id) {
+      return HttpResponse.json(study_post, { // 전체 목록 반환
+        headers: { "Accept": "application/json" }
+      });
+    }
+  
+    const study = study_post.find((s) => s.id === Number(id));
+
+    return HttpResponse.json(study,
     {
       headers: {
         "Accept": "application/json"
@@ -41,24 +54,22 @@ export const handlers = [
     })
   }),
 
-  http.get("/bootcamp/:id", async ({params}) => { 
+  http.get("/bootcamp/:id?", async ({params}) => { 
     const { id } = params;
     console.log(`[MSW] Intercepted GET /bootcamp/${id}`);
-    return HttpResponse.json({
-      id: 1,
-      type: "BOOTCAMP",
-      title:"부트캠프 솔직 후기",
-      content: "정말 만족스러웠습니다.",
-      programCourse: "백엔드",
-      bootcampName: "제로베이스",
-      bootcampStartDate: "2025-02-10",
-      bootcampEndDate: "2025-05-10",
-      techStack: ["Spring"],
-      programSatisfaction: 4,
-      learningLevel: 3,
-      assistantSatisfaction: 5,
-      viewCount: 57,
-    },
+    const bootcamp = boot_post.find((b) => b.id === Number(id));
+
+    if (!id) {
+      return HttpResponse.json(boot_post, { // 전체 목록 반환
+        headers: { "Accept": "application/json" }
+      });
+    }
+
+    if (!bootcamp) {
+      return HttpResponse.json({ message: "부트캠프를 찾을 수 없습니다." }, { status: 404 });
+    }
+
+    return HttpResponse.json(bootcamp,
     {
       headers: {
         "Accept": "application/json"
@@ -70,8 +81,8 @@ export const handlers = [
   // 댓글 가져오기
   http.get("/bootcamp/:id/comment", async() =>{
     console.log("[MSW] intercepted GET /comment");
-    return HttpResponse.json(comment,{
-
+    return HttpResponse.json(comment,
+      {
       headers: {
         "Content-Type": "application/json",
       },

@@ -18,7 +18,7 @@ interface PostData {
   techStack: string[];
   viewCount: number;
   studyStatus: string;
-}
+};
 
 const StudyPost = ():JSX.Element =>{
   const { id } = useParams<{ id?: string }>(); // URL에서 `id` 가져옴
@@ -64,14 +64,14 @@ const StudyPost = ():JSX.Element =>{
             <PostInfo label="스터디 목적" value={`${post.type}`} />
             <PostInfo label="모집 인원" value={`${post.maxSize} 명`} />
             <PostInfo label="모집 마감일" value={post.endDate} />
-            <PostInfo label="보증금" value={""} />
-            <PostInfo label="참여 시간" value={""} />
-            <PostInfo label="시작 예정일" value={`${post.startDate}`} />
-            <PostInfo label="사용 언어" value={<TechStackList stacks={post.techStack} />} valueClassName="col-span-5"/>
+            <PostInfo label="시작일" value={`${post.startDate}`} />
+            <PostInfo label="종료일" value={""} />
+            <PostInfo label="참여횟수" value={""} />
+            <PostInfo label="사용 언어" value={<TechStackList stacks={post.techStack ?? []} />} valueClassName="col-span-5"/>
         </div>
       </Post>
     </>
   )
-}
+};
 
 export default StudyPost;

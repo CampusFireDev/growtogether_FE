@@ -20,7 +20,7 @@ interface PostData {
   learningLevel: number;
   assistantSatisfaction: number;
   viewCount: number;
-}
+};
 
 const BootCampPost = ():JSX.Element =>{
   const { id } = useParams<{ id?: string }>(); // URL에서 `id` 가져옴
@@ -67,12 +67,12 @@ const BootCampPost = ():JSX.Element =>{
             <PostInfo label="강의 만족도" value={<Rating rate={post.programSatisfaction ?? 0} readOnly={true}/>} />
             <PostInfo label="프로그램 과정" value={post.programCourse} />
             <PostInfo label="취업 지원 만족도" value={<Rating rate={post.assistantSatisfaction ?? 0} readOnly={true}/>} />
-            <PostInfo label="학습 언어" value={<TechStackList stacks={post.techStack} />} />
+            <PostInfo label="학습 언어" value={<TechStackList stacks={post.techStack ?? []} />} />
             <PostInfo label="학습 난이도" value={<Rating rate={post.learningLevel ?? 0} readOnly={true}/>} />
           </div> 
       </Post>
     </>
   )
-}
+};
 
 export default BootCampPost;
