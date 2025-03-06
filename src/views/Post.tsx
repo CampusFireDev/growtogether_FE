@@ -1,3 +1,7 @@
+/**
+ * 게시글 컴포넌트
+ */
+
 import { Link } from "react-router-dom"
 import { IoEyeOutline } from "react-icons/io5";
 import FormButton from "../components/form/FormButton";
@@ -52,7 +56,7 @@ const Post = ({ post, postType, postTitle, infoTitle, children }: PostProps):JSX
             </div>
         </div>
 
-        {/* 포스트 상세 정보*/}
+        {/* 게시글 상세 정보*/}
         {children}
       
         {/* 후기 / 모집 상세*/}
