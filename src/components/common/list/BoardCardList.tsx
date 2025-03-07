@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import StatusBadge from "../ui/StatusBadge";
 import StudyTypeBadge from "../ui/StudyTypeBadge";
 import TechStackList from "../ui/TechStackList";
+import Loading from "../ui/Loading";
 
 interface StudyData {
+    id: number;
     type: string;
     title: string;
     description: string;
@@ -42,7 +44,7 @@ const BoardCardList = ():JSX.Element => {
             })
             .then((data) => {
                 console.log("받은 데이터: ", data);
-                setStudy(data);
+                setStudy(data[0]);
             })
             .catch((error) => {
                 console.error("API 호춯 실패: ", error);
@@ -59,7 +61,7 @@ const BoardCardList = ():JSX.Element => {
 
     // study가 null이면 로딩표시
     if (!study) {
-        return <div>로딩 중</div>
+        return <Loading />
     }
 
     return (
@@ -76,7 +78,7 @@ const BoardCardList = ():JSX.Element => {
                 </div>
                 <strong className="block text-xl nexon-bold mt-[10px] mb-[15px] text-black4">{study.title}</strong>
                 {/* 기술스택 */}
-                <TechStackList stacks={study.techStack}/>
+                <TechStackList stacks={study.techStack ?? []}/>
                 <div>
                     <div>
                         <div></div>
