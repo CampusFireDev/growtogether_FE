@@ -2,11 +2,14 @@ import StudyCard from "./StudyCard";
 import useStudyList from "../../hooks/study/useStudyList";
 import Pagination from "../common/ui/Pagination";
 import usePagination from "../../hooks/common/usePagination";
-import { useState } from "react";
-import ListSearchBar from "../common/ui/ListSearchBar";
+import { StudyData } from "../../types/study";
 
-const BoardCardList = ():JSX.Element => {
-    const { studyList, loading, error } = useStudyList();
+interface StudyCardListProps {
+    studyList: StudyData[];
+}
+
+const BoardCardList = ({ studyList }: StudyCardListProps):JSX.Element => {
+    const { loading, error } = useStudyList();
 
     const itemsPerPage = 9; // 표시할 개수
     const { currentPage, totalPages, nextPage, prevPage, goToPage, startIndex, endIndex } = usePagination(studyList.length, itemsPerPage);

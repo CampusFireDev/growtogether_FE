@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
-
-interface StudyData {
-    type: string;
-    title: string;
-    description: string;
-    maxSize: number;
-    startDate: string;
-    endDate: string;
-    techStack: string[];
-    viewCount: number;
-    studyStatus: string;
-    writer: string;
-}
+import { StudyData } from "../../types/study";
 
 const useStudyList = () => {
     const [studyList, setStudyList] = useState<StudyData[]>([]);
