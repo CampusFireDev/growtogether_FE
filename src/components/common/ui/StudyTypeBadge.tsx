@@ -3,12 +3,13 @@
  */
 
 interface StudyTypeBadgeProps {
-    type: "프로젝트" | "스터디";
+    type: "프로젝트" | "스터디" | "부트캠프";
 }
 
 const typeMapping: Record<string, StudyTypeBadgeProps["type"]> = {
     "PROJECT": "프로젝트",
     "STUDY": "스터디",
+    "BOOTCAMP": "부트캠프",
 }
 
 const StudyTypeBadge = ({ type }: { type: string }) => {
@@ -16,7 +17,8 @@ const StudyTypeBadge = ({ type }: { type: string }) => {
 
     const typeStyles: Record<StudyTypeBadgeProps["type"], string> = {
         "스터디": "bg-myBlue",
-        "프로젝트": "bg-myYellow"
+        "프로젝트": "bg-myYellow",
+        "부트캠프" : "bg-myPurple",
     };
 
     return (

@@ -20,7 +20,7 @@ const InputField = ({ label, labelFor, labelClassName="", type="text", id, name,
                 name={name}
                 placeholder={placeholder}
                 value={value}
-                className="w-full h-[50px] pl-[15px] pr-[15px] border border-[#e5e5e5] rounded-[5px]"
+                className={`w-full h-[50px] pl-[15px] pr-[15px] border border-[#e5e5e5] rounded-[5px] ${className}`}
             />
         </div>
     )

@@ -1,0 +1,52 @@
+{
+  "comment": [
+    {
+      "id": 1,
+      "author": "고먐미",
+      "content": "이 부트캠프 졸업 후 취업은 잘 되나요?",
+      "date": "2025-02-20",
+      "parentId": null
+    },
+    {
+      "id": 2,
+      "author": "Whatever",
+      "content": "스타트업, 대기업 등 다양한 곳에 취업했어요.",
+      "date": "2025-02-21",
+      "parentId": 1
+    }
+  ],
+
+  "study_post": [
+    {
+      "id": 1,
+      "type": "STUDY",
+      "title": "Spring Boot 스터디 모집",
+      "description": "매주 수요일 7시에 진행하는 스터디입니다.",
+      "maxSize": 5,
+      "startDate": "2025-02-21",
+      "endDate": "2025-03-30",
+      "techStack": ["React", "Spring"],
+      "viewCount": 2223,
+      "studyStatus": "OPEN"
+    }
+  ],
+  
+  "boot_post": [
+    {
+      "id": 1,
+      "type": "BOOTCAMP",
+      "title":"부트캠프 솔직 후기",
+      "content": "정말 만족스러웠습니다.",
+      "programCourse": "백엔드",
+      "bootcampName": "제로베이스",
+      "bootcampStartDate": "2025-02-10",
+      "bootcampEndDate": "2025-05-10",
+      "techStack": ["Spring"],
+      "programSatisfaction": 4,
+      "learningLevel": 3,
+      "assistantSatisfaction": 5,
+      "viewCount": 57
+    }
+  ]
+ }
+  

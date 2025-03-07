@@ -1,5 +1,6 @@
 interface TechStackBadgeProps {
     stack: string;
+    className?: string;
 }
 
 const stackStyles: Record<string, {color: string; img: string}> = {
@@ -9,7 +10,7 @@ const stackStyles: Record<string, {color: string; img: string}> = {
     "Spring": {color: "border-[#70AD51] text-[#70AD51]", img:"./images/spring.png"},
 };
 
-const TechStackBadge = ({ stack }: TechStackBadgeProps) => {
+const TechStackBadge = ({ stack, className }: TechStackBadgeProps) => {
     const stackData = stackStyles[stack];
     return (
         <span className={`inline-flex items-center h-[30px] px-[10px] text-sm/[30px] rounded-full border bg-white nexon-medium ${stackData.color}`}>
