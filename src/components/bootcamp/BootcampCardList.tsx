@@ -3,6 +3,7 @@ import usePagination from "../../hooks/common/usePagination";
 import Pagination from "../common/ui/Pagination";
 import BootcampCard from "./BootcampCard";
 import { BootcampData } from "../../types/bootcamp";
+import Loading from "../common/ui/Loading";
 
 interface BootcampCardListProps {
     bootcampList: BootcampData[];
@@ -15,7 +16,7 @@ const BootcampCardList = ({ bootcampList }: BootcampCardListProps): JSX.Element 
     const { currentPage, totalPages, nextPage, prevPage, goToPage, startIndex, endIndex } = usePagination(bootcampList.length, itemsPerPage);
 
     if (loading) {
-        return <div>로딩 중...</div>;
+        return <div><Loading/></div>;
     }
 
     if (error) {

@@ -1,11 +1,12 @@
 import useStudyList from "../../hooks/study/useStudyList";
 import StudyCard from "./StudyCard";
+import Loading from "../common/ui/Loading";
 
 const StudyPopularCardList = (): JSX.Element => {
     const { studyList, loading, error } = useStudyList();
 
     if (loading) {
-        return <div>로딩 중...</div>;
+        return <div><Loading/></div>;
     }
 
     if (error) {

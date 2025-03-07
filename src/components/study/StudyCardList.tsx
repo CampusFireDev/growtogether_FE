@@ -3,6 +3,7 @@ import useStudyList from "../../hooks/study/useStudyList";
 import Pagination from "../common/ui/Pagination";
 import usePagination from "../../hooks/common/usePagination";
 import { StudyData } from "../../types/study";
+import Loading from "../common/ui/Loading";
 
 interface StudyCardListProps {
     studyList: StudyData[];
@@ -15,7 +16,7 @@ const BoardCardList = ({ studyList }: StudyCardListProps):JSX.Element => {
     const { currentPage, totalPages, nextPage, prevPage, goToPage, startIndex, endIndex } = usePagination(studyList.length, itemsPerPage);
     
     if (loading) {
-        return <div>로딩 중...</div>;
+        return <div><Loading/></div>;
     }
 
     if (error) {

@@ -12,7 +12,7 @@ interface StudyCardProps {
 const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element => {
     return(
         <div className="border border-gray5 py-[25px] px-[30px] rounded-[10px]">
-            <Link to="/">
+            <Link to={`/study/${study.id}`}>
                 <div className="flex justify-between">
                     <StudyTypeBadge type={study.type} />
                     <StatusBadge status={study.studyStatus} />

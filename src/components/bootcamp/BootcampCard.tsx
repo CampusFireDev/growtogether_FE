@@ -11,7 +11,7 @@ interface BootcampCardProps {
 const BootcampCard = ({ bootcamp, showTechStack = true }: BootcampCardProps): JSX.Element => {
     return (
         <div className="border border-gray5 py-[25px] px-[30px] rounded-[10px]">
-            <Link to="/">
+            <Link to={`/bootcamp/${bootcamp.id}`}>
                 <div className="flex justify-between">
                     <BootcampCourseBadge type={bootcamp.programCourse} />
                 </div>
