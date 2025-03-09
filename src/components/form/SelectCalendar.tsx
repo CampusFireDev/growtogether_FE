@@ -81,9 +81,10 @@ const SelectCalendar = ({ label, labelFor, labelClassName="", placeholder, class
 
     const formatRange = (dates: Date[]): string => {
         if (dates.length > 1) {
-          const firstDate = dates[0];
-          const lastDate = dates[dates.length - 1];
-          return `${formatDate(firstDate)} ~ ${formatDate(lastDate)}`;
+            const sortedDates = [...dates].sort((a, b) => a.getTime() - b.getTime());
+            const firstDate = sortedDates[0];
+            const lastDate = sortedDates[dates.length - 1];
+            return `${formatDate(firstDate)} ~ ${formatDate(lastDate)}`;
         }
         return formatDate(dates[0]);
       };
@@ -92,7 +93,7 @@ const SelectCalendar = ({ label, labelFor, labelClassName="", placeholder, class
         if(singleDate && startDate){
             return formatDate(startDate); 
         } else if(multiDate && selectedDates.length > 0){
-            return selectedDates.map(date => formatDate(date)).join(", ");
+            return formatRange(selectedDates);
         } else if (startDate && endDate) {
             return formatRange([startDate, endDate]);
         } else if(startDate){
@@ -102,30 +103,35 @@ const SelectCalendar = ({ label, labelFor, labelClassName="", placeholder, class
     };
 
     return(
-        <div className={`mb-3 ${className}`}>
+        <div className={`mb-3 text-[13px] ${className}`}>
             {label && (
                 <label htmlFor={labelFor} className={`block mb-2 ${labelClassName}`}>
                     {label}
                 </label>
             )}
-            <div className="relative w-full h-[50px] pl-[15px] pr-[15px] border border-[#e5e5e5] rounded-[5px] flex items-center" 
-                onClick={handleSelect}
+            <div className="relative w-full h-[50px] pl-[15px] pr-[15px] border border-[#e5e5e5] 
+                rounded-[5px] flex items-center" onClick={handleSelect}
             >
                 <div className="flex justify-between items-center gap-5 w-full">
-                    <p className="text-nowrap text-[13px]" >{renderDate()}</p>
+                    <p className="text-nowrap" >{renderDate()}</p>
                     <IoCalendarOutline className="text-black font-bold"/>
                 </div>
                 
                 <div ref={calendarRef} className="absolute top-12 left-0 w-full z-20" >
                     {select && 
                     <Calendar className="w-full" 
-                    onDateSelect={handleDateSelect} 
                     startDate={startDate} 
                     endDate={endDate}
-                    
+                    selectedDates={selectedDates}
+                    onDateSelect={handleDateSelect} 
                     />}
                 </div>
             </div>
+            {multiDate && <div className="my-2 flex"> 
+                총&nbsp;<p className="text-myBlue nexon-medium">{selectedDates.length}</p>번:&nbsp;
+                <div>{` ${selectedDates.map(date => formatDate(date)).join(", ")}`}</div>
+            </div>}
+                
         </div>
     )
 };

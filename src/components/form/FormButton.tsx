@@ -10,7 +10,9 @@ const FormButton = ({ type = "button", children, onClick, className = "" }: Form
         <button
             type={type}
             onClick={onClick}
-            className={`w-full h-[55px] leading-[55px] bg-black text-white rounded-[5px] nexon-bold cursor-pointer ${className}`}
+            className={`w-full h-[55px] leading-[55px] bg-black text-white 
+                rounded-[5px] nexon-bold cursor-pointer hover:opacity-85 ${className}`
+            }
         >
             {children}
         </button>

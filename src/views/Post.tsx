@@ -43,7 +43,7 @@ const Post = ({ post, postType, postTitle, infoTitle, children }: PostProps):JSX
         {/* 게시글 상세 정보*/}
         {children}
       
-        {/* 후기 / 모집 상세*/}
+        {/* 후기 / 모집글 작성*/}
         <div className="border-b border-gray5 py-5">
           <p className="nexon-bold text-black4 text-[14px] lg:text-[17px] mb-3">{infoTitle}</p>
           <p className="nexon-bold text-[14px] lg:text-[17px] ">{post.title}</p>
