@@ -16,6 +16,7 @@ import BootcampCreate from "../views/BootcampCreate.tsx";
 import StudyCreate from "../views/StudyCreate.tsx";
 import Point from "../components/mypage/Point.tsx"
 import PointCharge from "../components/mypage/PointCharge.tsx"
+import StudyDetail from "../views/mypage/StudyDetail.tsx";
 
 const Router = ():JSX.Element =>{
     return(
@@ -37,6 +38,7 @@ const Router = ():JSX.Element =>{
                 <Route path="/mypage/point" element={<Point />} />
                 <Route path="/mypage/point/charge" element={<PointCharge />} />
                 <Route path="/findId" element={<FindId />} />
+                <Route path="/mypage/studyDetail" element={<StudyDetail />} />
             </Route>
         </Routes>
     )
