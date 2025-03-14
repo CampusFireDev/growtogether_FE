@@ -8,20 +8,28 @@ interface InputFieldProps {
     placeholder?: string;
     value?: string;
     className?: string;
-}
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+    children?: React.ReactNode;
+    helperText?: string; 
+}   
 
-const InputField = ({ label, labelFor, labelClassName="", type="text", id, name, placeholder, value, className="" }: InputFieldProps): JSX.Element => {
+const InputField = ({ label, labelFor, labelClassName="", type="text", id, name, placeholder, value, className="", onChange, children, helperText}: InputFieldProps): JSX.Element => {
     return (
-        <div className={`${className}`}>
+        <div className={`mb-6 bg-white text-black ${className}`}>
             { label && <label htmlFor={labelFor} className={`block mb-2 ${labelClassName}`}>{label}</label> }
-            <input
-                type={type}
-                id={id}
-                name={name}
-                placeholder={placeholder}
-                value={value}
-                className={`w-full h-[50px] pl-[15px] pr-[15px] border border-[#e5e5e5] rounded-[5px] ${className}`}
-            />
+            <div className="relative w-full">
+                <input
+                    type={type}
+                    id={id}
+                    name={name}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange} 
+                    className={`w-full h-[50px] pl-[15px] pr-[15px] border border-[#e5e5e5] rounded-[5px] ${className}`} 
+                />
+                {children && <div className="absolute right-3 top-1/2 -translate-y-1/2">{children}</div>}
+            </div>
+            {helperText && <p className="mt-1 text-red-500">{helperText}</p>} 
         </div>
     )
 }

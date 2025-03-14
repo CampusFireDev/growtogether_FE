@@ -15,6 +15,7 @@
     "@tiptap/pm": "^2.11.5",
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
+    "axios": "^1.8.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
@@ -44,5 +45,6 @@
     "workerDirectory": [
       "public"
     ]
-  }
+  },
+  "proxy": "https://open-api.kakaopay.com/online/"
 }
