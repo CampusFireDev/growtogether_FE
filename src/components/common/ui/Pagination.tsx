@@ -17,7 +17,7 @@ const Pagination = ({ currentPage, totalPages, nextPage, prevPage, goToPage }: P
                         disabled={currentPage === 1}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.707107 4.94975L5.65685 0L6.36396 0.707107L1.41421 5.65685L6.36396 10.6066L5.65685 11.3137L0.707107 6.36396L0 5.65685L0.707107 4.94975ZM5.36433 4.94975L10.3141 0L11.0212 0.707107L6.07144 5.65685L11.0212 10.6066L10.3141 11.3137L5.36433 6.36396L4.65723 5.65685L5.36433 4.94975Z" fill="#444444"/>
+                            <path fillRule="evenodd" clipRule="evenodd" d="M0.707107 4.94975L5.65685 0L6.36396 0.707107L1.41421 5.65685L6.36396 10.6066L5.65685 11.3137L0.707107 6.36396L0 5.65685L0.707107 4.94975ZM5.36433 4.94975L10.3141 0L11.0212 0.707107L6.07144 5.65685L11.0212 10.6066L10.3141 11.3137L5.36433 6.36396L4.65723 5.65685L5.36433 4.94975Z" fill="#444444"/>
                         </svg>
                         첫번째 페이지로 이동
                     </button>
@@ -29,7 +29,7 @@ const Pagination = ({ currentPage, totalPages, nextPage, prevPage, goToPage }: P
                         disabled={currentPage === 1}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.65685 0L0.707107 4.94975L0 5.65685L0.707107 6.36396L5.65685 11.3137L6.36396 10.6066L1.41421 5.65685L6.36396 0.707107L5.65685 0Z" fill="#444444"/>
+                            <path fillRule="evenodd" clipRule="evenodd" d="M5.65685 0L0.707107 4.94975L0 5.65685L0.707107 6.36396L5.65685 11.3137L6.36396 10.6066L1.41421 5.65685L6.36396 0.707107L5.65685 0Z" fill="#444444"/>
                         </svg>
                         이전 페이지로 이동
                     </button>
@@ -54,7 +54,7 @@ const Pagination = ({ currentPage, totalPages, nextPage, prevPage, goToPage }: P
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
                             <g transform="scale(-1, 1) translate(-7, 0)">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.65685 0L0.707107 4.94975L0 5.65685L0.707107 6.36396L5.65685 11.3137L6.36396 10.6066L1.41421 5.65685L6.36396 0.707107L5.65685 0Z" fill="#444444"/>
+                                <path fillRule="evenodd" clipRule="evenodd" d="M5.65685 0L0.707107 4.94975L0 5.65685L0.707107 6.36396L5.65685 11.3137L6.36396 10.6066L1.41421 5.65685L6.36396 0.707107L5.65685 0Z" fill="#444444"/>
                             </g>
                         </svg>
                         다음 페이지로 이동
@@ -68,7 +68,7 @@ const Pagination = ({ currentPage, totalPages, nextPage, prevPage, goToPage }: P
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                             <g transform="scale(-1, 1) translate(-12, 0)">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.707107 4.94975L5.65685 0L6.36396 0.707107L1.41421 5.65685L6.36396 10.6066L5.65685 11.3137L0.707107 6.36396L0 5.65685L0.707107 4.94975ZM5.36433 4.94975L10.3141 0L11.0212 0.707107L6.07144 5.65685L11.0212 10.6066L10.3141 11.3137L5.36433 6.36396L4.65723 5.65685L5.36433 4.94975Z" fill="#444444"/>
+                                <path fillRule="evenodd" clipRule="evenodd" d="M0.707107 4.94975L5.65685 0L6.36396 0.707107L1.41421 5.65685L6.36396 10.6066L5.65685 11.3137L0.707107 6.36396L0 5.65685L0.707107 4.94975ZM5.36433 4.94975L10.3141 0L11.0212 0.707107L6.07144 5.65685L11.0212 10.6066L10.3141 11.3137L5.36433 6.36396L4.65723 5.65685L5.36433 4.94975Z" fill="#444444"/>
                             </g>
                         </svg>
                         마지막 페이지로 이동

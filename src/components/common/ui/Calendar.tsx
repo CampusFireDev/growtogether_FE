@@ -6,14 +6,15 @@ import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 interface CalendarProps {
-    onDateSelect?: (date: Date) => void;
     startDate?: Date | null;
     endDate?: Date | null;
+    selectedDates?: Date[];
+    onDateSelect?: (date: Date) => void;
     className?:string;
 };
 
 const date = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-const Calendar = ({ onDateSelect, startDate, endDate, className }:CalendarProps):JSX.Element =>{
+const Calendar = ({ startDate, endDate, selectedDates, onDateSelect, className }:CalendarProps):JSX.Element =>{
     const today = new Date();
     const [currentMonth, setCurrentMonth] = useState(today.getMonth());
     const [currentYear, setCurrentYear] = useState(today.getFullYear());
@@ -58,9 +59,10 @@ const Calendar = ({ onDateSelect, startDate, endDate, className }:CalendarProps)
             const isSunday = dateObj.getDay() === 0;
             const isStart = startDate && dateObj.toDateString() === startDate.toDateString();
             const isEnd = endDate && dateObj.toDateString() === endDate.toDateString();
+            const isSelected = selectedDates?.some(date => date.toDateString() === dateObj.toDateString());
             const hoverStyle = hoveredDate === i ? "bg-gray5 rounded-full" : "";
-            const textColor = isStart || isEnd ? "text-white" : "text-black4";
-            const bgColor = isStart || isEnd ? "bg-myBlue rounded-full" : "";
+            const textColor = isStart || isEnd || isSelected ? "text-white" : "text-black4";
+            const bgColor = isStart || isEnd || isSelected ? "bg-myBlue rounded-full" : "";
             const sundayColor = isSunday && !isStart && !isEnd ? "text-red-500" : "";
             
             days.push(

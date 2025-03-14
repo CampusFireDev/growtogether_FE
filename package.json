@@ -10,6 +10,12 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.8",
+    "@tiptap/core": "^2.11.5",
+    "@tiptap/extension-placeholder": "^2.11.5",
+    "@tiptap/pm": "^2.11.5",
+    "@tiptap/react": "^2.11.5",
+    "@tiptap/starter-kit": "^2.11.5",
+    "axios": "^1.8.3",
     "react": "^18.3.1",
     "react-calendar": "^5.1.0",
     "react-dom": "^18.3.1",
@@ -41,5 +47,6 @@
     "workerDirectory": [
       "public"
     ]
-  }
+  },
+  "proxy": "https://open-api.kakaopay.com/online/"
 }

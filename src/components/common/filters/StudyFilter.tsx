@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import DropdownFilter from "./DropdownFilter";
 
 const StudyFilter = (): JSX.Element => {
@@ -10,6 +11,11 @@ const StudyFilter = (): JSX.Element => {
             <DropdownFilter label="기술스택" />
             <DropdownFilter label="모집인원" />
             <DropdownFilter label="기간" />
+            <Link to="/study/create">
+                <button className="h-[40px] px-[15px] text-[15px] text-white bg-black4 rounded-[5px]">
+                    스터디 개설하기
+                </button>
+            </Link>
         </div>
     )
 }
