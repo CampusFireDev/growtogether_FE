@@ -17,6 +17,7 @@ import StudyCreate from "../views/StudyCreate.tsx";
 import Point from "../components/mypage/Point.tsx"
 import PointCharge from "../components/mypage/PointCharge.tsx"
 import StudyDetail from "../views/mypage/StudyDetail.tsx";
+import MypageLayout from "../layout/MypageLayout.tsx";
 
 const Router = ():JSX.Element =>{
     return(
@@ -34,10 +35,12 @@ const Router = ():JSX.Element =>{
                 <Route path="/bootcamp/create" element={<BootcampCreate/>} />
                 <Route path="/study/create" element={<StudyCreate/>} />
                 <Route path="/notice" element={<Notice/>} />
+                <Route path="/findId" element={<FindId />} />
+            </Route>
+            <Route element={<MypageLayout />}>
                 <Route path="/mypage/" element={<MyPage/>} />
                 <Route path="/mypage/point" element={<Point />} />
                 <Route path="/mypage/point/charge" element={<PointCharge />} />
-                <Route path="/findId" element={<FindId />} />
                 <Route path="/mypage/study-detail" element={<StudyDetail />} />
             </Route>
         </Routes>

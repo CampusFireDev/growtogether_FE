@@ -42,7 +42,7 @@ const StudyDetail = ():JSX.Element =>{
                 </div>
             </div>
             {/* 모집 게시글로 이동 & 수정 */}
-            <div className="flex justify-between items-center mt-[60px] mb-2">
+            <div className="flex justify-between items-center mb-2">
                 <Link to="/" className="flex items-center gap-1 text-sm text-black6">
                     모집 게시글로 이동
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
@@ -57,7 +57,7 @@ const StudyDetail = ():JSX.Element =>{
                 </Link>
             </div>
 
-            <div className="border border-gray5">
+            <div className="border border-gray5 bg-white">
                 {/* 상단 타이틑 영역 */}
                 <div className="flex justify-between items-center py-[30px] px-[30px]">
                     {/* 이전 페이지로 이동 & 타이틀 */}

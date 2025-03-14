@@ -65,6 +65,10 @@ body{
   overflow-x: hidden;
 }
 
+em {
+  font-style: normal;
+}
+
 .full-line:after {
   content: "";
   position: absolute;
