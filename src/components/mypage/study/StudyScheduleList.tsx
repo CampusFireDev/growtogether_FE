@@ -1,5 +1,5 @@
 import useStudyNotice from "../../../hooks/mypage/useStudyNotice";
-import StudyNotice from "./StudyNotice";
+import StudyNotice from "./StudySchedule";
 
 const StudyNoticeList = ({ studyId }: { studyId: number }): JSX.Element => {
     const { noticeList } = useStudyNotice(studyId);

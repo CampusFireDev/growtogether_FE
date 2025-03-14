@@ -1,9 +1,11 @@
 import { useState } from "react";
-import ButtonStyle1 from "../common/ui/ButtonStyle1";
-import useStudyNotice from "../../hooks/mypage/useStudyNotice";
+import ButtonStyle1 from "../../common/ui/ButtonStyle1";
+import useStudyNotice from "../../../hooks/mypage/useStudyNotice";
+import StudyScheduleCreate from "./StudyScheduleCreate";
 
 const StudyCalendar = ({ studyId }: { studyId: number }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [isPopupOpen, setIsPopupOpen] = useState(false); // 팝업 상태 관리
     
     // 공지사항 불러오기
     const { noticeList } = useStudyNotice(studyId); 
@@ -65,6 +67,11 @@ const StudyCalendar = ({ studyId }: { studyId: number }) => {
     const today = new Date().toDateString();
     const goToToday = () => setCurrentDate(new Date(today));
 
+    // 팝업 열기 함수
+    const openPopup = () => setIsPopupOpen(true);
+
+    // 팝업 닫기 함수
+    const closePopup = () => setIsPopupOpen(false);
 
     return (
         <div>
@@ -82,10 +89,12 @@ const StudyCalendar = ({ studyId }: { studyId: number }) => {
                     <ButtonStyle1
                         className="bg-myGreen text-white"
                         label="일정 등록"
+                        onClick={openPopup}
                     />
+                    { isPopupOpen && <StudyScheduleCreate onClose={closePopup} /> }
                 </div>
                 {/* 캘린더 버튼 */}
-                <div className="absolute top-[30px] left-0 w-full flex items-center justify-center gap-5">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-5 z-[-1]">
                     <button onClick={goToPreviousMonth} className="flex items-center justify-center w-[40px] h-[40px] text-[0px] border border-gray5 rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11" fill="none">
                             <path fillRule="evenodd" clipRule="evenodd" d="M5.33333 -0.000976562L0 5.49899L0.000119766 5.49911L4.74146e-05 5.49918L5.33338 10.9991L6.00005 10.3117L1.33326 5.49906L6 0.686519L5.33333 -0.000976562Z" fill="#444444"/>
