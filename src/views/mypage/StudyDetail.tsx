@@ -1,13 +1,46 @@
 import { Link } from "react-router-dom";
 import StudyTypeBadge from "../../components/common/ui/StudyTypeBadge";
 import StudyAlarmList from "../../components/mypage/study/StudyAlarmList";
-import StudyCalendar from "../../components/mypage/StudyCalendar";
+import StudyCalendar from "../../components/mypage/study/StudyCalendar";
 import StudyMemeberList from "../../components/mypage/study/StudyMemberList";
-import StudyNoticeList from "../../components/mypage/study/StudyNoticeList";
+import StudyScheduleList from "../../components/mypage/study/StudyScheduleList";
 
 const StudyDetail = ():JSX.Element =>{
     return (
         <div>
+            {/* 참여 신청 팝업 */}
+            <div className="hidden fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black/50 z-[10]">
+                <div className="w-[600px] bg-white rounded-[10px]">
+                    {/* 상단 타이틀 */}
+                    <div className="flex items-center justify-between px-[20px] py-[20px] border-b border-gray5">
+                        <strong className="nexon-medium text-lg text-black4">
+                            <span className="text-myBlue">유재석</span>
+                            님의 참여 신청
+                        </strong>
+                        <button className="flex items-center gap-1 text-sm text-black6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" viewBox="0 0 13 16" fill="none">
+                                <path d="M0.666748 3.14706H12.0001M4.91675 11.9706V6.67647M7.75008 11.9706V6.67647M9.16675 15.5H3.50008C2.71768 15.5 2.08341 14.7099 2.08341 13.7353V4.02941C2.08341 3.5421 2.40055 3.14706 2.79175 3.14706H9.87508C10.2663 3.14706 10.5834 3.5421 10.5834 4.02941V13.7353C10.5834 14.7099 9.94915 15.5 9.16675 15.5ZM4.91675 3.14706H7.75008C8.14128 3.14706 8.45842 2.75202 8.45842 2.26471V1.38235C8.45842 0.895043 8.14128 0.5 7.75008 0.5H4.91675C4.52555 0.5 4.20841 0.895043 4.20841 1.38235V2.26471C4.20841 2.75202 4.52555 3.14706 4.91675 3.14706Z" stroke="#666666" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            닫기
+                        </button>
+                    </div>
+                    {/* 팝업 내용 */}
+                    <div className="px-[20px] py-[20px]">
+                        <div className="flex items-center justify-between mb-5">
+                            <div className="flex items-center gap-5">
+                                <div className="w-[72px] h-[72px] rounded-full bg-gray5"></div>
+                                <div>
+                                    <strong className="block text-xl text-black4 nexon-bold">유재석</strong>
+                                    <p className="flex items-center gap-2 text-black6"><span className="nexon-medium">기술 스택</span>Java, Spring, Vue.js</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p className="w-full h-[120px] px-[15px] py-[15px] text-black4 border border-gray5 rounded-[5px]">
+                            잘부탁드립니다!
+                        </p>
+                    </div>
+                </div>
+            </div>
             {/* 모집 게시글로 이동 & 수정 */}
             <div className="flex justify-between items-center mt-[60px] mb-2">
                 <Link to="/" className="flex items-center gap-1 text-sm text-black6">
@@ -51,7 +84,7 @@ const StudyDetail = ():JSX.Element =>{
                 {/* 일정 상세 영역 */}
                 <div className="py-[30px] px-[30px]">
                     <strong className="block text-xl text-black4 nexon-bold mb-3">2월 4일</strong>
-                    <StudyNoticeList studyId={1} />
+                    <StudyScheduleList studyId={1} />
                 </div>
             </div>
 
