@@ -10,9 +10,20 @@ interface Comment {
   date: string;
 }
 
+interface StudyJoin {
+  studyMemberId: number;
+  nickName: string;
+  skills: string[];
+  content: string;
+  studyId: number;
+}
+
 let study_post = fakeData.study_post;
 let boot_post = fakeData.boot_post;
 let comment: Comment[] = fakeData.comment;
+let studyJoinRequests: StudyJoin[] = fakeData.study_join_requests; // 참가 신청 데이터 추가
+let studyMember = fakeData.study_member;
+let studyNotice = fakeData.study_notice;
 
 export const handlers = [
   http.get("/user/:id", ({ params }) => {
@@ -92,4 +103,45 @@ export const handlers = [
 
     return HttpResponse.json(newComment, { status: 201 });
   }),
+
+  // 스터티 참가 신청 목록 가져오기
+  http.get("/study/:studyId/join", async({ params }) => {
+    const { studyId } = params;
+
+    // studyId에 해당하는 참가 신청 목록 필터링
+    const applications = studyJoinRequests.filter(
+      (app) => app.studyId === Number(studyId)
+    );
+
+    return HttpResponse.json(applications, {
+      headers: { "Accept": "application/json" }
+    });
+  }),
+
+  // 스터디 참가 인원 목록 가져오기
+  http.get("/study/:studyId/studyMember", async({ params }) => {
+    const { studyId } = params;
+
+    const applications = studyMember.filter(
+      (app) => app.studyId === Number(studyId)
+    );
+
+    return HttpResponse.json(applications, {
+      headers: { "Accept": "application/json" }
+    });
+  }),
+
+  // 스터디 일정 가져오기
+  http.get("/study/:studyId/notice", async({ params }) => {
+    const { studyId } = params;
+
+    const applications = studyNotice.filter(
+      (app) => app.studyId === Number(studyId)
+    );
+
+    return HttpResponse.json(applications, {
+      headers: { "Accept": "application/json" }
+    });
+  })
+
 ];

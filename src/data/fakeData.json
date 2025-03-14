@@ -319,6 +319,46 @@
       "date": "2025-02-21",
       "parentId": 1
     }
+  ],
+
+  "study_join_requests": [
+    {
+      "studyMemberId": 5,
+      "nickName": "nick123n5",
+      "skills": ["자바", "스프링"],
+      "content": "제발 참가 좀 하게 해주세요",
+      "studyId": 5
+    }
+  ],
+
+  "study_member": [
+    {
+      "studyId": 1,
+      "nickName": "김철수",
+      "status": "LEADER"
+    },
+    {
+      "studyId": 1,
+      "nickName": "홍길동",
+      "status": "NORMAL"
+    }
+  ],
+
+  "study_notice": [
+    {
+      "studyId": 1,
+      "noticeId": 1,
+      "title": "첫번째 공지",
+      "anthor": "홍길동",
+      "noticeDate": "2025-02-24T22:22:41.209164"
+    },
+    {
+      "studyId": 1,
+      "noticeId": 2,
+      "title": "두번째 공지",
+      "anthor": "홍길동",
+      "noticeDate": "2025-02-24T22:22:41.209164"
+    }
   ]
  }
   
