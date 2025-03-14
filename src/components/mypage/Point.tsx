@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FormButton from "../form/FormButton";
 
 const Point = () : JSX.Element =>{
+    const currentPoints = 82; 
+    const navigate = useNavigate();
+
     const transactions = [
         {date: "2025-02-01", type: "적립", amount: 1000},
         {date: "2025-02-02", type: "사용", amount: -1000},
@@ -12,6 +15,9 @@ const Point = () : JSX.Element =>{
     ]
     const getAmount = (amount: number) =>amount > 0 ? "text-myBlue" : "text-[#FF0000]";
 
+    const handleChargeClick = () =>{
+        navigate("/mypage/point/charge", {state: {currentPoints}});
+    }
 
     return (
         <>
@@ -20,14 +26,14 @@ const Point = () : JSX.Element =>{
                     <div className="w-8 h-8 mx-3 flex justify-center items-center text-white rounded-full bg-black ">P</div>
                     <p className="nexon-bold">현재 사용가능한 포인트:</p>
                     <div className="flex items-center justify-end gap-1">
-                        <p className="text-myGreen text-[28px]">82</p>
+                        <p className="text-myGreen text-[28px]">{currentPoints}</p>
                         <p>P</p>
                     </div>
                 </div>
                 <div>
-                    <Link to="/mypage/point/charge">
+                    <button onClick={handleChargeClick}>
                         <FormButton type="button" className="bg-myGreen px-10 rounded-full nexon-medium">포인트 충전</FormButton>
-                    </Link>
+                    </button>
                 </div>
             </div>
             <div className="my-20 ">

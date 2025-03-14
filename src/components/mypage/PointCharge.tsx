@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { FaRegCircleCheck } from "react-icons/fa6";
-import FormButton from "../form/FormButton";
 import KakaoPayButton from "./KakaoPayButton";
 const PointCharge = (): JSX.Element => {
+    const location = useLocation();
+    const { currentPoints } = location.state || {};
+
     const [selectedPoint, setSelectedPoint] = useState<number | null>(null);
     const [customPoint, setCustomPoint] = useState<number | null>(null);
     const [payment, setPayment] = useState<number>(0);
@@ -28,6 +31,9 @@ const PointCharge = (): JSX.Element => {
         setSelectedPoint(0); // 직접 입력한 경우, 선택된 포인트를 0으로 설정
         setPayment(numberValue || 0);
     };
+
+    // 충전 후 포인트 계산
+    const totalPoints = (selectedPoint || customPoint || 0) + (currentPoints || 0);
 
     return (
         <div className="text-center w-full max-w-[800px] mx-auto">
@@ -59,16 +65,12 @@ const PointCharge = (): JSX.Element => {
 
             <div>
                 <p className="nexon-bold my-7 text-right mr-10 text-black4">
-                    충전 후 포인트: <span className="text-myGreen">{selectedPoint || customPoint || 0} P</span>
+                    충전 후 포인트: <span className="text-myGreen">{totalPoints} P</span>
                 </p>
             </div>
 
             {/* 카카오페이 결제 버튼 */}
             <div className="flex justify-center items-center my-5">
-                {/* <FormButton type="submit" className="!bg-[#FEE500] flex justify-center items-center !w-[300px]">
-                    <img src="/images/kakao_logo.png" className="w-10" alt="카카오페이 로고" />
-                    <p className="text-black">카카오페이로 결제하기</p>
-                </FormButton> */}
                 <KakaoPayButton amount={payment} />
             </div>
         </div>
