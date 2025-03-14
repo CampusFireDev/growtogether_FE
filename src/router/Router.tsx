@@ -7,13 +7,15 @@ import MyPage from "../main/MyPage";
 import Login from "../auth/Login";
 import SignUp from "../auth/SignUp";
 import Layout from "../layout/Layout";
-import FindPassword from "../components/password/findPassword";
-import ResetPassword from "../components/password/resetPassword"; 
+import FindPassword from "../components/password/FindPassword.tsx";
+import ResetPassword from "../components/password/ResetPassword.tsx"; 
 import FindId from "../auth/FindId.tsx";
 import BootCampPost from "../views/BootCampPost.tsx";
 import StudyPost from "../views/StudyPost.tsx";
 import BootcampCreate from "../views/BootcampCreate.tsx";
 import StudyCreate from "../views/StudyCreate.tsx";
+import Point from "../components/mypage/Point.tsx"
+import PointCharge from "../components/mypage/PointCharge.tsx"
 
 const Router = ():JSX.Element =>{
     return(
@@ -31,7 +33,9 @@ const Router = ():JSX.Element =>{
                 <Route path="/bootcamp/create" element={<BootcampCreate/>} />
                 <Route path="/study/create" element={<StudyCreate/>} />
                 <Route path="/notice" element={<Notice/>} />
-                <Route path="/mypage" element={<MyPage/>} />
+                <Route path="/mypage/" element={<MyPage/>} />
+                <Route path="/mypage/point" element={<Point />} />
+                <Route path="/mypage/point/charge" element={<PointCharge />} />
                 <Route path="/findId" element={<FindId />} />
             </Route>
         </Routes>

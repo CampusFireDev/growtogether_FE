@@ -74,3 +74,10 @@ body{
   background: var(--color-gray5);
 }
 
+input[type=password]{
+	font-family:"Nanum Gothic", sans-serif !important;
+}
+
+input[type=password]::placeholder {
+	font-family: "Nexon"; 
+}

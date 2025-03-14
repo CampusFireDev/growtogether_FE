@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import GenericPost from "../components/common/posts/GeericPost";
+import GenericPost from "../components/common/posts/GenericPost";
 import PostInfo from "../components/common/ui/PostInfo";
 import { StudyData } from "../types/study";
 import TechStackList from "../components/common/ui/TechStackList";
