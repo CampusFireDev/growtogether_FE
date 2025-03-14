@@ -5,6 +5,7 @@
   --color-myGreen: #34A853;
   --color-myYellow: #FCBC05;
   --color-myPurple: #9330EA;
+  --color-myRed: #E8463B;
   --color-black2: #222222;
   --color-black4: #444444;
   --color-black6: #666666;
@@ -80,4 +81,5 @@ input[type=password]{
 
 input[type=password]::placeholder {
 	font-family: "Nexon"; 
+
 }
