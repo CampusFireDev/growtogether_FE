@@ -18,6 +18,7 @@ import Point from "../components/mypage/Point.tsx"
 import PointCharge from "../components/mypage/PointCharge.tsx"
 import StudyDetail from "../views/mypage/StudyDetail.tsx";
 import MypageLayout from "../layout/MypageLayout.tsx";
+import KaKaoRedirect from "../components/login/KaKaoRedirect.tsx";
 
 const Router = ():JSX.Element =>{
     return(
@@ -36,6 +37,7 @@ const Router = ():JSX.Element =>{
                 <Route path="/study/create" element={<StudyCreate/>} />
                 <Route path="/notice" element={<Notice/>} />
                 <Route path="/findId" element={<FindId />} />
+                <Route path="/oauth/kakao/callback" element={<KaKaoRedirect />} />
             </Route>
             <Route element={<MypageLayout />}>
                 <Route path="/mypage/" element={<MyPage/>} />
