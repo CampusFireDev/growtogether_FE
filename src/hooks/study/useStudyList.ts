@@ -7,8 +7,8 @@ const useStudyList = () => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            fetch("/study", {
+        const timer = setTimeout(async () => {
+            await fetch("/api/study?page=1", {
                 cache: "no-store",
                 headers: {
                     "Accept": "application/json"
@@ -20,8 +20,8 @@ const useStudyList = () => {
                 }
                 return res.json();
             })
-            .then((data: StudyData[]) => {
-                setStudyList(data);
+            .then((data) => {
+                setStudyList(data.studyList);
                 setLoading(false);
             })
             .catch((error) => {

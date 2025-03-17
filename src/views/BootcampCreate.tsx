@@ -1,38 +1,67 @@
+import { useState } from "react";
 import Create from "../views/Create";
 import SelectMenu from "../components/form/SelectMenu";
 import InputField from "../components/form/InputField";
 import SelectCalendar from "../components/form/SelectCalendar";
 import Rating from "../components/common/ui/Rating";
-
-const programList = ["프론트엔드", "백엔드","데이터베이스"];
+import useBootcampProgramCourse from "../hooks/bootcamp/useBootcampProgramCourse";
+// import useBootcampSkillName from "../hooks/bootcamp/useBootcampSkillList";
 
 const BootcampCreate = ():JSX.Element => {
+    const { programCourse, loading, error } = useBootcampProgramCourse();
+    
+    
+    const [formData, setFormData] = useState({
+        bootCampName: "",
+        startDate: "",
+        endDate: "",
+        programCourse: "",
+        learningLevel: 0,
+        assistantSatisfaction: 0,
+        programSatisfaction: 0,
+        title: "",
+        content: "",
+        skillNames: [],
+    });
+
+    if (loading) return <div>Loading...</div>; 
+    if (error) return <div>{error}</div>;
+
+    const handleRatingChange = (ratingType: string, newRate: number) => {
+        setFormData({
+            ...formData,
+            [ratingType]: newRate,
+        })
+    }
+
     return(
         <div>
             <Create type="bootcamp"
                 firstTitle="부트캠프 기본 정보를 입력해주세요." 
                 secondTitle="부트캠프에 대해 소개해주세요." 
+                formData={formData}
+                setFormData={setFormData}
             >
                 <div>
-                    <InputField label="부트캠프 명" labelFor="bootcampTitle" labelClassName="nexon-medium text-sm" type="text" 
-                        id="bootcampTitle" name="bootcampTitle" placeholder="부트캠프명을 입력해주세요." className="text-[13px] my-1">
+                    <InputField label="부트캠프 명" labelFor="bootCampName" labelClassName="nexon-medium text-sm" type="text" 
+                        id="bootCampName" name="bootCampName" placeholder="부트캠프명을 입력해주세요." className="text-[13px] my-1">
                     </InputField>
                     <div className="flex gap-5 items-center">
                         <SelectCalendar label="참여 기간" labelClassName="nexon-medium text-sm" placeholder= "참여기간을 선택해주세요." className="text-[13px] my-1 flex-1"/>
-                        <SelectMenu label="프로그램 과정" labelClassName="nexon-medium text-sm" className="my-1 flex-1" placeholder="프로그램 과정을 선택해주세요." options={programList}></SelectMenu>
+                        <SelectMenu label="프로그램 과정" labelClassName="nexon-medium text-sm" className="my-1 flex-1" placeholder="프로그램 과정을 선택해주세요." options={programCourse}></SelectMenu>
                     </div>
                     <div className="flex justify-center items-center gap-30 my-3">
                         <div className="flex flex-col justify-center items-center">
                             <h3 className="nexon-medium text-sm mb-2">강의 만족도</h3>
-                            <Rating></Rating>
+                            <Rating rate={formData.programSatisfaction} onRateChange={(newRate) => handleRatingChange("programSatisfaction", newRate)}></Rating>
                         </div>
                         <div className="flex flex-col justify-center items-center">
                             <h3 className="nexon-medium text-sm mb-2">취업 지원 만족도</h3>
-                            <Rating></Rating>
+                            <Rating rate={formData.assistantSatisfaction} onRateChange={(newRate) => handleRatingChange("assistantSatisfaction", newRate)} ></Rating>
                         </div>
                         <div className="flex flex-col justify-center items-center">
                             <h3 className="nexon-medium text-sm mb-2">학습 난이도</h3>
-                            <Rating></Rating>
+                            <Rating rate={formData.learningLevel} onRateChange={(newRate) => handleRatingChange("learningLevel", newRate)}></Rating>
                         </div>
                     </div>
                 </div>

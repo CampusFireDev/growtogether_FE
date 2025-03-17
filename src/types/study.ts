@@ -3,13 +3,16 @@ export interface StudyData {
     type: string;
     title: string;
     description: string;
-    createdAt: string;
-    maxSize: number;
-    likes: number;
+    maxParticipant: number;
+    studyClosingData: string;
+    mainScheduledList: string;
+    likeCount: number;
     startDate: string;
     endDate: string;
-    techStack: string[];
+    skillNames: string[];
     viewCount: number;
     studyStatus: string;
-    writer: string;
+    author: string;
+    commentCount: number;
+    createdAt: string;
 }

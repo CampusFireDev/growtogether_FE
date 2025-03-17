@@ -7,8 +7,8 @@ import MyPage from "../main/MyPage";
 import Login from "../auth/Login";
 import SignUp from "../auth/SignUp";
 import Layout from "../layout/Layout";
-import FindPassword from "../components/password/findPassword.tsx";
-import ResetPassword from "../components/password/resetPassword.tsx";
+import FindPassword from "../components/password/FindPassword.tsx";
+import ResetPassword from "../components/password/ResetPassword.tsx";
 import FindId from "../auth/FindId.tsx";
 import BootCampPost from "../views/BootCampPost.tsx";
 import StudyPost from "../views/StudyPost.tsx";
@@ -16,6 +16,7 @@ import BootcampCreate from "../views/BootcampCreate.tsx";
 import StudyCreate from "../views/StudyCreate.tsx";
 import Point from "../components/mypage/Point.tsx"
 import PointCharge from "../components/mypage/PointCharge.tsx"
+import PersonalInfo from "../components/mypage/PersonalInfo.tsx"
 import StudyDetail from "../views/mypage/StudyDetail.tsx";
 import MypageLayout from "../layout/MypageLayout.tsx";
 import KaKaoRedirect from "../components/login/KaKaoRedirect.tsx";
@@ -43,6 +44,8 @@ const Router = ():JSX.Element =>{
                 <Route path="/mypage/" element={<MyPage/>} />
                 <Route path="/mypage/point" element={<Point />} />
                 <Route path="/mypage/point/charge" element={<PointCharge />} />
+                <Route path="/mypage/personalinfo" element={<PersonalInfo />} />
+                <Route path="/findId" element={<FindId />} />
                 <Route path="/mypage/study-detail" element={<StudyDetail />} />
             </Route>
         </Routes>

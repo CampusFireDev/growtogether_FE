@@ -28,8 +28,8 @@ const MyPage = ():JSX.Element =>{
                 </div>
                 <Link to="/mypage/point">
                     <div className="flex gap-3 p-5 border-b-1 border-gray5 justify-between items-center">
-                        <p className="text-[16px] nexon">포인트</p>
-                        <p className="nexon-bold">200P</p>   
+                        <span className="text-[16px] nexon">포인트</span>
+                        <span className="nexon-bold">200P</span>   
                     </div>
                 </Link>
                 <div className="flex flex-col gap-3 p-5 border-b-1 border-gray5">
@@ -42,10 +42,12 @@ const MyPage = ():JSX.Element =>{
                         <p className="nexon-bold">256</p>   
                     </div>
                 </div>
-                <div className="flex gap-3 p-5 border-b-1 border-gray5 justify-between items-center">
-                    <p className="text-[16px]">내 정보 관리</p> 
-                </div>
-                <div className="flex gap-3 p-5 border-gray5 justify-between items-center">
+                <Link to="/mypage/personalinfo">
+                    <div className="flex gap-3 p-4 border-b-1 border-gray5 justify-between items-center">
+                        <span className="text-[16px]">내 정보 관리</span> 
+                    </div>
+                </Link>
+                <div className="flex gap-3 p-4 border-gray5 justify-between items-center">
                     <p className="text-[16px] text-[#F74175]">로그아웃</p> 
                 </div>
             </div>

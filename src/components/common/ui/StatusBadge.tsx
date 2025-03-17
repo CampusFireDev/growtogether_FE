@@ -9,7 +9,7 @@ interface StatusBadgeProps {
 const statusMapping: Record<string, StatusBadgeProps["status"]> = {
     "PROGESS": "진행중",
     "COMPLETE": "모집마감",
-    "OPEN": "모집중",
+    "RECRUIT": "모집중",
 };
 
 const StatusBadge = ({ status }: { status: string }) => {

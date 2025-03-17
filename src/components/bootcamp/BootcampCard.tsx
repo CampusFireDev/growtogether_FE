@@ -20,10 +20,10 @@ const BootcampCard = ({ bootcamp, showTechStack = true }: BootcampCardProps): JS
                 <div className="flex align-center text-sm gap-1 mt-[10px] text-black6">
                     <strong>작성일</strong>
                     <span className="text-xs/[21px]">|</span>
-                    <p>{bootcamp.createdAt}</p>
+                    <p>{bootcamp.createdAt.split("T")[0]}</p>
                 </div>
                 {/* showTechStack이 true일 때만 기술 스택 표시*/}
-                {showTechStack && <TechStackList stacks={bootcamp.techStack}/>}
+                {showTechStack && <TechStackList stacks={bootcamp.skillNames}/>}
                 <div className="flex justify-between mt-[15px] pt-[15px] border-t border-gray5">
                     <div className="flex items-center gap-1">
                         <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5"></div>
@@ -59,7 +59,7 @@ const BootcampCard = ({ bootcamp, showTechStack = true }: BootcampCardProps): JS
                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13" fill="none">
                                 <path fillRule="evenodd" clipRule="evenodd" d="M1.94869 1.56914C2.55632 0.912605 3.38034 0.543782 4.23953 0.543782C5.09872 0.543782 5.92273 0.912605 6.53036 1.56914L7.47975 2.59438L8.42913 1.56914C8.72803 1.23466 9.08557 0.967863 9.48089 0.784322C9.87621 0.600782 10.3014 0.504173 10.7316 0.500132C11.1619 0.496091 11.5885 0.5847 11.9867 0.760788C12.385 0.936875 12.7467 1.19691 13.051 1.52573C13.3552 1.85455 13.5958 2.24557 13.7587 2.67596C13.9216 3.10635 14.0036 3.5675 13.9999 4.03251C13.9961 4.49751 13.9068 4.95705 13.7369 5.38432C13.5671 5.81159 13.3203 6.19802 13.0108 6.52108L7.47975 12.5L1.94869 6.52108C1.34124 5.86434 1 4.97374 1 4.04511C1 3.11649 1.34124 2.22588 1.94869 1.56914Z" stroke="#666666" strokeLinejoin="round"/>
                             </svg>
-                            {bootcamp.likes}
+                            {bootcamp.likeCount}
                         </li>
                     </ul>
                 </div>

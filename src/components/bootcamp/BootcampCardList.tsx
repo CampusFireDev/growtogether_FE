@@ -24,7 +24,7 @@ const BootcampCardList = ({ bootcampList }: BootcampCardListProps): JSX.Element 
     }    
 
     // 현재 페이지에 해당하는 데이터만 가져오기
-    const paginatedList = bootcampList.slice(startIndex, endIndex);
+    // const paginatedList = bootcampList.slice(startIndex, endIndex);
 
     return (
         <>

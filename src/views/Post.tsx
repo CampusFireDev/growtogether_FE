@@ -31,8 +31,8 @@ const Post = ({ post, postType, postTitle, infoTitle, children }: PostProps):JSX
         <div className="border-y border-gray5 flex items-center justify-between">    
             <div className="flex items-center gap-2 text-black4 text-[13px] text-nowrap py-3">
                 <img src="/images/profile.png" alt="" className="w-6 h-6"/>
-                <span className="nexon-medium">{isBootcampPost(post) ? post.author : post.writer} | 작성일</span>
-                <span>{post.createdAt}</span>
+                <span className="nexon-medium">{post.author} | 작성일</span>
+                <span>{post.createdAt.split("T")[0]}</span>
             </div>
             <div className="flex text-black6 items-center gap-1 ">
                 <IoEyeOutline className="w-4 h-4" />
@@ -52,7 +52,7 @@ const Post = ({ post, postType, postTitle, infoTitle, children }: PostProps):JSX
 
         {/* 좋아요, 목록 버튼*/}
         <div className="flex justify-center items-center gap-3 my-5">
-            <LikeBtn likeCount={post.likes}/>
+            <LikeBtn likeCount={post.likeCount}/>
             <Link to={`/${postType}`}>
               <FormButton type="button" className="!w-[80px] !h-[50px] !flex !items-center !justify-center">목록</FormButton>
             </Link>

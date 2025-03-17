@@ -8,7 +8,7 @@ const Study = ():JSX.Element=>{
     const { studyList } = useStudyList();
 
     // 모집중인 게시글만 필터링
-    const openStudyList = studyList.filter((study) => study.studyStatus === 'OPEN')
+    const openStudyList = studyList.filter((study) => study.studyStatus === "RECRUIT" || [])
 
     return(
         <>
@@ -17,7 +17,7 @@ const Study = ():JSX.Element=>{
                 <div className="mb-[20px]">
                     <h3 className="nexon-bold text-[24px] text-black4">🔥 현재 급상승 중인 모집글</h3>
                 </div>
-                <StudyPopularCardList />
+                {/* <StudyPopularCardList /> */}
                 <div className="flex justify-between items-center mb-[20px] mt-[60px]">
                     <h3 className="nexon-bold text-[24px] text-black4">모집 중인 게시글 <span className="text-myBlue">{openStudyList.length}</span>개를 찾았어요.</h3>
                     <ListSearchBar />

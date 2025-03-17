@@ -4,6 +4,7 @@ import BootcampFilter from "../components/common/filters/BootcampFilter";
 import ListSearchBar from "../components/common/ui/ListSearchBar";
 import useBootcampList from "../hooks/bootcamp/useBootcampList";
 
+
 const BootCamp = ():JSX.Element=>{
     const { bootcampList } = useBootcampList();
 

@@ -15,6 +15,7 @@ const StudyPopularCardList = (): JSX.Element => {
 
     // 급상승 게시글: 상위 3개만 표시
     const popularStudies = studyList.slice(0, 3);
+    // const popularBootcamp = Array.isArray(bootcampPopularList) ? bootcampPopularList.slice(0, 3) : [];
 
     return (
         <div className="grid grid-cols-3 gap-[18px]">

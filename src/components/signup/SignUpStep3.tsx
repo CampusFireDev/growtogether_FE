@@ -1,3 +1,4 @@
+import axios from 'axios'; 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SignUpProcess from "./SignUpProcess";
@@ -35,7 +36,7 @@ const SignUpStep3 = ():JSX.Element=>{
         setShowPassword((prev) => !prev);
     };
 
-    const handleNext = () => {
+    const handleNext = async () => {
         let newErrors: { [key: string]: string } = {};
         const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -52,12 +53,36 @@ const SignUpStep3 = ():JSX.Element=>{
             return;
         }
 
-        setError({});
-        navigate("/signup/step4");
+        const memberRegisterDto = {
+            nickName: nickname,
+            email: email,
+            verificationCode: "", // 인증 코드가 필요한 경우 입력
+            phone: phone,
+            password: password,
+            githubUrl: "", // 깃허브 URL이 필요하다면 이 부분을 처리
+            profileImageUrl: profileImage || "", // 프로필 이미지 URL (base64 인코딩된 이미지를 서버에 올려야 할 수 있음)
+            skills: [0], // 기술 스택 ID가 배열로 전달됨
+        };
+    
+        const requestData = {
+            memberRegisterDto: memberRegisterDto,
+            profileImage: profileImage || "", // 프로필 이미지 URL (base64 인코딩된 이미지를 서버에 올려야 할 수 있음)
+        };
+    
+        try {
+            // API 호출 (예시: POST 요청)
+            const response = await axios.post('http://13.125.21.225:8080/member/resister', requestData);
+    
+            // 성공적으로 요청을 보내면 처리
+            console.log('회원가입 성공:', response.data);
+            navigate("/signup/step4"); // 성공적으로 이동
+        } catch (error) {
+            console.error('회원가입 실패:', error);
+        }
     };
 
     return(
-        <div className="">
+        <div>
             <SignUpProcess currentStep={3}/>
             <div className="mb-6 flex flex-col justify-center items-center">
                 <div className="relative w-32 h-32 overflow-hidden rounded-full">

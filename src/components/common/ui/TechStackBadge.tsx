@@ -8,10 +8,13 @@ interface TechStackBadgeProps {
 }
 
 const stackStyles: Record<string, {color: string; img: string}> = {
-    "React": {color: "border-[#61DAFB] text-[#61DAFB]", img: "/images/react.png"},
-    "Javascript": {color: "border-[#FFD600] text-[#FFD600]", img:"/images/js.png"},
-    "Typescript": {color: "border-[#007ACC] text-[#007ACC]", img:"/images/ts.png"},
-    "Spring": {color: "border-[#70AD51] text-[#70AD51]", img:"/images/spring.png"},
+    "React": {color: "border-[#61DAFB] text-[#61DAFB]", img: "/tech_logo/react.png"},
+    "Javascript": {color: "border-[#FFD600] text-[#FFD600]", img:"/tech_logo/js.png"},
+    "Typescript": {color: "border-[#007ACC] text-[#007ACC]", img:"/tech_logo/ts.png"},
+    "Spring": {color: "border-[#70AD51] text-[#70AD51]", img:"/tech_logo/spring.png"},
+    "MySQL": {color: "border-[#00758F] text-[#00758F]", img:"/tech_logo/spring.png"},
+    "Spring Boot": {color: "border-[#70AD51] text-[#70AD51]", img:"/tech_logo/spring.png"},
+    "Docker": {color: "border-[#1D63ED] text-[#1D63ED]", img:"/tech_logo/docker.png"},
 };
 
 const TechStackBadge = ({ stack, className, showDeleteIcon=false, onDelete }: TechStackBadgeProps) => {

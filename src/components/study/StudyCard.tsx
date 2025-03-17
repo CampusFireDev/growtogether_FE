@@ -24,11 +24,11 @@ const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element
                 </div>
                 <strong className="text-xl/[31px] h-[64px] overflow-hidden line-clamp-2 nexon-bold mt-[6px] mb-[15px] text-black4">{study.title}</strong>
                 {/* showTechStack이 true일 때만 기술 스택 표시*/}
-                {showTechStack && <TechStackList stacks={study.techStack}/>}
+                {showTechStack && <TechStackList stacks={study.skillNames}/>}
                 <div className="flex justify-between mt-[15px] pt-[15px] border-t border-gray5">
                     <div className="flex items-center gap-1">
                         <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5"></div>
-                        <p className="text-sm text-black6">{study.writer}</p>
+                        <p className="text-sm text-black6">{study.author}</p>
                     </div>
                     <ul className="flex text-sm text-black6 gap-3">
                         <li className="flex items-center gap-1">
@@ -52,7 +52,7 @@ const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element
                         </li>
                         <li className="flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 13 13" fill="none">
-                                <path d="M10.96 8.46928C11.2262 7.86705 11.3741 7.2008 11.3741 6.5C11.3741 3.80761 9.19167 1.625 6.49954 1.625C3.80741 1.625 1.625 3.80761 1.625 6.5C1.625 9.19239 3.80741 11.375 6.49954 11.375C7.36629 11.375 8.18021 11.1488 8.88547 10.7521L11.375 11.3745L10.96 8.46928Z" stroke="#666666" stroke-linecap="round" strokeLinejoin="round"/>
+                                <path d="M10.96 8.46928C11.2262 7.86705 11.3741 7.2008 11.3741 6.5C11.3741 3.80761 9.19167 1.625 6.49954 1.625C3.80741 1.625 1.625 3.80761 1.625 6.5C1.625 9.19239 3.80741 11.375 6.49954 11.375C7.36629 11.375 8.18021 11.1488 8.88547 10.7521L11.375 11.3745L10.96 8.46928Z" stroke="#666666" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                             42
                         </li>

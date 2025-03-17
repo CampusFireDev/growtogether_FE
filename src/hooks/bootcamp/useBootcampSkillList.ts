@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { BootcampData } from "../../types/bootcamp";
 
-const useBootcampList = () => {
-    const [ bootcampList, setBootcampList ] = useState<BootcampData[]>([]);
+const useBootcampSkillName = () => {
+    const [ skillName, setSkillName ] = useState([]);
     const [ loading, setLoading ] = useState<boolean>(true);
     const [ error, setError ] = useState<string | null>(null);
 
     useEffect(() => {
         const timer = setTimeout(async () => {
-            await fetch("/api/bootcamp?page=0&sortType=new", {
+            await fetch("/api/bootcamp/skillName", {
                 cache: "no-store",
                 headers: {
                     "Accept": "application/json"
@@ -18,7 +17,7 @@ const useBootcampList = () => {
                 return res.json();
             })
             .then((data) => {
-                setBootcampList(data.reviews);
+                setSkillName(data);
                 setLoading(false);
             })
             .catch((error) => {
@@ -31,7 +30,7 @@ const useBootcampList = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    return { bootcampList, loading, error };
+    return { skillName, loading, error };
 }
 
-export default useBootcampList;
+export default useBootcampSkillName;

@@ -1,19 +1,22 @@
 export interface BootcampData {
     id: number;
-    programCourse: string;
-    bootcampName: string;
-    type: string;
     title: string;
-    content: string;
     author: string;
-    likes: number
-    bootcampStartDate: string;
-    bootcampEndDate: string;
-    createdAt: string;
-    techStack: string[];
-    programSatisfaction: number;
+    profileImageUrl: string;
+    content: string;
+    imgUrl: null;
+    bootcampName: string;
+    programCourse: string;
+    startdate: string;
+    enddate: string;
     learningLevel: number;
     assistantSatisfaction: number;
+    programSatisfaction: number;
+    likeCount: number
     viewCount: number;
+    type: string;
+    skillNames: string[];
     comments: number;
+    createdAt: string;
+    updatedAt: string;
 }
