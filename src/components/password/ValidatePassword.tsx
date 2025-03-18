@@ -3,10 +3,18 @@ import { FaCheckSquare } from "react-icons/fa";
 
 interface ValidatePasswordProps {
     password: string;
+    onValidationChange: (criteria: PasswordCriteria) => void; // 부모 컴포넌트에 검증
 };
 
-const ValidatePassword = ({ password }:ValidatePasswordProps):JSX.Element => {
-    const [passwordCriteria, setPasswordCriteria] = useState({
+interface PasswordCriteria {
+    length: boolean;
+    letter: boolean;
+    number: boolean;
+    specialChar: boolean;
+}
+
+const ValidatePassword = ({ password, onValidationChange }: ValidatePasswordProps):JSX.Element => {
+    const [passwordCriteria, setPasswordCriteria] = useState<PasswordCriteria>({
         length:false, letter: false, number: false ,specialChar: false
     });
 
@@ -15,7 +23,11 @@ const ValidatePassword = ({ password }:ValidatePasswordProps):JSX.Element => {
         const letter = /[A-Za-z]/.test(password);
         const number = /\d/.test(password);
         const specialChar = /[@$!%*?&]/.test(password);
-        setPasswordCriteria({ length, letter, number, specialChar });
+        
+        const updatedCriteria = { length, letter, number, specialChar };
+        
+        setPasswordCriteria(updatedCriteria);
+        onValidationChange(updatedCriteria);
     },[password]);
 
     return(
