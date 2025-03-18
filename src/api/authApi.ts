@@ -2,12 +2,18 @@ import axios from "axios"
 import { API_URL } from "../config"
 
 /**
+ * Local Storage에서 토큰 가져오기
+ */
+const token = localStorage.getItem("token");
+
+/**
  * Axios 인스턴스 생성 
  */
 const api = axios.create({
     baseURL: API_URL.API_BASE_URL,
     headers: {
         "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}), // 초기 토큰 설정 추가
     },
 });
 
@@ -47,7 +53,7 @@ export const login = async (email: string, password: string) => {
     console.log("✅ 저장할 토큰:", accessToken);
     localStorage.setItem("token", accessToken); // Local Storage에 저장
 
-    // 💡 Axios 헤더에 즉시 반영 (이 부분 추가)
+    // 💡 Axios 헤더에 즉시 반영
     api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
     
     return response.data;
