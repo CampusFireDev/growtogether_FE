@@ -13,7 +13,7 @@ const useAuth = () => {
             setToken(storedToken);
 
             // Axios 헤더에도 즉시 반영
-            api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
+            api.defaults.headers.common["Authorization"] = `${storedToken}`;
         }
     }, []);
 
@@ -27,7 +27,7 @@ const useAuth = () => {
         localStorage.setItem("token", newToken);
 
         // Axios 헤더 즉시 반영
-        api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
+        api.defaults.headers.common["Authorization"] = `${newToken}`;
         
         // 상태 업데이트
         setToken(newToken);
