@@ -1,53 +1,60 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Children } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SignUpProcess from "./SignUpProcess";
 import SignUpStep2 from "./SignUpStep2";
 import SignUpStep3 from "./SignUpStep3";
 import SignUpStep4 from "./SignUpStep4";
+import RadioInput from "../form/RadioInput";
+import CheckboxInput from "../form/CheckboxInput";
+import { FormButton } from "../login";
 const SignUpStep1 = ():JSX.Element=>{
     const navigate = useNavigate();
     const { step } = useParams(); 
-    const [agreeTerms, setAgreeTerms] = useState<null | boolean>(null); //이용약관 동의 여부
+    
+    // 기본 값을 null로 설정하여 처음에는 아무것도 체크되지 않도록 함
+    const [agreeTerms, setAgreeTerms] = useState<null | boolean>(null); // 이용약관 동의 여부
     const [agreePrivacy, setAgreePrivacy] = useState<null | boolean>(null); //개인정보 보호 동의 여부
     const [agreeAll, setAgreeAll] = useState(false); // 모두 동의 여부
     const [canProceed, setCanProceed] = useState(false); // '다음' 단계 버튼 활성화
 
     // 이용약관 동의 처리
     const handleAgreeTermsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setAgreeTerms(e.target.id === "agree");
-    };
+        const isAgreed = e.target.id === "agree";
+        setAgreeTerms(isAgreed);
+        setAgreeAll(isAgreed && agreePrivacy === true); // 하나라도 비동의면 전체동의 해제
+        updateCanProceed(isAgreed, agreePrivacy);
+    }
 
-    // 개인정보 동의 처리
+    // 개인정보 보호 동의 처리
     const handleAgreePrivacyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setAgreePrivacy(e.target.id === "agree");
-    };
+        const isAgreed = e.target.id === "agreePrivacy"; 
+        setAgreePrivacy(isAgreed);
+        setAgreeAll(isAgreed && agreeTerms === true); // 하나라도 비동의면 전체동의 해제
+        updateCanProceed(agreeTerms, isAgreed);
+    }
 
     // 모두 동의 처리
     const handleAgreeAll = () => {
-        setAgreeAll(prevAgreeAll => {
-            const newAgreeAll = !prevAgreeAll;  
-            if (newAgreeAll) {
-                setAgreeTerms(true);
-                setAgreePrivacy(true);
-            } else {
-                setAgreeTerms(null);
-                setAgreePrivacy(null);
-            }
-            return newAgreeAll;  
-        });
+        const newAgreeAll = !agreeAll;
+        setAgreeAll(newAgreeAll);
+        setAgreeTerms(newAgreeAll);
+        setAgreePrivacy(newAgreeAll);
+        setCanProceed(newAgreeAll);
     };
 
-    const canProceedNext = () =>{
-        if(agreeTerms && agreePrivacy){
-            setCanProceed(true);
-        }else{
-            setCanProceed(false);
+    // 다음 버튼 활성화 여부 업데이트
+    const updateCanProceed = (terms: boolean | null, privacy: boolean | null) => {
+        setCanProceed(terms === true && privacy === true);
+    };
+
+    // ✅ "다음" 버튼 클릭 시 경고 메시지 확인
+    const handleNextStep = () => {
+        if (agreeTerms !== true || agreePrivacy !== true) {
+            alert("모든 약관에 동의해야 다음 단계로 진행할 수 있습니다.");
+            return;
         }
+        navigate("/signup/step2");
     };
-
-    useEffect(()=>{
-        canProceedNext();
-    },[agreeTerms, agreePrivacy]);
 
     if (step === "step2") {
         return <SignUpStep2 />; 
@@ -59,128 +66,82 @@ const SignUpStep1 = ():JSX.Element=>{
         return <SignUpStep4 />;
     }
 
+
     return(
         <div className="text-center">
             <SignUpProcess currentStep={1}/>
             <div className="mb-6">
-                <div className="flex justify-between">
-                    <h2 className="nexon-medium text-sm">이용약관</h2>
+                <div className="flex items-center justify-between mb-2">
+                    <h2 className="nexon-medium text-lg text-black4">이용약관</h2>
                     <div className="flex gap-4 items-center text-sm text-black4">
-                        <label htmlFor="agree">
-                            <input type="radio" id="agree" name="terms" checked={agreeTerms === true} onChange={handleAgreeTermsChange} className="accent-black mr-1"/>
-                            동의
-                        </label>
-                        <label htmlFor="disagree">
-                            <input type="radio" id="disagree" name="terms" checked={agreeTerms === false} onChange={handleAgreeTermsChange} className="accent-black mr-1"/>
-                            비동의
-                        </label>
+                        <RadioInput
+                            id="agree"
+                            name="terms"
+                            value="agree"
+                            label="동의"
+                            checked={agreeTerms === true}
+                            onChange={handleAgreeTermsChange}
+                        />
+                        <RadioInput
+                            id="disagree"
+                            name="terms"
+                            value="disagree"
+                            label="비동의"
+                            checked={agreeTerms === false}
+                            onChange={handleAgreeTermsChange}
+                        />
                     </div>
                 </div>
-                <div className="p-2 border border-gray9 rounded-xl bg-white9 text-xs text-black6 max-h-[250px] overflow-y-auto whitespace-pre-line">
-                    제 1 조 (목적)
-                    이 약관은 [회사명] (이하 "회사")가 제공하는 [서비스명] (이하 "서비스") 이용에 관한 조건을 규정합니다.
-                    <br />
-                    <br />
-                    제 2 조 (약관의 효력 및 변경)
-                    본 약관은 서비스 이용자가 가입을 완료하는 시점에 효력이 발생하며, 변경 시 서비스 화면에 공지됩니다.
-                    <br />
-                    <br />
-                    제 3 조 (서비스 제공 및 이용)
-                    회사는 [서비스명]을 제공하며, 이용자는 이를 이용함에 있어 법령을 준수해야 합니다.
-                    <br />
-                    <br />
-                    제 4 조 (회원가입)
-                    회원 가입 시 제공하는 정보는 정확해야 하며, 이용자는 이를 변경해야 할 경우 즉시 수정해야 합니다.
-                    <br />
-                    <br />
-                    제 5 조 (회원의 의무)
-                    이용자는 서비스를 정상적으로 이용하기 위해 약관을 준수하고, 타인의 권리를 침해하지 않아야 합니다.
-                    <br />
-                    <br />
-                    제 6 조 (서비스 이용의 제한 및 중지)
-                    회사는 불법적인 활동이나 약관 위반 시 서비스 이용을 제한하거나 중지할 수 있습니다.
-                    <br />
-                    <br />
-                    제 7 조 (개인정보 보호)
-                    회사는 이용자의 개인정보를 보호하며, 개인정보 처리 방침에 따라 관리합니다. (자세한 사항은 개인정보 처리 방침 참조)
-                    <br />
-                    <br />
-                    제 8 조 (서비스 요금 및 결제)
-                    서비스는 기본적으로 무료로 제공되며, 유료 서비스의 경우 요금은 별도 안내됩니다.
-                    <br />
-                    <br />
-                    제 9 조 (개인정보의 제3자 제공)
-                    회사는 이용자의 개인정보를 제3자에게 제공하지 않으며, 법적 의무가 있을 경우에만 제공됩니다.
-                    <br />
-                    <br />
-                    제 10 조 (책임의 한계)
-                    회사는 서비스 제공에 있어 발생하는 문제에 대해 제한적인 책임만을 지며, 불가항력적인 사유에 대해서는 책임을 지지 않습니다.
-                    <br />
-                    <br />
-                    제 11 조 (관할 법원)
-                    본 약관에 관한 분쟁은 [회사 주소지]의 법원을 제1심 법원으로 합니다.
-                    <br />
-                    <br />
-                    [시행일자] : [시행일자]
+                <div className="p-2 border border-gray9 rounded-[5px] bg-white9 text-xs text-black6 max-h-[250px] h-full overflow-y-auto whitespace-pre-line">
+                    이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />이용약관 동의 내용<br />
                 </div>
             </div>
 
             <div className="mb-6">
-                <div className="flex justify-between">
-                    <h2 className="nexon-medium text-sm">개인정보보호</h2>
+                <div className="flex items-center justify-between mb-2">
+                    <h2 className="nexon-medium text-lg text-black4">개인정보보호</h2>
                     <div className="flex gap-4 items-center text-sm text-black4">
-                        <label htmlFor="agreePrivacy">
-                            <input type="radio" id="agree" name="privacy" checked={agreePrivacy === true} onChange={handleAgreePrivacyChange} className="accent-black mr-1"/>
-                            동의
-                        </label>
-                        <label htmlFor="disagreePrivacy">
-                            <input type="radio" id="disagree" name="privacy" checked={agreePrivacy === false} onChange={handleAgreePrivacyChange} className="accent-black mr-1"/>
-                            비동의
-                        </label>
+                        <RadioInput
+                            id="agreePrivacy"
+                            name="privacy"
+                            value="agreePrivacy"
+                            label="동의"
+                            checked={agreePrivacy === true}
+                            onChange={handleAgreePrivacyChange}
+                        />
+                        <RadioInput
+                            id="disagreePrivacy"
+                            name="privacy"
+                            value="disagreePrivacy"
+                            label="비동의"
+                            checked={agreePrivacy === false}
+                            onChange={handleAgreePrivacyChange}
+                        />
                     </div>
                 </div>
-                <div className="p-2 border border-gray9 rounded-xl bg-white9 text-xs text-black6 max-h-[250px] overflow-y-auto whitespace-pre-line">
-                    1. 개인정보 수집 및 이용 목적
-                    우리는 회원가입을 위해 최소한의 개인정보를 수집합니다. 수집된 개인정보는 서비스 제공 및 관리, 고객 지원, 통계 분석, 이벤트 안내 등 본 서비스의 목적에만 사용됩니다.
-                    <br />
-                    <br />
-                    2. 수집하는 개인정보 항목
-                    필수 항목: 이름, 이메일, 전화번호 등
-                    선택 항목: 주소, 프로필 사진 등
-                    <br />
-                    <br />
-                    3. 개인정보 보유 및 이용 기간
-                    수집된 개인정보는 회원 탈퇴 또는 서비스 종료 시까지 보유됩니다. 다만, 관련 법령에 따라 보존해야 하는 경우에는 해당 기간 동안 보관될 수 있습니다.
-                    <br />
-                    <br />
-                    4. 개인정보의 제3자 제공
-                    원칙적으로 사용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 다만, 법적 의무가 있는 경우 또는 서비스 제공을 위해 필요한 경우에는 예외가 있을 수 있습니다.
-                    <br />
-                    <br />
-                    5. 개인정보 보호를 위한 안전 조치
-                    사용자의 개인정보는 암호화된 방식으로 안전하게 보호됩니다. 개인정보 접근 권한이 제한된 직원만이 접근할 수 있도록 관리합니다.
-                    <br />
-                    <br />
-                    6. 사용자의 권리
-                    사용자는 언제든지 본인의 개인정보에 접근하고 수정할 수 있습니다. 또한, 개인정보의 삭제를 요청할 수 있습니다. 이를 위해 고객센터로 문의 바랍니다.
-                    <br />
-                    <br />
-                    7. 동의 거부 권리
-                    개인정보 제공에 대한 동의를 거부할 수 있습니다. 다만, 필수 항목에 대한 동의를 거부할 경우 서비스 이용에 제한이 있을 수 있습니다.
+                <div className="p-2 border border-gray9 rounded-[5px] bg-white9 text-xs text-black6 max-h-[250px] overflow-y-auto whitespace-pre-line">
+                   개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />개인정보보호 내용<br />
                 </div>
             </div>
 
-            <div className="mb-4 text-black4">
-                <label htmlFor="agreeAll">
-                    <input type="checkbox" onClick={handleAgreeAll} className="accent-black mr-1"/>
-                    모두 동의
-                </label>
+            <div className="flex justify-center mb-6 text-black4">
+                <CheckboxInput
+                    id="checkAll"
+                    name="checkAll"
+                    value="checkAll"
+                    label="전체 동의"
+                    checked={agreeAll}
+                    onChange={handleAgreeAll}
+                />
             </div>
             
-            <button className={`w-full py-3 nexon-medium text-white text-xs mb-10
-                ${canProceed ? "bg-myBlue" : "bg-black6 cursor-not-allowed"}`} disabled={!canProceed} onClick={()=>canProceed && navigate("/signup/step2")}>
+            <FormButton
+                type="button"
+                onClick={handleNextStep}
+                className={`${canProceed ? "bg-myBlue" : "bg-black6 cursor-not-allowed"}`}
+            >
                 다음
-            </button>
+            </FormButton>
         </div>
     )
 }
