@@ -46,6 +46,9 @@ export const login = async (email: string, password: string) => {
 
     console.log("✅ 저장할 토큰:", accessToken);
     localStorage.setItem("token", accessToken); // Local Storage에 저장
+
+    // 💡 Axios 헤더에 즉시 반영 (이 부분 추가)
+    api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
     
     return response.data;
 }

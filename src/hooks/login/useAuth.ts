@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import api from "../../api/authApi";
 
 const useAuth = () => {
     const [ token, setToken ] = useState<string | null>(null); // 토큰 상태 관리
@@ -10,6 +11,9 @@ const useAuth = () => {
         if (storedToken) {
             // 상태 업데이트
             setToken(storedToken);
+
+            // Axios 헤더에도 즉시 반영
+            api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
         }
     }, []);
 
@@ -21,6 +25,9 @@ const useAuth = () => {
 
         // Local Storage에 토큰 저장
         localStorage.setItem("token", newToken);
+
+        // Axios 헤더 즉시 반영
+        api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
         
         // 상태 업데이트
         setToken(newToken);
