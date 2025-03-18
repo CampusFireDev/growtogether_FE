@@ -20,7 +20,7 @@ const ValidatePassword = ({ password }:ValidatePasswordProps):JSX.Element => {
 
     return(
         
-        <ul className="absolute flex gap-5 nexon-medium text-[12px] top-full text-nowrap">
+        <ul className="flex gap-5 nexon-medium text-[12px] top-full text-nowrap">
                 <li className={`flex gap-1 items-center ${passwordCriteria.length ? "text-myGreen" : "text-black9"}`}>
                     <FaCheckSquare /> 8자 이상
                 </li>

@@ -11,12 +11,16 @@ import ValidatePassword from "../password/ValidatePassword";
 const optionsList = ["React", "TypeScript", "Java", "Spring", ".NET"]; // 기술스택 메뉴 선택 예시
 const SignUpStep3 = ():JSX.Element=>{
     const navigate = useNavigate();
+
+
+    const [nickname, setNickname] = useState("");
+
+
     const [profileImage, setProfileImage] = useState<string | undefined>(undefined);
     const [showPassword, setShowPassword ] = useState<boolean>(false);
     const [confirmPassword, setConfirmPassword] = useState("");
     const [password, setPassword] = useState<string>("");
-    const [nickname, setNickname] = useState("");
-    const [email, setEmail] = useState("");
+    //const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [error, setError] = useState<{ [key: string]: string }>({});
 
@@ -41,7 +45,7 @@ const SignUpStep3 = ():JSX.Element=>{
         const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
         if(!nickname.trim()) newErrors.nickname = "닉네임을 입력해주세요."
-        if (!email.trim()) newErrors.email = "이메일.";
+        // if (!email.trim()) newErrors.email = "이메일.";
         if(!password.trim()) newErrors.password = "비밀번호를 입력해주세요.";
         if(!password.trim()) newErrors.confirmPassword = "비밀번호를 다시 입력해주세요.";
         if(!regex.test(password)) newErrors.password = "비밀번호를 영문+숫자+특수문자 조합으로 최소 8자 입력해주세요."
@@ -94,13 +98,33 @@ const SignUpStep3 = ():JSX.Element=>{
                     <LuImagePlus className="w-5 h-5 text-white"/>
                 </div>
             </div>
-            <div className="text-[13px]">
-                <InputField label="닉네임 (필수)" labelFor="nickname" labelClassName="nexon-medium text-sm" type="text" id="nickname" name="nickname" 
-                    placeholder="닉네임을 입력해주세요." onChange={(e) => setNickname(e.target.value)} helperText={error.nickname}
+            <div>
+                
+                <InputField
+                    label="이메일"
+                    labelFor="email"
+                    labelClassName="nexon-medium text-[15px] text-black4"
+                    type="email"
+                    id="email"
+                    name="email"
+                    // value={email}
+                    className="mb-5"
+                    placeholder="이메일 주소"
+                    disabled={true}
                 />
-                <InputField label="이메일" labelFor="email" labelClassName="nexon-medium text-sm" type="email" id="email" name="email" 
-                    placeholder="이메일 주소" onChange={(e) => setEmail(e.target.value)} helperText={error.email}
+                <InputField
+                    label="닉네임"
+                    labelFor="nickname"
+                    labelClassName="nexon-medium text-[15px] text-black4"
+                    type="text"
+                    id="nickname"
+                    name="nickname"
+                    className="mb-5"
+                    placeholder="닉네임을 입력해주세요."
+                    onChange={(e) => setNickname(e.target.value)}
+                    helperText={error.nickname}
                 />
+
                 <div className="relative mb-10">
                     <InputField label="비밀번호 (필수)" labelFor="password" labelClassName="nexon-medium text-sm" type={showPassword ? "text" : "password"} id="password" name="password" 
                         placeholder="영문+숫자+특수문자 조합으로 최소 8자 입력해주세요." className="relative " onChange={(e)=>setPassword(e.target.value)} helperText={error.password}

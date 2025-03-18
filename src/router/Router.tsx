@@ -20,14 +20,13 @@ import PersonalInfo from "../components/mypage/PersonalInfo.tsx"
 import StudyDetail from "../views/mypage/StudyDetail.tsx";
 import MypageLayout from "../layout/MypageLayout.tsx";
 import KaKaoRedirect from "../components/login/KaKaoRedirect.tsx";
+import UserAuthLayout from "../layout/UserAuthLayout.tsx";
 
 const Router = ():JSX.Element =>{
     return(
         <Routes>
             <Route element={<Layout/>}>
                 <Route path="/" element={<Home/>} />
-                <Route path="/login" element={<Login/>} />
-                <Route path="/signup/:step?" element={<SignUp/>} />
                 <Route path="/findpassword" element={<FindPassword/>} />
                 <Route path="/resetpassword" element={<ResetPassword/>} />
                 <Route path="/study" element={<Study/>} />
@@ -47,6 +46,10 @@ const Router = ():JSX.Element =>{
                 <Route path="/mypage/personalinfo" element={<PersonalInfo />} />
                 <Route path="/findId" element={<FindId />} />
                 <Route path="/mypage/study-detail" element={<StudyDetail />} />
+            </Route>
+            <Route element={<UserAuthLayout />}>
+                <Route path="/login" element={<Login/>} />
+                <Route path="/signup/:step?" element={<SignUp/>} />
             </Route>
         </Routes>
     )
