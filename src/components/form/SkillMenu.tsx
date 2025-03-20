@@ -29,13 +29,13 @@ const SkillMenu = ({ setFormData, formData}: SkillMenuProps) =>{
     return (
         <>
             <SelectMenu label="학습 언어" labelClassName="nexon-medium text-sm" className="my-1" placeholder="사용 언어를 선택해주세요." options={skillName} onChange={handleTechStackChange}/>
-                <div className="mt-3">
-                    {selectedTechStacks.map((stack, index) => (
-                        <TechStackBadge key={index} stack={stack} className="mr-3 mb-2" 
-                            showDeleteIcon={true} onDelete={handleDeleteTechStack}
-                        />
-                    ))}
-                </div>
+            <div className="mt-3">
+                {selectedTechStacks.map((stack, index) => (
+                    <TechStackBadge key={index} stack={stack} className="mr-3 mb-2" 
+                        showDeleteIcon={true} onDelete={handleDeleteTechStack}
+                    />
+                ))}
+            </div>
         </>
     )
 };

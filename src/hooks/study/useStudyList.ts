@@ -1,40 +1,45 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { StudyData } from "../../types/study";
-
-const useStudyList = () => {
+const useStudyList = (page: number) => {
     const [studyList, setStudyList] = useState<StudyData[]>([]);
+    const [totalElements, setTotalElements] = useState<number>(0);
+    const [totalPages, setTotalPages] = useState<number>(0); 
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const itemsPerPage = 9; 
 
     useEffect(() => {
-        const timer = setTimeout(async () => {
-            await fetch("/api/study?page=1", {
-                cache: "no-store",
-                headers: {
-                    "Accept": "application/json"
+        const fetchStudyList = async() => {
+            setLoading(true);
+            try{
+                const res = await axios.get(`/api/study?page=${page}&size=${itemsPerPage}`, {
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+                console.log("🎯API 스터디 게시글 응답 데이터:", res.data);
+                window.scrollTo(0, 0);
+
+                if (Array.isArray(res.data.studyList)) {
+                    setStudyList(res.data.studyList);
+                    setTotalElements(res.data.totalElements);
+                    setTotalPages(res.data.totalPages);
+                } else {
+                    setStudyList([]); // 빈 배열로 초기화
+                    setTotalElements(0);
+                    setTotalPages(0);
                 }
-            })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(`HTTP error! Status: ${res.status}`);
-                }
-                return res.json();
-            })
-            .then((data) => {
-                setStudyList(data.studyList);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("API 호출 실패: ", error);
+            } catch (error: any) {
                 setError(error.message);
+            } finally {
                 setLoading(false);
-            });
-        }, 500);
+            }
+        }
+        fetchStudyList();
+    }, [page]);
 
-        return () => clearTimeout(timer);
-    }, []);
-
-    return { studyList, loading, error };
+    return { studyList, totalElements, totalPages, loading, error };
 };
 
 export default useStudyList;

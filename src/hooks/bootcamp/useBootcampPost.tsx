@@ -1,6 +1,4 @@
-
 import { BootcampData } from "../../types/bootcamp";
-
 
 export const useBootcampPost = async (id: number): Promise<BootcampData> => {
   try {
@@ -11,7 +9,7 @@ export const useBootcampPost = async (id: number): Promise<BootcampData> => {
     }
     
     const data: BootcampData = await response.json();
-    console.log("✅✅",data);
+    console.log("✅",data);
     return data;
 
   } catch (error) {

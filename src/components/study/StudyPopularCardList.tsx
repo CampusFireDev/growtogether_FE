@@ -1,9 +1,9 @@
-import useStudyList from "../../hooks/study/useStudyList";
+import useStudyPopularList from "../../hooks/study/useStudyPopularList";
 import StudyCard from "./StudyCard";
 import Loading from "../common/ui/Loading";
 
 const StudyPopularCardList = (): JSX.Element => {
-    const { studyList, loading, error } = useStudyList();
+    const { studyPopularList, loading, error } = useStudyPopularList();
 
     if (loading) {
         return <div><Loading/></div>;
@@ -14,12 +14,12 @@ const StudyPopularCardList = (): JSX.Element => {
     }
 
     // 급상승 게시글: 상위 3개만 표시
-    const popularStudies = studyList.slice(0, 3);
-    // const popularBootcamp = Array.isArray(bootcampPopularList) ? bootcampPopularList.slice(0, 3) : [];
+    // const popularStudies = studyList.slice(0, 3);
+    const popularStudy = Array.isArray(studyPopularList) ? studyPopularList.slice(0, 3) : [];
 
     return (
         <div className="grid grid-cols-3 gap-[18px]">
-            {popularStudies.map((study, index) => (
+            {popularStudy.map((study, index) => (
                 <StudyCard key={index} study={study} showTechStack={false} />
             ))}
         </div>

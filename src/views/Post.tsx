@@ -10,6 +10,7 @@ import LikeBtn from "../components/common/ui/LikeBtn";
 import Comment from "../components/common/ui/Comment";
 import { BootcampData  } from "../types/bootcamp";
 import { StudyData } from "../types/study";
+import { CommentData } from "../types/comment";
 
 interface PostProps {
   post: BootcampData | StudyData;
@@ -17,11 +18,12 @@ interface PostProps {
   postTitle: string;
   infoTitle: string;
   children: React.ReactNode;
+  comments: CommentData[];
 }
 
-const Post = ({ post, postType, postTitle, infoTitle, children }: PostProps):JSX.Element =>{
+const Post = ({ post, postType, postTitle, infoTitle, children, comments }: PostProps):JSX.Element =>{
   const isBootcampPost = (post: BootcampData | StudyData): post is BootcampData => {
-    return (post as BootcampData).bootcampName !== undefined;
+    return (post as BootcampData).bootCampName !== undefined;
   };
   
   return(
@@ -34,7 +36,7 @@ const Post = ({ post, postType, postTitle, infoTitle, children }: PostProps):JSX
                 <span className="nexon-medium">{post.author} | 작성일</span>
                 <span>{post.createdAt.split("T")[0]}</span>
             </div>
-            <div className="flex text-black6 items-center gap-1 ">
+            <div className="flex text-black6 items-center gap-1">
                 <IoEyeOutline className="w-4 h-4" />
                 <p className="text-[11px]">{post.viewCount}</p>
             </div>
@@ -47,7 +49,7 @@ const Post = ({ post, postType, postTitle, infoTitle, children }: PostProps):JSX
         <div className="border-b border-gray5 py-5">
           <p className="nexon-bold text-black4 text-[14px] lg:text-[17px] mb-3">{infoTitle}</p>
           <p className="nexon-bold text-[14px] lg:text-[17px] ">{post.title}</p>
-          <p className="text-[13px] lg:text-[15px] my-2">{isBootcampPost(post) ? post.content : post.description}</p>
+          <p className="text-[13px] lg:text-[15px] my-2">{post.content}</p>
         </div>
 
         {/* 좋아요, 목록 버튼*/}
@@ -59,7 +61,7 @@ const Post = ({ post, postType, postTitle, infoTitle, children }: PostProps):JSX
         </div>
 
         {/* 댓글 창*/}
-        <Comment postId={post.id}/>
+        <Comment postId={isBootcampPost(post) ? post.id : post.studyId} comments={comments}/>
     </div>
   )
 }

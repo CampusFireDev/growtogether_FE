@@ -1,30 +1,26 @@
-import useBootcampList from "../../hooks/bootcamp/useBootcampList";
-import usePagination from "../../hooks/common/usePagination";
-import Pagination from "../common/ui/Pagination";
+import { useEffect } from "react";
 import BootcampCard from "./BootcampCard";
+import Pagination from "../common/ui/Pagination";
+import usePagination from "../../hooks/common/usePagination";
 import { BootcampData } from "../../types/bootcamp";
-import Loading from "../common/ui/Loading";
+
 
 interface BootcampCardListProps {
     bootcampList: BootcampData[];
+    totalElements: number;
+    totalPages: number;
+    page: number;
+    setPage: (page: number) => void;
 }
 
-const BootcampCardList = ({ bootcampList }: BootcampCardListProps): JSX.Element => {
-    const { loading, error } = useBootcampList();
+const BootcampCardList = ({ bootcampList, totalElements, totalPages, page, setPage, }: BootcampCardListProps): JSX.Element => {
+    const { currentPage, nextPage, prevPage, goToPage} = usePagination(page, totalPages);
 
-    const itemsPerPage = 9; // 표시할 개수
-    const { currentPage, totalPages, nextPage, prevPage, goToPage, startIndex, endIndex } = usePagination(bootcampList.length, itemsPerPage);
-
-    if (loading) {
-        return <div><Loading/></div>;
-    }
-
-    if (error) {
-        return <div className="text-red-500">⚠️ 데이터 불러오기 실패: {error}</div>;
-    }    
-
-    // 현재 페이지에 해당하는 데이터만 가져오기
-    // const paginatedList = bootcampList.slice(startIndex, endIndex);
+    useEffect(() => {
+        if (page !== currentPage) {
+            setPage(currentPage);
+        }
+    }, [currentPage, page, setPage]);
 
     return (
         <>
@@ -36,7 +32,7 @@ const BootcampCardList = ({ bootcampList }: BootcampCardListProps): JSX.Element 
             <Pagination 
                 currentPage={currentPage} 
                 totalPages={totalPages} 
-                nextPage={nextPage}
+                nextPage={nextPage }
                 prevPage={prevPage}
                 goToPage={goToPage}
             />

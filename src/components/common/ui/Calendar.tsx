@@ -30,11 +30,13 @@ const Calendar = ({ startDate, endDate, selectedDates, onDateSelect, className }
 
     const prevMonth = (e:React.MouseEvent) =>{
         e.stopPropagation();
+        e.preventDefault();   
         setCurrentMonth((prev) => (prev === 0 ? 11: prev - 1));
         if (currentMonth === 0) setCurrentYear((prev) => prev - 1);
     };
     const nextMonth = (e:React.MouseEvent) => {
         e.stopPropagation();
+        e.preventDefault();  
         setCurrentMonth((prev) => (prev === 11 ? 0 : prev + 1));
         if (currentMonth === 11) setCurrentYear((prev) => prev + 1);
     };

@@ -5,7 +5,7 @@ export interface BootcampData {
     profileImageUrl: string;
     content: string;
     imgUrl: null;
-    bootcampName: string;
+    bootCampName: string;
     programCourse: string;
     startdate: string;
     enddate: string;
@@ -16,7 +16,7 @@ export interface BootcampData {
     viewCount: number;
     type: string;
     skillNames: string[];
-    comments: number;
+    commentCount: number;
     createdAt: string;
     updatedAt: string;
 }

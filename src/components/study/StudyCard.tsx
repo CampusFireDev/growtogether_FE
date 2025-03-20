@@ -12,7 +12,7 @@ interface StudyCardProps {
 const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element => {
     return(
         <div className="border border-gray5 py-[25px] px-[30px] rounded-[10px]">
-            <Link to={`/study/${study.id}`}>
+            <Link to={`/study/${study.studyId}`}>
                 <div className="flex justify-between">
                     <StudyTypeBadge type={study.type} />
                     <StatusBadge status={study.studyStatus} />
@@ -20,7 +20,7 @@ const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element
                 <div className="flex align-center text-sm gap-1 mt-[20px] text-black6">
                     <strong>마감일</strong>
                     <span className="text-xs/[21px]">|</span>
-                    <p>{study.endDate}</p>
+                    <p>{study.studyClosingDate}</p>
                 </div>
                 <strong className="text-xl/[31px] h-[64px] overflow-hidden line-clamp-2 nexon-bold mt-[6px] mb-[15px] text-black4">{study.title}</strong>
                 {/* showTechStack이 true일 때만 기술 스택 표시*/}
@@ -32,19 +32,7 @@ const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element
                     </div>
                     <ul className="flex text-sm text-black6 gap-3">
                         <li className="flex items-center gap-1">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                viewBox="0 0 32 32"
-                                width="18px"
-                                height="18px"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeMiterlimit="10"
-                                strokeWidth="2"
-                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" width="18px" height="18px" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="2">
                                 <path d="M16,7C9.934,7,4.798,10.776,3,16c1.798,5.224,6.934,9,13,9s11.202-3.776,13-9C27.202,10.776,22.066,7,16,7z" />
                                 <circle cx="16" cy="16" r="5" />
                             </svg>

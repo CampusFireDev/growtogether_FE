@@ -1,17 +1,19 @@
 export interface StudyData {
-    id: number;
-    type: string;
+    studyId: number;
     title: string;
-    description: string;
+    content: string;
+    viewCount: number;
     maxParticipant: number;
     studyClosingData: string;
     mainScheduledList: string;
-    likeCount: number;
-    startDate: string;
-    endDate: string;
-    skillNames: string[];
-    viewCount: number;
     studyStatus: string;
+    type: string;
+    studyCount: number;
+    likeCount: number;
+    skillNames: string[];
+    studyStartDate: string;
+    studyEndDate: string;
+    studyClosingDate: string;
     author: string;
     commentCount: number;
     createdAt: string;

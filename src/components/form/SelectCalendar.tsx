@@ -14,8 +14,9 @@ interface SelectCalendarProps {
     className?: string;
     singleDate?: boolean; //단일 날짜 선택
     multiDate?: boolean; // 다중 날짜 선택
+    onChange?: (selectedDates: string[]) => void;
 };
-const SelectCalendar = ({ label, labelFor, labelClassName="", placeholder, className, singleDate=false, multiDate=false }: SelectCalendarProps): JSX.Element =>{
+const SelectCalendar = ({ label, labelFor, labelClassName="", placeholder, className, singleDate=false, multiDate=false, onChange }: SelectCalendarProps): JSX.Element =>{
     const [select, setSelect] = useState(false);
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
@@ -40,32 +41,42 @@ const SelectCalendar = ({ label, labelFor, labelClassName="", placeholder, class
         setSelect(!select);
     };
 
-    const handleDateSelect = (selectedDate: Date) =>{
+    const handleDateSelect = (selectedDate: Date) => {
         if (singleDate) {
             // 단일 날짜 선택 모드일 경우
             setStartDate(selectedDate);
             setEndDate(null);
             setSelect(false);
-        } else if(multiDate) {
+            // 상태 업데이트 후 onChange 호출
+            onChange && onChange([formatDate(selectedDate)]);
+        } else if (multiDate) {
             // 다중 날짜 선택 모드일 경우
-            if(selectedDates.some(date => date.toDateString() === selectedDate.toDateString())){
-                setSelectedDates(prev => prev.filter(date => date.toDateString() !== selectedDate.toDateString()))
+            const isSelected = selectedDates.some(date => date.toDateString() === selectedDate.toDateString());
+            let updatedSelectedDates;
+            
+            if (isSelected) {
+                updatedSelectedDates = selectedDates.filter(date => date.toDateString() !== selectedDate.toDateString());
             } else {
-                setSelectedDates(prev => [...prev, selectedDate]);
+                updatedSelectedDates = [...selectedDates, selectedDate];
             }
+            
+            setSelectedDates(updatedSelectedDates); 
+            const formattedDates = updatedSelectedDates.map(date => formatDate(date));
+            onChange && onChange(formattedDates);
         } else {
             // 범위 선택 모드일 경우
             if (!startDate || (startDate && endDate)) {
                 setStartDate(selectedDate);
                 setEndDate(null);
             } else {
-                if (selectedDate < startDate) {
-                    setEndDate(startDate);
-                    setStartDate(selectedDate);
-                } else {
-                    setEndDate(selectedDate);
-                }
+                const newStart = selectedDate < startDate ? selectedDate : startDate;
+                const newEnd = selectedDate < startDate ? startDate : selectedDate;
+    
+                setStartDate(newStart);
+                setEndDate(newEnd);
                 setSelect(false);
+    
+                onChange && onChange([formatDate(newStart), formatDate(newEnd)]);
             }
         }
     };
@@ -127,7 +138,8 @@ const SelectCalendar = ({ label, labelFor, labelClassName="", placeholder, class
                     />}
                 </div>
             </div>
-            {multiDate && <div className="my-2 flex"> 
+            {multiDate && 
+            <div className="my-2 flex"> 
                 총&nbsp;<p className="text-myBlue nexon-medium">{selectedDates.length}</p>번:&nbsp;
                 <div>{` ${selectedDates.map(date => formatDate(date)).join(", ")}`}</div>
             </div>}

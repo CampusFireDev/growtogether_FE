@@ -1,37 +1,46 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { BootcampData } from "../../types/bootcamp";
-
-const useBootcampList = () => {
+const useBootcampList = (page: number) => {
     const [ bootcampList, setBootcampList ] = useState<BootcampData[]>([]);
+    const [ totalElements, setTotalElements] = useState<number>(0);
+    const [ totalPages, setTotalPages] = useState<number>(0); 
     const [ loading, setLoading ] = useState<boolean>(true);
     const [ error, setError ] = useState<string | null>(null);
+    const itemsPerPage = 9; 
 
     useEffect(() => {
-        const timer = setTimeout(async () => {
-            await fetch("/api/bootcamp?page=0&sortType=new", {
-                cache: "no-store",
-                headers: {
-                    "Accept": "application/json"
+        const fetchBootcampList = async () => {
+            setLoading(true);
+            try{
+                const res = await axios.get(`/api/bootcamp?page=${page}&size=${itemsPerPage}`, {
+                    headers:{
+                        "Accept": "application/json"
+                    }
+                });
+                console.log("🎯API 부트캠프 게시글 응답 데이터:", res.data);
+                window.scrollTo(0, 0);
+                
+                if(Array.isArray(res.data.reviews)){
+                    setBootcampList(res.data.reviews);
+                    setTotalElements(res.data.totalElements);
+                    setTotalPages(res.data.totalPages);
+                } else {
+                    setBootcampList([]);
+                    setTotalElements(0);
+                    setTotalPages(0);
                 }
-            })
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                setBootcampList(data.reviews);
+            } catch(error: any){
+                setError(error.message)
+            } finally {
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.error("API 호출 실패: ", error);
-                setError(error.message);
-                setLoading(false);
-            })
-        }, 500);
-        
-        return () => clearTimeout(timer);
-    }, []);
+            }
+        };
 
-    return { bootcampList, loading, error };
+        fetchBootcampList();
+    }, [page]);
+
+    return { bootcampList, totalElements, totalPages, loading, error };
 }
 
 export default useBootcampList;

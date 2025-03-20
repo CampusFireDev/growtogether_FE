@@ -6,13 +6,10 @@ const useBootcampSkillName = () => {
     const [ error, setError ] = useState<string | null>(null);
 
     useEffect(() => {
-        const timer = setTimeout(async () => {
+        const data = async() =>{
             await fetch("/api/bootcamp/skillName", {
-                cache: "no-store",
-                headers: {
-                    "Accept": "application/json"
-                }
-            })
+            headers: {"Accept": "application/json"}}
+            )
             .then((res) => {
                 return res.json();
             })
@@ -25,12 +22,12 @@ const useBootcampSkillName = () => {
                 setError(error.message);
                 setLoading(false);
             })
-        }, 500);
+        }
+        data();
         
-        return () => clearTimeout(timer);
     }, []);
 
     return { skillName, loading, error };
-}
+};
 
 export default useBootcampSkillName;

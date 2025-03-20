@@ -8,7 +8,7 @@ interface StudyTypeBadgeProps {
 
 const typeMapping: Record<string, StudyTypeBadgeProps["type"]> = {
     "PROJECT": "프로젝트",
-    "STUDY": "스터디",
+    "STUDY": "스터디", 
     "BOOTCAMP": "부트캠프",
 }
 

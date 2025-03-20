@@ -2,7 +2,7 @@ interface InputFieldProps {
     label?: string;
     labelFor?: string;
     labelClassName?: string;
-    type?: 'text' | 'password' | 'date' | 'number' | 'checkbox' | 'radio' | 'email' | 'tel' | 'url';
+    type?: 'text' | 'password' | 'date' | 'number' | 'checkbox' | 'radio' | 'email' | 'tel' | 'url' | 'time';
     id?: string;
     name?: string;
     placeholder?: string;

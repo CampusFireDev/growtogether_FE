@@ -1,19 +1,17 @@
 import useBootcampPopularList from "../../hooks/bootcamp/useBootcampPopularLists";
 import BootcampCard from "./BootcampCard";
+import Loading from "../common/ui/Loading";
 
 const BootcampPopualrCardList = (): JSX.Element => {
     const { bootcampPopularList, loading, error } = useBootcampPopularList();
 
     if (loading) {
-        return <div>로딩 중...</div>;
+        return <div><Loading/></div>;
     }
 
     if (error) {
         return <div className="text-red-500">⚠️ 데이터 불러오기 실패: {error}</div>;
     }
-
-    // `bootcampPopularList`가 배열이 아닐 경우 빈 배열로 처리
-    console.log("🎯 bootcampPopularList:", bootcampPopularList);
 
     const popularBootcamp = Array.isArray(bootcampPopularList) ? bootcampPopularList.slice(0, 3) : [];
 

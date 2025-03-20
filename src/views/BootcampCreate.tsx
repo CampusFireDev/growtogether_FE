@@ -5,16 +5,13 @@ import InputField from "../components/form/InputField";
 import SelectCalendar from "../components/form/SelectCalendar";
 import Rating from "../components/common/ui/Rating";
 import useBootcampProgramCourse from "../hooks/bootcamp/useBootcampProgramCourse";
-// import useBootcampSkillName from "../hooks/bootcamp/useBootcampSkillList";
-
 const BootcampCreate = ():JSX.Element => {
     const { programCourse, loading, error } = useBootcampProgramCourse();
     
-    
     const [formData, setFormData] = useState({
         bootCampName: "",
-        startDate: "",
-        endDate: "",
+        startdate: "",
+        enddate: "",
         programCourse: "",
         learningLevel: 0,
         assistantSatisfaction: 0,
@@ -34,6 +31,15 @@ const BootcampCreate = ():JSX.Element => {
         })
     }
 
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const { name, value } = e.target;
+    //     console.log(">>",e.target);
+    //     setFormData({
+    //         ...formData,
+    //         [name]: value,
+    //     });
+    // };
+
     return(
         <div>
             <Create type="bootcamp"
@@ -43,12 +49,22 @@ const BootcampCreate = ():JSX.Element => {
                 setFormData={setFormData}
             >
                 <div>
-                    <InputField label="부트캠프 명" labelFor="bootCampName" labelClassName="nexon-medium text-sm" type="text" 
-                        id="bootCampName" name="bootCampName" placeholder="부트캠프명을 입력해주세요." className="text-[13px] my-1">
+                    <InputField label="부트캠프 명" labelFor="bootCampName" labelClassName="nexon-medium text-sm" type="text" id="bootCampName"
+                        name="bootCampName" placeholder="부트캠프명을 입력해주세요." className="text-[13px] my-1" value={formData.bootCampName} onChange={(e) => setFormData(prev => ({...prev, bootCampName: e.target.value}))}>
                     </InputField>
                     <div className="flex gap-5 items-center">
-                        <SelectCalendar label="참여 기간" labelClassName="nexon-medium text-sm" placeholder= "참여기간을 선택해주세요." className="text-[13px] my-1 flex-1"/>
-                        <SelectMenu label="프로그램 과정" labelClassName="nexon-medium text-sm" className="my-1 flex-1" placeholder="프로그램 과정을 선택해주세요." options={programCourse}></SelectMenu>
+                        <SelectCalendar label="참여 기간" labelClassName="nexon-medium text-sm" 
+                            placeholder= "참여기간을 선택해주세요." className="text-[13px] my-1 flex-1" onChange={(selectedDates) => 
+                                setFormData(prev => ({
+                                    ...prev, 
+                                    startdate: selectedDates[0] || "", 
+                                    enddate: selectedDates.length > 1 ? selectedDates[selectedDates.length - 1] : ""
+                                }))
+                            }
+                        />
+                        <SelectMenu label="프로그램 과정" labelClassName="nexon-medium text-sm" className="my-1 flex-1" 
+                            placeholder="프로그램 과정을 선택해주세요." options={programCourse} onChange={(e) => setFormData(prev => ({...prev, programCourse: e.target.value}))}
+                        />
                     </div>
                     <div className="flex justify-center items-center gap-30 my-3">
                         <div className="flex flex-col justify-center items-center">

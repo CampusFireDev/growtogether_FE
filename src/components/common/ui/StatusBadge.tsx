@@ -7,7 +7,7 @@ interface StatusBadgeProps {
 }
 
 const statusMapping: Record<string, StatusBadgeProps["status"]> = {
-    "PROGESS": "진행중",
+    "PROGRESS": "진행중",
     "COMPLETE": "모집마감",
     "RECRUIT": "모집중",
 };

@@ -3,20 +3,26 @@
  */
 
 interface BootcampCourseBadgeProps {
-    type: "프론트엔드" | "백엔드";
+    type: "데브옵스" | "데이터베이스" | "백엔드" | "프론트엔드" | "클라우드";
 }
 
 const typeMapping: Record<string, BootcampCourseBadgeProps["type"]> = {
-    "backend": "백엔드",
-    "frontend": "프론트엔드",
+    "DEVOPS": "데브옵스",
+    "DATABASE": "데이터베이스",
+    "BACKEND": "백엔드",
+    "FRONTEND": "프론트엔드",
+    "CLOUD" : "클라우드",
 }
 
 const BootcampCourseBadge = ({ type }: { type: string }) => {
     const mappedType = typeMapping[type];
 
     const typeStyles: Record<BootcampCourseBadgeProps["type"], string> = {
+        "데브옵스": "border-myYellow text-myYellow",
+        "데이터베이스": "border-myPurple text-myPurple",
         "백엔드": "border-myBlue text-myBlue",
-        "프론트엔드": "border-myGreen text-myGreen"
+        "프론트엔드": "border-myGreen text-myGreen",
+        "클라우드": "border-myBlue text-myBlue",
     };
 
     return (

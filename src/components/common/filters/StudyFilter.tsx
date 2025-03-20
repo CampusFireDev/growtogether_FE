@@ -9,7 +9,7 @@ const StudyFilter = (): JSX.Element => {
             </button>
             <DropdownFilter label="스터디 목적" />
             <DropdownFilter label="기술스택" />
-            <DropdownFilter label="모집인원" />
+            {/* <DropdownFilter label="모집인원" /> */}
             <DropdownFilter label="기간" />
             <Link to="/study/create">
                 <button className="h-[40px] px-[15px] text-[15px] text-white bg-black4 rounded-[5px]">
