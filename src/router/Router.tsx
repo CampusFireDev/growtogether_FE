@@ -3,7 +3,7 @@ import Home from "../main/Home";
 import Study from "../views/Study";
 import BootCamp from "../views/BootCamp";
 import Notice from "../views/Notice";
-import MyPage from "../main/MyPage";
+import MyPage from "../views/mypage/MyPage.tsx";
 import Login from "../auth/Login";
 import SignUp from "../auth/SignUp";
 import Layout from "../layout/Layout";
@@ -45,11 +45,13 @@ const Router = ():JSX.Element =>{
                 <Route path="/mypage/point/charge" element={<PointCharge />} />
                 <Route path="/mypage/personalinfo" element={<PersonalInfo />} />
                 <Route path="/findId" element={<FindId />} />
-                <Route path="/mypage/study-detail" element={<StudyDetail />} />
             </Route>
             <Route element={<UserAuthLayout />}>
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup/:step?" element={<SignUp/>} />
+            </Route>
+            <Route element={<StudyDashboardLayout />}>
+                <Route path="/mypage/study-detail" element={<StudyDetail />} />
             </Route>
         </Routes>
     )

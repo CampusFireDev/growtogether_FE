@@ -8,6 +8,12 @@ import { FormButton } from "../login";
 const optionsList = ["React", "TypeScript", "Java", "Spring", ".NET"];
 const PersonalInfo = ():JSX.Element =>{
     const navigate = useNavigate();
+
+    
+
+
+
+    
     const [profileImage, setProfileImage] = useState<string | undefined>(undefined);
     const [password, setPassword] = useState<string>("");
     const [nickname, setNickname] = useState("");
@@ -47,7 +53,10 @@ const PersonalInfo = ():JSX.Element =>{
 
     return(
         <div className="">
-            <h2 className="nexon-bold text-[24px] my-5"> 내 정보 </h2>
+            <strong className="block nexon-bold text-xl text-black4 mb-2">내 정보 수정</strong>
+            <div className="border border-gray5 bg-white">
+
+            </div>
             <div className="mb-6 flex flex-col justify-center items-center">
                 <div className="relative w-32 h-32 overflow-hidden rounded-full">
                     {profileImage ? <img src={profileImage} alt="Profile Img" className="w-full h-full object-cover"/>
