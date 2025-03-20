@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Nav from "./Nav";
 import { IoIosArrowForward } from "react-icons/io";
-import useMemberId from "../hooks/auth/\buseMemberId";
+import useMemberId from "../hooks/auth/useMemberId";
 import useMyPageInfo from "../hooks/mypage/useMyPageInfo";
 
 const MypageLayout = ():JSX.Element => {

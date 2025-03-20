@@ -21,6 +21,7 @@ import StudyDetail from "../views/mypage/StudyDetail.tsx";
 import MypageLayout from "../layout/MypageLayout.tsx";
 import KaKaoRedirect from "../components/login/KaKaoRedirect.tsx";
 import UserAuthLayout from "../layout/UserAuthLayout.tsx";
+import StudyDashboardLayout from "../layout/StudyDashboardLayout.tsx";
 
 const Router = ():JSX.Element =>{
     return(
