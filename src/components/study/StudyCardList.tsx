@@ -22,14 +22,6 @@ const StudyCardList = ({ studyList, totalElements, totalPages, page, setPage }: 
         }
     }, [currentPage, page, setPage]);
 
-    // if (loading) {
-    //     return <div><Loading/></div>;
-    // }
-
-    // if (error) {
-    //     return <div className="text-red-500">⚠️ 데이터 불러오기 실패: {error}</div>;
-    // }
-
     return (
         <>
             <div className="grid grid-cols-3 gap-[18px]">

@@ -1,6 +1,7 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import { BrowserRouter, useLocation } from "react-router-dom";
 import Router from './router/Router';
+import { ContentTypeProvider } from "./context/ContentTypeContext"
 import "./App.css";
 
 function ScrollToTop() {
@@ -12,13 +13,14 @@ function ScrollToTop() {
 
   return null;
 }
-
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop /> {/* 라우팅 변경 시 스크롤을 맨 위로 이동 */}
-      <Router />
-    </BrowserRouter>
+    <ContentTypeProvider>
+      <BrowserRouter>
+        <ScrollToTop /> {/* 라우팅 변경 시 스크롤을 맨 위로 이동 */}
+        <Router />
+      </BrowserRouter>
+    </ContentTypeProvider>
   );
 }
 

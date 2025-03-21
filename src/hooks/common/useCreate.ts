@@ -1,21 +1,17 @@
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
+import { useContentType } from "../../context/ContentTypeContext";
 import useAuth from "../login/useAuth";
 
 interface UseCreateProps {
-    type: string;
     title: string;
     content: string;
     formData: any;
 }
-const useCreate = ({ type, title, content, formData }: UseCreateProps) => {
+const useCreate = ({ title, content, formData }: UseCreateProps) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-
-
-    // const headers = {
-    //     Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImJlc3QxMDkwN0BuYXZlci5jb20iLCJtZW1iZXJJZCI6MzcsIm5pY2tOYW1lIjoiYmVzdCIsImlhdCI6MTc0MjM5NjAwOSwiZXhwIjoxNzQyNDgyNDA5fQ._fvWFHORuwUWTWkz5x-4Gl_KUkf-UaQYQ81volleg5A",
-    // };
+    const { contentType } = useContentType();
     const {token} = useAuth();
 
     const handleCreate = async () => {
@@ -24,7 +20,7 @@ const useCreate = ({ type, title, content, formData }: UseCreateProps) => {
         try {
             let response;
             const headers = token ? { Authorization: `${token}` } : {};
-            if (type === "bootcamp") {
+            if (contentType === "bootcamp") {
                 const formDataToSend = new FormData();
                 const jsonBlob = new Blob(
                     [
@@ -46,7 +42,7 @@ const useCreate = ({ type, title, content, formData }: UseCreateProps) => {
 
                 formDataToSend.append("bootCampReview", jsonBlob);
                 response = await axios.post("/api/bootcamp", formDataToSend, { headers });
-            } else if (type === "study") {
+            } else if (contentType === "study") {
                 const data = {
                     title,
                     content,
@@ -62,7 +58,7 @@ const useCreate = ({ type, title, content, formData }: UseCreateProps) => {
             }
 
             if (response) {
-               console.log(`${type === "bootcamp" ? "부트캠프" : "스터디"} 등록 성공!`);
+               console.log(`${contentType === "bootcamp" ? "부트캠프" : "스터디"} 등록 성공!`);
             }
         } catch (error: any) {
             setError(error.response?.data || error.message);

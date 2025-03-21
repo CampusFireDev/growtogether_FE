@@ -51,9 +51,9 @@ const Router = ():JSX.Element =>{
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup/:step?" element={<SignUp/>} />
             </Route>
-            <Route element={<StudyDashboardLayout />}>
+            {/* <Route element={<StudyDashboardLayout />}>
                 <Route path="/mypage/study-detail" element={<StudyDetail />} />
-            </Route>
+            </Route> */}
         </Routes>
     )
 }

@@ -20,7 +20,7 @@ const FormButton = ({ type = "button", children, disabled, onClick, onSubmit, cl
             onClick={onClick}
             disabled={disabled}
             onSubmit={type === "submit" ? handleSubmit : undefined} 
-            className={`w-full h-[55px] leading-[55px] bg-black text-white 
+            className={`w-full h-[55px] leading-[55px] bg-black text-white flex items-center justify-center
                 rounded-[5px] nexon-bold cursor-pointer hover:opacity-85 ${className}`
             }
         >
