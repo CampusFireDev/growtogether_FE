@@ -1,10 +1,11 @@
 export interface CommentData {
     commentId: number;
-    nickname: string;
+    studyCommentId: number;
     author: string;
     content: string;
+    commentContent: string;
     createdAt: string;
     isDeleted: boolean;
     childComments: CommentData[];
-    parentId: number | null;
+    parentCommentId: number | null;
 }
