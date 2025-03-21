@@ -7,6 +7,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import Calendar from "../common/ui/Calendar"
 
 interface SelectCalendarProps {
+    type?: string;
     label?: string;
     labelFor?: string;
     labelClassName?: string;
@@ -16,7 +17,7 @@ interface SelectCalendarProps {
     multiDate?: boolean; // 다중 날짜 선택
     onChange?: (selectedDates: string[]) => void;
 };
-const SelectCalendar = ({ label, labelFor, labelClassName="", placeholder, className, singleDate=false, multiDate=false, onChange }: SelectCalendarProps): JSX.Element =>{
+const SelectCalendar = ({ type, label, labelFor, labelClassName="", placeholder, className, singleDate=false, multiDate=false, onChange }: SelectCalendarProps): JSX.Element =>{
     const [select, setSelect] = useState(false);
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
@@ -130,11 +131,11 @@ const SelectCalendar = ({ label, labelFor, labelClassName="", placeholder, class
                 
                 <div ref={calendarRef} className="absolute top-12 left-0 w-full z-20" >
                     {select && 
-                    <Calendar className="w-full" 
-                    startDate={startDate} 
-                    endDate={endDate}
-                    selectedDates={selectedDates}
-                    onDateSelect={handleDateSelect} 
+                    <Calendar type={type} className="w-full" 
+                        startDate={startDate} 
+                        endDate={endDate}
+                        selectedDates={selectedDates}
+                        onDateSelect={handleDateSelect} 
                     />}
                 </div>
             </div>

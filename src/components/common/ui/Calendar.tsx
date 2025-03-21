@@ -6,6 +6,7 @@ import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 interface CalendarProps {
+    type?: string;
     startDate?: Date | null;
     endDate?: Date | null;
     selectedDates?: Date[];
@@ -14,8 +15,10 @@ interface CalendarProps {
 };
 
 const date = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-const Calendar = ({ startDate, endDate, selectedDates, onDateSelect, className }:CalendarProps):JSX.Element =>{
+const Calendar = ({ type, startDate, endDate, selectedDates, onDateSelect, className }:CalendarProps):JSX.Element =>{
     const today = new Date();
+    today.setHours(0, 0, 0, 0); 
+
     const [currentMonth, setCurrentMonth] = useState(today.getMonth());
     const [currentYear, setCurrentYear] = useState(today.getFullYear());
     const [hoveredDate, setHoveredDate] = useState<number | null>(null);
@@ -23,8 +26,13 @@ const Calendar = ({ startDate, endDate, selectedDates, onDateSelect, className }
     const lastDate = new Date(currentYear, currentMonth+1, 0).getDate();
 
     const handleDateClick = (day: number) => {
+        const selectedDate = new Date(currentYear, currentMonth, day);
+        selectedDate.setHours(0, 0, 0, 0); // 시간 초기화
+        if (type === "study" && selectedDate < today) {
+            return;
+        }
         if (onDateSelect) {
-            onDateSelect(new Date(currentYear, currentMonth, day)); 
+            onDateSelect(selectedDate);
         }
     };
 
@@ -62,15 +70,19 @@ const Calendar = ({ startDate, endDate, selectedDates, onDateSelect, className }
             const isStart = startDate && dateObj.toDateString() === startDate.toDateString();
             const isEnd = endDate && dateObj.toDateString() === endDate.toDateString();
             const isSelected = selectedDates?.some(date => date.toDateString() === dateObj.toDateString());
-            const hoverStyle = hoveredDate === i ? "bg-gray5 rounded-full" : "";
+            const isPast = type === "study" && dateObj < today; 
+            
+            const hoverStyle = hoveredDate === i && !isPast ? "bg-gray5 rounded-full" : "";
             const textColor = isStart || isEnd || isSelected ? "text-white" : "text-black4";
             const bgColor = isStart || isEnd || isSelected ? "bg-myBlue rounded-full" : "";
-            const sundayColor = isSunday && !isStart && !isEnd ? "text-red-500" : "";
-            
+            const sundayColor = isSunday && !isStart && !isEnd && !isPast? "text-red-500" : "";
+            const pastTextColor = isPast ? "text-black9": "";
+            const cursorStyle = isPast ? "cursor-not-allowed opacity-60" : "cursor-pointer";
+
             days.push(
                 <div key={i} className={`flex justify-center items-center cursor-pointer lg:h-15 lg:w-16 px-2 py-1
-                    ${hoverStyle} ${bgColor} ${textColor} ${sundayColor} ${isToday?"border-2 border-myBlue rounded-full": ""}`} 
-                    onClick={() => handleDateClick(i)} onMouseEnter={() => handleMouseEnter(i)} onMouseLeave={handleMouseLeave}
+                    ${hoverStyle} ${bgColor} ${textColor} ${sundayColor} ${pastTextColor} ${cursorStyle} ${isToday?"border-2 border-myBlue rounded-full": ""}`} 
+                    onClick={!isPast ? () => handleDateClick(i) : undefined} onMouseEnter={() => !isPast && handleMouseEnter(i)} onMouseLeave={handleMouseLeave}
                     >
                     {i}
                 </div>
