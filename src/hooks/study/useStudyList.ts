@@ -18,9 +18,8 @@ const useStudyList = (page: number) => {
                         "Accept": "application/json"
                     }
                 });
-                console.log("🎯API 스터디 게시글 응답 데이터:", res.data);
                 window.scrollTo(0, 0);
-
+                
                 if (Array.isArray(res.data.studyList)) {
                     setStudyList(res.data.studyList);
                     setTotalElements(res.data.totalElements);

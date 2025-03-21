@@ -22,6 +22,7 @@ import MypageLayout from "../layout/MypageLayout.tsx";
 import KaKaoRedirect from "../components/login/KaKaoRedirect.tsx";
 import UserAuthLayout from "../layout/UserAuthLayout.tsx";
 import StudyDashboardLayout from "../layout/StudyDashboardLayout.tsx";
+import Notification from "../components/mypage/Notification.tsx"
 
 const Router = ():JSX.Element =>{
     return(
@@ -45,6 +46,7 @@ const Router = ():JSX.Element =>{
                 <Route path="/mypage/point" element={<Point />} />
                 <Route path="/mypage/point/charge" element={<PointCharge />} />
                 <Route path="/mypage/personalinfo" element={<PersonalInfo />} />
+                <Route path="/mypage/notification" element={<Notification />} />
                 <Route path="/findId" element={<FindId />} />
             </Route>
             <Route element={<UserAuthLayout />}>

@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/login/useAuth";
+import useNotification from "../hooks/common/useNotification";
+import Notification from "../components/mypage/Notification";
 
 const Nav = ():JSX.Element =>{
     const { token } = useAuth(); // 토큰 상태 가져오기
+    const {notificationCount} = useNotification();
 
     return (
         <div className="fixed top-0 left-0 w-full border-b border-[#e5e5e5] bg-white z-10">
@@ -26,12 +29,20 @@ const Nav = ():JSX.Element =>{
                 </div>
                 <div className="flex items-center">
                     <ul className="list-none flex gap-[25px] text-base">
-                        <li>
-                            <Link to="/signup">
+                        <li className="relative group">
+                            <div className="absolute p-1 -top-1 -right-2 bg-black w-[17px] h-[17px] rounded-full text-[9px] flex items-center justify-center text-white nexon-medium">
+                                {notificationCount}
+                            </div>
+                            <Link to={token ? "/mypage/notification" : "/login"}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23" fill="none">
                                     <path d="M7 20.9394C7.79613 21.5989 8.84747 22 10 22C11.1525 22 12.2039 21.5989 13 20.9394M1.57109 17.5454C1.09677 17.5454 0.831858 16.7727 1.11877 16.3434C1.78453 15.3471 2.42712 13.886 2.42712 12.1265L2.45458 9.57693C2.45458 4.84003 5.83278 1 10 1C14.2286 1 17.6566 4.89659 17.6566 9.70327L17.6291 12.1265C17.6291 13.8981 18.2495 15.3672 18.8882 16.3638C19.164 16.7942 18.8984 17.5454 18.43 17.5454H1.57109Z" stroke="#444444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                             </Link>
+                            {token && 
+                                (<div className="absolute hidden group-hover:block top-full right-0 z-20">
+                                    <Notification isPopup={true} />
+                                </div>)
+                            }
                         </li>
                         <li>
                             <Link to={token ? "/mypage" : "/login"}>
@@ -42,12 +53,9 @@ const Nav = ():JSX.Element =>{
                         </li>
                     </ul>
                 </div>
-
-        
             </div>
-
         </div>
     )
-}
+};
 
 export default Nav;

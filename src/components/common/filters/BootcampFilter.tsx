@@ -5,15 +5,15 @@ const BootcampFilter = (): JSX.Element => {
     return (
         <div className="fixed flex justify-between items-center full-line max-w-[1200px] w-full py-[15px] bg-white">
             <div className="flex gap-2">
-                <button className="h-[40px] px-[15px] text-[15px] text-black4 border border-gray5 rounded-[50px]">
-                    <span className="inline-block mr-1 text-[13px]">❤️</span> 내가 찜한 부트캠프
+                <button className="h-[40px] px-[15px] text-[11px] sm:text-[15px] text-black4 border border-gray5 rounded-[50px]">
+                    <span className="inline-block mr-1 text-[10px] sm:text-[13px]">❤️</span> 내가 찜한 부트캠프
                 </button>
                 <DropdownFilter label="학습 언어" />
                 <DropdownFilter label="프로그램 과정" />
             </div>
             <div className="flex gap-2">
                 <Link to="/bootcamp/create">
-                    <button className="h-[40px] px-[15px] text-[15px] text-white bg-black4 rounded-[5px]">
+                    <button className="h-[40px] px-[15px] text-[11px] sm:text-[15px] text-white bg-black4 rounded-[5px]">
                         부트캠프 후기 작성하기
                     </button>
                 </Link>

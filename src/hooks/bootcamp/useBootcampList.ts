@@ -18,7 +18,6 @@ const useBootcampList = (page: number) => {
                         "Accept": "application/json"
                     }
                 });
-                console.log("🎯API 부트캠프 게시글 응답 데이터:", res.data);
                 window.scrollTo(0, 0);
                 
                 if(Array.isArray(res.data.reviews)){
