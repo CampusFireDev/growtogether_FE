@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useContentType } from "../context/ContentTypeContext";
 import Create from "../views/Create";
 import SelectMenu from "../components/form/SelectMenu";
 import SelectCalendar from "../components/form/SelectCalendar";
@@ -11,8 +12,9 @@ const studyPurposeList = [
 const partNumberList = [2,3,4,5,6]; //참여 인원(모집 인원)
 const durationList = [30, 45, 60, 70, 80, 90, 100, 120]; // 진행 시간 (단위: 분)
 
-
 const StudyCreate = ():JSX.Element => {
+    const { setcontentType } = useContentType();
+    setcontentType("study");
 
     const [formData, setFormData] = useState({
         type:"",
@@ -39,8 +41,7 @@ const StudyCreate = ():JSX.Element => {
         
     return(
         <div>
-
-            <Create type="study"
+            <Create
                 firstTitle="스터디/프로젝트 기본 정보를 입력해주세요" 
                 secondTitle="스터디/프로젝트에 대해 소개해주세요." 
                 formData={formData}
@@ -57,11 +58,11 @@ const StudyCreate = ():JSX.Element => {
                     </div>
                     <div className="flex gap-5 items-center">
                     </div>
-                        <SelectCalendar label="모집 마감일" labelClassName="nexon-medium text-sm" 
+                        <SelectCalendar type="study" label="모집 마감일" labelClassName="nexon-medium text-sm" 
                             className="my-1 flex-1" placeholder="모집 마감일을 선택해주세요." singleDate={true} onChange={(selectedDates) => setFormData(prev => ({...prev, studyClosingDate: selectedDates[0] || ""}))}>
                         </SelectCalendar>
 
-                        <SelectCalendar label="참여 날짜" labelClassName="nexon-medium text-sm" 
+                        <SelectCalendar type="study" label="참여 날짜" labelClassName="nexon-medium text-sm" 
                             className="my-1 flex-1" placeholder="참여 날짜를 선택해주세요." multiDate={true} 
                             onChange={(selectedDates) => setFormData(prev => ({
                                 ...prev,

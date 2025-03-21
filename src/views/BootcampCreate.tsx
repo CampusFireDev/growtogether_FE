@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useContentType } from "../context/ContentTypeContext";
 import Create from "../views/Create";
 import SelectMenu from "../components/form/SelectMenu";
 import InputField from "../components/form/InputField";
@@ -7,6 +8,8 @@ import Rating from "../components/common/ui/Rating";
 import useBootcampProgramCourse from "../hooks/bootcamp/useBootcampProgramCourse";
 const BootcampCreate = ():JSX.Element => {
     const { programCourse, loading, error } = useBootcampProgramCourse();
+    const { setcontentType } = useContentType();
+    setcontentType("bootcamp");
     
     const [formData, setFormData] = useState({
         bootCampName: "",
@@ -42,7 +45,7 @@ const BootcampCreate = ():JSX.Element => {
 
     return(
         <div>
-            <Create type="bootcamp"
+            <Create
                 firstTitle="부트캠프 기본 정보를 입력해주세요." 
                 secondTitle="부트캠프에 대해 소개해주세요." 
                 formData={formData}

@@ -1,27 +1,25 @@
 /**
  * 게시글 컴포넌트
  */
-
 import { Link } from "react-router-dom"
+import { useContentType } from "../context/ContentTypeContext"; 
 import { IoEyeOutline } from "react-icons/io5";
 import FormButton from "../components/form/FormButton";
 import StudyTypeBadge from "../components/common/ui/StudyTypeBadge";
 import LikeBtn from "../components/common/ui/LikeBtn";
-import Comment from "../components/common/ui/Comment";
+import CommentList from "../components/common/ui/CommentList";
 import { BootcampData  } from "../types/bootcamp";
 import { StudyData } from "../types/study";
-import { CommentData } from "../types/comment";
 
 interface PostProps {
   post: BootcampData | StudyData;
-  postType: string;
   postTitle: string;
   infoTitle: string;
   children: React.ReactNode;
-  comments: CommentData[];
 }
 
-const Post = ({ post, postType, postTitle, infoTitle, children, comments }: PostProps):JSX.Element =>{
+const Post = ({ post, postTitle, infoTitle, children,  }: PostProps):JSX.Element =>{
+  const { contentType } = useContentType();
   const isBootcampPost = (post: BootcampData | StudyData): post is BootcampData => {
     return (post as BootcampData).bootCampName !== undefined;
   };
@@ -55,13 +53,13 @@ const Post = ({ post, postType, postTitle, infoTitle, children, comments }: Post
         {/* 좋아요, 목록 버튼*/}
         <div className="flex justify-center items-center gap-3 my-5">
             <LikeBtn likeCount={post.likeCount}/>
-            <Link to={`/${postType}`}>
+            <Link to={`/${contentType}`}>
               <FormButton type="button" className="!w-[80px] !h-[50px] !flex !items-center !justify-center">목록</FormButton>
             </Link>
         </div>
 
         {/* 댓글 창*/}
-        <Comment postId={isBootcampPost(post) ? post.id : post.studyId} comments={comments}/>
+        <CommentList postId={isBootcampPost(post) ? post.id : post.studyId} />
     </div>
   )
 }

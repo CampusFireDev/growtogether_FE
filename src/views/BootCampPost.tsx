@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; 
+import { useContentType } from "../context/ContentTypeContext";
+import { useBootcampPost } from "../hooks/bootcamp/useBootcampPost";
+import { BootcampData } from "../types/bootcamp";
 import TechStackList from "../components/common/ui/TechStackList";
 import PostInfo from "../components/common/ui/PostInfo";
 import Rating from "../components/common/ui/Rating";
 import GenericPost from "../components/common/posts/GenericPost";
-import { BootcampData } from "../types/bootcamp";
-import { useBootcampPost } from "../hooks/bootcamp/useBootcampPost";
-import useBootcampComments from "../hooks/bootcamp/useBootcampComments";
 
 const BootCampPost = ():JSX.Element =>{
   const { id } = useParams<{ id: string }>();
   const [bootcampData, setBootcampData] = useState<BootcampData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [newComment, setNewComment] = useState<string>("");
-  const {bootcampComments =[], loading: commentsLoading, error: commentsError, addComment, deleteComment } = useBootcampComments(Number(id));
+  const { setcontentType } = useContentType();
 
   useEffect(() => {
     if (!id) return; 
+    setcontentType("bootcamp");
 
     const loadBootcampData = async () => {
       try {
@@ -31,25 +31,16 @@ const BootCampPost = ():JSX.Element =>{
     };
 
     loadBootcampData();
-  }, [id]);
+  }, [id, setcontentType]);
 
-  
+  if (loading) { return <div>Loading...</div>; }
+  if (error) { return <div>{error}</div>; }
 
-  if (loading) {
-    return <div>Loading...</div>; 
-  }
-
-  if (error) {
-    return <div>{error}</div>; 
-  }
-
-  if (!bootcampData) {
-    return <div>No bootcamp data available.</div>; 
-  }
+  if (!bootcampData) { return <div>No bootcamp data available.</div>; }
   
   return(
     <>
-      <GenericPost postType="bootcamp" post={bootcampData} comments={bootcampComments}
+      <GenericPost post={bootcampData}
         renderContent={(bootcampData: BootcampData) =>
         (
             <div className="text-[14px] lg:text-[17px] text-nowrap grid grid-rows-3 

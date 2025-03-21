@@ -1,9 +1,9 @@
 /**
  * 게시글 작성 컴포넌트
  */
-
 import React, { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useContentType } from "../context/ContentTypeContext"; 
 import InputField from "../components/form/InputField";
 import TextArea from "../components/form/TextArea";
 // import TiptapEditor from "../components/form/TiptapEditor";
@@ -12,29 +12,29 @@ import SkillMenu from "../components/form/SkillMenu";
 import useCreate from "../hooks/common/useCreate";
 
 interface CreateProps {
-    type: string;
     firstTitle: string;
     secondTitle: string;
     children: React.ReactNode;
     formData: any;
     setFormData: React.Dispatch<React.SetStateAction<any>>; 
 };
-const Create = ({ type, firstTitle, secondTitle, children, formData, setFormData }:CreateProps):JSX.Element => {
+const Create = ({ firstTitle, secondTitle, children, formData, setFormData }:CreateProps):JSX.Element => {
+    const { contentType } = useContentType();
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
-    const { handleCreate, loading}  = useCreate({type, title, content, formData})
+    const { handleCreate, loading}  = useCreate({title, content, formData})
     
     const handleEditorChange = (newContent: string) => {
         setContent(newContent);
     };
 
-    const formDataIsValid = (formData: any, type: string) => {
-        if (type === "bootcamp") {
+    const formDataIsValid = (formData: any) => {
+        if (contentType === "bootcamp") {
             // 부트캠프에 필요한 필드 검증
             return formData.bootCampName && formData.startdate && formData.enddate && formData.learningLevel && formData.assistantSatisfaction && formData.programSatisfaction && formData.programCourse && formData.skillNames;
-        } else if (type === "study") {
+        } else if (contentType === "study") {
             // 스터디에 필요한 필드 검증
             return formData.maxParticipant && formData.studyClosingDate && formData.mainScheduleList && formData.type &&  formData.skillNames; // 예시 필드
         } else {
@@ -44,11 +44,11 @@ const Create = ({ type, firstTitle, secondTitle, children, formData, setFormData
     };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (title && content && formDataIsValid(formData, type)) {
+        if (title && content && formDataIsValid(formData)) {
             try {
                 await handleCreate(); 
                 alert("등록이 완료되었습니다.");
-                navigate(`/${type}`); // 등록 완료 후 메인 페이지로 이동
+                navigate(`/${contentType}`); // 등록 완료 후 메인 페이지로 이동
             } catch (error) {
                 console.error("등록 오류:", error);
                 alert("등록 중 오류가 발생했습니다.");
@@ -97,7 +97,7 @@ const Create = ({ type, firstTitle, secondTitle, children, formData, setFormData
                     <FormButton type="submit" className="bg-myBlue !w-[80px] !h-[40px] flex justify-center items-center" disabled={loading}> 
                         {loading ? "등록 중..." : "등록하기"}
                     </FormButton>
-                    <Link to={`/${type}`}>
+                    <Link to={`/${contentType}`}>
                         <FormButton type="button" className="!w-[80px] !h-[40px] flex justify-center items-center">목록</FormButton>
                     </Link>
                 </div>

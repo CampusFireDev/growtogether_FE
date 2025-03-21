@@ -4,22 +4,22 @@ import StudyPopularCardList from "../components/study/StudyPopularCardList";
 import ListSearchBar from "../components/common/ui/ListSearchBar";
 import StudyFilter from "../components/common/filters/StudyFilter";
 import useStudyList from "../hooks/study/useStudyList";
-import Loading from "../../src/components/common/ui/Loading";
+import StatusHandler from "../components/common/ui/StatusHandler";
 
-const Study = ():JSX.Element=>{
+interface StudyProps {
+    isHome?: boolean; // isHome prop 추가
+}
+
+const Study = ({ isHome }: StudyProps):JSX.Element=>{
     const [page, setPage] = useState(1);
     const { studyList, totalElements, totalPages, loading, error } = useStudyList(page);
-    
-    if (loading) { return <div><Loading/></div>;}
-
-    if (error) { return <div className="text-red-500">⚠️ 데이터 불러오기 실패: {error}</div>;}  
 
     // 모집중인 게시글만 필터링
     const openStudyList = studyList.filter((study) => study.studyStatus === "RECRUIT" || [])
 
     return(
-        <>
-            <StudyFilter />
+        <StatusHandler loading={loading} error={error}>
+            {!isHome && <StudyFilter />}
             <div className="pt-[110px] pb-[70px]">
                 <div className="mb-[20px]">
                     <h3 className="nexon-bold text-[24px] text-black4">🔥 현재 급상승 중인 모집글</h3>
@@ -37,7 +37,7 @@ const Study = ():JSX.Element=>{
                     setPage={setPage}
                 />
             </div>
-        </>
+        </StatusHandler>
     )
 }
 

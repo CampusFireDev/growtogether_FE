@@ -4,18 +4,14 @@ import BootcampPopualrCardList from "../components/bootcamp/BootcampPopualrCardL
 import BootcampFilter from "../components/common/filters/BootcampFilter";
 import ListSearchBar from "../components/common/ui/ListSearchBar";
 import useBootcampList from "../hooks/bootcamp/useBootcampList";
-import Loading from "../../src/components/common/ui/Loading";
+import StatusHandler from "../components/common/ui/StatusHandler";
 
 const BootCamp = ():JSX.Element=>{
     const [page, setPage] = useState(1);
     const { bootcampList, totalElements, totalPages, loading, error } = useBootcampList(page);
 
-    if (loading) { return <div><Loading/></div>;}
-
-    if (error) {return <div className="text-red-500">⚠️ 데이터 불러오기 실패: {error}</div>;}    
-
     return(
-        <>
+        <StatusHandler loading={loading} error={error}>
             <BootcampFilter />
             <div className="pt-[110px] pb-[70px]">
                 <div className="mb-[20px]">
@@ -34,7 +30,7 @@ const BootCamp = ():JSX.Element=>{
                     setPage={setPage}
                 />
             </div>
-        </>
+        </StatusHandler>
     )
 }
 

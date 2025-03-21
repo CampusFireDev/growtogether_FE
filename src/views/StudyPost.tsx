@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; 
+import { useContentType } from "../context/ContentTypeContext";
+import { useStudyPost } from "../hooks/study/useStudyPost";
+import { StudyData } from "../types/study";
 import TechStackList from "../components/common/ui/TechStackList";
 import PostInfo from "../components/common/ui/PostInfo";
 import GenericPost from "../components/common/posts/GenericPost";
-import { StudyData } from "../types/study";
-import { useStudyPost } from "../hooks/study/useStudyPost";
-import useStudyComments from "../hooks/study/useStudyComments";
 
 const StudyPost = ():JSX.Element =>{
   const { id } = useParams<{ id: string }>();
   const [studyData, setStudyData] = useState<StudyData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  
-  const {studyComments = [], loading: commentsLoading, error: commentsError} = useStudyComments(Number(id));
+  const { setcontentType } = useContentType();
+
   useEffect(() =>{
     if (!id) return;
+    setcontentType("study");
 
     const loadStudyData = async () => {
       try {
@@ -30,21 +31,15 @@ const StudyPost = ():JSX.Element =>{
     loadStudyData();
   }, [id]);
 
-  if (loading) {
-    return <div>Loading...</div>; 
-  }
+  if (loading) { return <div>Loading...</div>; }
 
-  if (error) {
-    return <div>{error}</div>; 
-  }
+  if (error) { return <div>{error}</div>; }
   
-  if (!studyData) {
-    return <div>No study data available.</div>; 
-  }
+  if (!studyData) { return <div>No study data available.</div>; }
   
   return(
     <>
-      <GenericPost postType="study" post={studyData} comments={studyComments}
+      <GenericPost post={studyData} 
         renderContent={(studyData:StudyData) =>
         (
           <div className="text-[14px] lg:text-[17px] text-nowrap grid grid-rows-3 
