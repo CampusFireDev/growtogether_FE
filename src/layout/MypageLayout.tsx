@@ -43,10 +43,10 @@ const MypageLayout = ():JSX.Element => {
                                 </div>
                             </Link>
                             <div className="flex flex-col gap-3 p-5 border-b-1 border-gray5">
-                                <div className="flex justify-between items-center">
-                                    <p className="text-[16px] nexon">내 스터디</p>
-                                    <p className="nexon-bold">2</p>   
-                                </div>
+                                <Link to="/mypage/study" className="flex justify-between items-center">
+                                    <em className="text-[16px] nexon">내 스터디</em>
+                                    <em className="nexon-bold">2</em>   
+                                </Link>
                                 <Link to="/mypage/mylikes">
                                     <div className="flex justify-between items-center">
                                         <p className="text-[16px] nexon">좋아요 게시글</p>

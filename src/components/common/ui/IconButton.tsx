@@ -13,7 +13,7 @@ const IconButton = ({ icon, label, color, onClick }: IconButtonProps): JSX.Eleme
     };
 
     return (
-        <button onClick={onClick} className={`flex items-center gap-2 nexon-medium text-sm ${colorClasses[color]}`}>
+        <button onClick={onClick} className={`flex items-center gap-1 nexon-medium text-sm cursor-pointer ${colorClasses[color]}`}>
             {icon}
             {label}
         </button>

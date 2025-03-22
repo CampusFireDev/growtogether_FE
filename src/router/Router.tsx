@@ -17,11 +17,13 @@ import StudyCreate from "../views/StudyCreate.tsx";
 import Point from "../components/mypage/Point.tsx"
 import PointCharge from "../components/mypage/PointCharge.tsx"
 import PersonalInfo from "../components/mypage/PersonalInfo.tsx"
-// import StudyDetail from "../views/mypage/StudyDetail.tsx";
+import StudyDetail from "../views/mypage/StudyDetail.tsx";
 import MypageLayout from "../layout/MypageLayout.tsx";
 import KaKaoRedirect from "../components/login/KaKaoRedirect.tsx";
 import UserAuthLayout from "../layout/UserAuthLayout.tsx";
-// import StudyDashboardLayout from "../layout/StudyDashboardLayout.tsx";
+import StudyDashboardLayout from "../layout/StudyDashboardLayout.tsx";
+import LikedPostsView from "../views/mypage/LikedPostsView.tsx";
+import MyStudyListView from "../views/mypage/MyStudyListView.tsx";
 import Notification from "../components/mypage/Notification.tsx"
 import MyLikes from "../components/mypage/MyLikes.tsx"
 
@@ -49,15 +51,17 @@ const Router = ():JSX.Element =>{
                 <Route path="/mypage/personalinfo" element={<PersonalInfo />} />
                 <Route path="/mypage/notification" element={<Notification />} />
                 <Route path="/mypage/mylikes" element={<MyLikes />} />
+                <Route path="/mypage/like-post" element={<LikedPostsView />} />
+                <Route path="/mypage/study" element={<MyStudyListView />} />
                 <Route path="/findId" element={<FindId />} />
             </Route>
             <Route element={<UserAuthLayout />}>
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup/:step?" element={<SignUp/>} />
             </Route>
-            {/* <Route element={<StudyDashboardLayout />}>
-                <Route path="/mypage/study-detail" element={<StudyDetail />} />
-            </Route> */}
+            <Route element={<StudyDashboardLayout />}>
+                <Route path="/mypage/:studyId/study-detail" element={<StudyDetail />} />
+            </Route>
         </Routes>
     )
 }

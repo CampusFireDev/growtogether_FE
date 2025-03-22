@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import StudyTypeBadge from "../../components/common/ui/StudyTypeBadge";
 import StudyAlarmList from "../../components/mypage/study/StudyAlarmList";
-// import StudyCalendar from "../../components/mypage/study/StudyCalendar";
+import StudyCalendar from "../../components/mypage/study/StudyCalendar";
 import StudyMemeberList from "../../components/mypage/study/StudyMemberList";
 import StudyScheduleList from "../../components/mypage/study/StudyScheduleList";
+import { useState } from "react";
 
 const StudyDetail = ():JSX.Element =>{
+    const { studyId } = useParams();
+    const numericStudyId = Number(studyId) || 0; // studyId 숫자로 변환 || 기본값 = 0;
+
+    const [ selectedDate, setSelectedDate ] = useState<string>("");
+
     return (
         <div>
             {/* 참여 신청 팝업 */}
@@ -43,7 +49,7 @@ const StudyDetail = ():JSX.Element =>{
             </div>
             {/* 모집 게시글로 이동 & 수정 */}
             <div className="flex justify-between items-center mb-2">
-                <Link to="/" className="flex items-center gap-1 text-sm text-black6">
+                <Link to={`/study/${studyId}`} className="flex items-center gap-1 text-sm text-black6">
                     모집 게시글로 이동
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
                         <path d="M6.83333 0.625L11 5M11 5L6.83333 9.375M11 5L1 5" stroke="#666666" strokeLinecap="round" strokeLinejoin="round"/>
@@ -73,18 +79,20 @@ const StudyDetail = ():JSX.Element =>{
                         </strong>
                     </div>
                     {/* 스터디 인원 */}
-                    <StudyMemeberList studyId={1} />
+                    <StudyMemeberList studyId={numericStudyId} />
                 </div>
                 {/* 스터디 알림 리스트 */}
                 <StudyAlarmList studyId={5}/>
                 {/* 캘린더 영역 */}
                 <div>
-                    {/* <StudyCalendar studyId={1} /> */}
+                    <StudyCalendar onDataSelect={setSelectedDate} />
                 </div>
                 {/* 일정 상세 영역 */}
                 <div className="py-[30px] px-[30px]">
-                    <strong className="block text-xl text-black4 nexon-bold mb-3">2월 4일</strong>
-                    <StudyScheduleList studyId={1} />
+                    <strong className="block text-xl text-black4 nexon-bold mb-3">
+                        { selectedDate }
+                    </strong>
+                    { selectedDate && <StudyScheduleList studyId={numericStudyId} date={selectedDate} /> }
                 </div>
             </div>
 

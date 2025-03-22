@@ -1,7 +1,13 @@
 import useMyPageInfo from "../../hooks/mypage/useMyPageInfo";
 
-const MypageMain = (): JSX.Element => {
-    const { info } = useMyPageInfo();
+const MypageMain = (): JSX.Element | null => {
+    const { info, loading, error } = useMyPageInfo();
+
+    // API 요청 중이면 아무것도 렌더링하지 않음
+    if (loading) return null; 
+
+    // 로그인 에러가 발생하면 마이페이지 화면 자체가 보이지 않도록 설정
+    if (error) return null; 
 
     return (
         <div>

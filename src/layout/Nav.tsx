@@ -1,11 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/login/useAuth";
 import useNotification from "../hooks/common/useNotification";
 import Notification from "../components/mypage/Notification";
 
 const Nav = ():JSX.Element =>{
     const { token } = useAuth(); // 토큰 상태 가져오기
+
     const {notificationCount} = useNotification();
+
+    const navigate = useNavigate();
+
+    // 마이페이지 클릭 시 실행할 함수
+    const handleMyPageClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        if (!token) {
+            event.preventDefault(); // 기본 링크 이동 막기
+            alert("로그인이 필요합니다.");
+            navigate("/login"); // 로그인 페이지로 이동
+        }
+    };
 
     return (
         <div className="fixed top-0 left-0 w-full border-b border-[#e5e5e5] bg-white z-10">
@@ -23,7 +35,7 @@ const Nav = ():JSX.Element =>{
                             <Link to="/notice" className="nexon-medium">공지사항</Link>
                         </li>
                         <li>
-                            <Link to="/mypage" className="nexon-medium">마이페이지</Link>
+                            <Link to="/mypage" className="nexon-medium" onClick={handleMyPageClick}>마이페이지</Link>
                         </li>
                     </ul>
                 </div>

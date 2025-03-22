@@ -1,42 +1,19 @@
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
+// import useApi from "../useApi";
 
-interface StudyMemberList {
-    nickName: string;
-    status: string;   
-}
+// interface StudyMemberList {
+//     nickName: string;
+//     status: string;   
+// }
 
-const useStudyMemberList = (studyId: number) => {
-    const [memberList, setMemberList] = useState<StudyMemberList[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+// const useStudyMemberList = ( studyId: number ) => {
+//     // studyId가 없으면 보내지 않음
+//     const { data: memberList, loading, error } = useApi<StudyMemberList[]>(
+//         studyId ? `http://www.growtogether.store/study/${studyId}/studyMember` : "",
+//         true
+//     );
 
-    useEffect(() => {
-        if (!studyId) return;
+//     return { memberList: memberList || [], loading, error };
+// }
 
-        const timer = setTimeout(() => {
-            fetch(`/study/${studyId}/studyMember`, {
-                cache: "no-store",
-                headers: {
-                    "Accept": "application/json"
-                }
-            })
-            .then((res) => {
-                return res.json();
-            })
-            .then((data: StudyMemberList[]) => {
-                setMemberList(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                setError(error.message);
-                setLoading(true);
-            });
-        }, 500);
-
-        return () => clearTimeout(timer);
-    }, [studyId]);
-
-    return { memberList, loading, error };
-}
-
-export default useStudyMemberList;
+// export default useStudyMemberList;
