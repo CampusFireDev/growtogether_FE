@@ -35,7 +35,7 @@ const Point = () : JSX.Element =>{
                     </div>
                 ): (
                     <div>
-                        {points.map((point, index) => (
+                        {points.map((point) => (
                             <div className="flex items-center justify-between px-5 py-5 border-t border-gray5">
                                 <div>
                                     <strong className="block text-lg nexon-medium text-black4">

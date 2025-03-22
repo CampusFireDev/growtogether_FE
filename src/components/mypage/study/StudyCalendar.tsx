@@ -1,14 +1,14 @@
 import { useState } from "react";
 import ButtonStyle1 from "../../common/ui/ButtonStyle1";
-import useStudyNotice from "../../../hooks/mypage/useStudyNotice";
+// import useStudyNotice from "../../../hooks/mypage/useStudyNotice";
 import StudyScheduleCreate from "./StudyScheduleCreate";
 
-const StudyCalendar = ({ studyId }: { studyId: number }) => {
+const StudyCalendar = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [isPopupOpen, setIsPopupOpen] = useState(false); // 팝업 상태 관리
     
     // 공지사항 불러오기
-    const { noticeList } = useStudyNotice(studyId); 
+    // const { noticeList } = useStudyNotice(studyId); 
 
     const year = currentDate.getFullYear(); // 현재 년 가져오기
     const month = currentDate.getMonth(); // 현재 달 가져오기
@@ -77,7 +77,8 @@ const StudyCalendar = ({ studyId }: { studyId: number }) => {
         <div>
             <div className="relative flex items-center justify-between py-[30px] px-[30px]">
                 <div className="flex items-center gap-2">
-                    <ButtonStyle1
+                    <ButtonStyle1 
+                        type="button"
                         className="bg-black6 text-white"
                         icon={
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -87,6 +88,7 @@ const StudyCalendar = ({ studyId }: { studyId: number }) => {
                         label="채팅방 입장"
                     />
                     <ButtonStyle1
+                        type="button"
                         className="bg-myGreen text-white"
                         label="일정 등록"
                         onClick={openPopup}

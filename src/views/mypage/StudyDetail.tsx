@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import StudyTypeBadge from "../../components/common/ui/StudyTypeBadge";
 import StudyAlarmList from "../../components/mypage/study/StudyAlarmList";
-import StudyCalendar from "../../components/mypage/study/StudyCalendar";
+// import StudyCalendar from "../../components/mypage/study/StudyCalendar";
 import StudyMemeberList from "../../components/mypage/study/StudyMemberList";
 import StudyScheduleList from "../../components/mypage/study/StudyScheduleList";
 
@@ -79,7 +79,7 @@ const StudyDetail = ():JSX.Element =>{
                 <StudyAlarmList studyId={5}/>
                 {/* 캘린더 영역 */}
                 <div>
-                    <StudyCalendar studyId={1} />
+                    {/* <StudyCalendar studyId={1} /> */}
                 </div>
                 {/* 일정 상세 영역 */}
                 <div className="py-[30px] px-[30px]">

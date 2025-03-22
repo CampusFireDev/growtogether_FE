@@ -52,30 +52,33 @@ const Notification = ({ isPopup }: NotificationProps):JSX.Element => {
   };
 
   return(
-    <div className="py-7 px-7 h-130 border border-gray5 bg-white overflow-x-hidden overflow-y-scroll">
-        <h2 className="nexon-bold">🔔 알림</h2>
-        {error && <p className="text-red-500">{error}</p>}
-        <div className="text-[10px] text-black7">
-          <span className="text-[12px] text-myBlue nexon-medium">{notificationCount}</span>
-          개의 읽지 않은 알람이 있습니다.
-        </div>
-        {notification.length > 0 ? (
-          <ul className="mt-2">
-            {notification.map((noti, index) => {
-            return (
-              <li
-                key={index} className="text-[13px] text-gray-600 py-3 border-b border-gray5 last:border-none cursor-pointer hover:bg-white5"
-                onClick={() => handleNotificationClick(noti.id, noti.url || "")}
-              >
-                <span className="nexon-medium mr-3">{index+1}</span>{noti.content}
-              </li>
-            );
-            })}
-          </ul>
-        ) : (
-          <p className="text-sm text-gray-500 mt-2">새로운 알림이 없습니다.</p>
-        )}
-    </div>
+    <>
+      <strong className="block nexon-bold text-xl text-black4 mb-2">🔔 알림</strong>
+      <div className="text-[10px] text-black7">
+        <span className="text-[12px] text-myBlue nexon-medium">{notificationCount}</span>
+        개의 읽지 않은 알람이 있습니다.
+      </div>
+      <div className="py-7 px-7 h-117 border border-gray5 bg-white overflow-x-hidden overflow-y-scroll">
+          <h2 className="nexon-bold"></h2>
+          {error && <p className="text-red-500">{error}</p>}
+          {notification.length > 0 ? (
+            <ul className="mt-2">
+              {notification.map((noti, index) => {
+              return (
+                <li
+                  key={index} className="text-[13px] text-gray-600 py-3 border-b border-gray5 last:border-none cursor-pointer hover:bg-white5"
+                  onClick={() => handleNotificationClick(noti.id, noti.url || "")}
+                >
+                  <span className="nexon-medium mr-3">{index+1}</span>{noti.content}
+                </li>
+              );
+              })}
+            </ul>
+          ) : (
+            <p className="text-sm text-gray-500 mt-2">새로운 알림이 없습니다.</p>
+          )}
+      </div>
+    </>
   );
 };
 

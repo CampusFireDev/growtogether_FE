@@ -26,9 +26,9 @@ const Create = ({ firstTitle, secondTitle, children, formData, setFormData }:Cre
 
     const { handleCreate, loading}  = useCreate({title, content, formData})
     
-    const handleEditorChange = (newContent: string) => {
-        setContent(newContent);
-    };
+    // const handleEditorChange = (newContent: string) => {
+    //     setContent(newContent);
+    // };
 
     const formDataIsValid = (formData: any) => {
         if (contentType === "bootcamp") {

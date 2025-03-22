@@ -12,7 +12,7 @@ interface StudyCardListProps {
     setPage: (page: number) => void;
 }
 
-const StudyCardList = ({ studyList, totalElements, totalPages, page, setPage }: StudyCardListProps):JSX.Element => {
+const StudyCardList = ({ studyList, totalPages, page, setPage }: StudyCardListProps):JSX.Element => {
 
     const { currentPage, nextPage, prevPage, goToPage} = usePagination(page, totalPages);
 

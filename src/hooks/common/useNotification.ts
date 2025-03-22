@@ -9,7 +9,6 @@ import { NotificationData } from "../../types/notification";
 interface EventSourcePolyfillInit extends EventSourceInit {
     headers?: { [key: string]: string };
 }
-
 const useNotification = () => {
     const memberId = useMemberId();
     const token = useAuth();
@@ -44,7 +43,7 @@ const useNotification = () => {
             setNotification((prevNotifications) => 
                 prevNotifications.filter((noti) => noti.id !== notiId)
             );
-            setNotificationCount((prevCount) => prevCount - 1);
+            setNotificationCount((prev) => prev - 1);
             loadNotification();
         } catch (error){
             console.log("✔️",error);
@@ -107,7 +106,7 @@ const useNotification = () => {
         };
     },[memberId, window.location.pathname]);
 
-    return { notification, notificationCount, readNotification, error,  }; 
+    return { notification, setNotification, notificationCount, readNotification, error,  }; 
 };
 
 export default useNotification;

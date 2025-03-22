@@ -54,9 +54,7 @@ const PersonalInfo = ():JSX.Element =>{
     return(
         <div className="">
             <strong className="block nexon-bold text-xl text-black4 mb-2">내 정보 수정</strong>
-            <div className="border border-gray5 bg-white">
-
-            </div>
+            <div className="border border-gray5 bg-white"></div>
             <div className="mb-6 flex flex-col justify-center items-center">
                 <div className="relative w-32 h-32 overflow-hidden rounded-full">
                     {profileImage ? <img src={profileImage} alt="Profile Img" className="w-full h-full object-cover"/>

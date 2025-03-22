@@ -5,7 +5,7 @@ import Study from "../views/Study";
 import Carousel from "../components/common/ui/Carousel";
 
 const Home = ():JSX.Element =>{
-    const { token, isAuthenticated } = useAuth();
+    const {isAuthenticated } = useAuth();
 
     useEffect(() => {
         console.log("✅ 현재 Axios Authorization 헤더:", api.defaults.headers.common["Authorization"]);

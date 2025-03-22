@@ -57,7 +57,7 @@ const SignUpStep2 = ():JSX.Element=>{
 
     // 회원가입 조건 검사
     const validateForm = () => {
-        const { email, verificationCode, nickName, password, passwordCheck, phone } = formData;
+        const { nickName, password, passwordCheck, phone } = formData;
 
         if (!passwordCriteria.length || !passwordCriteria.letter || !passwordCriteria.number || !passwordCriteria.specialChar) {
             alert("비밀번호는 8자 이상, 영문, 숫자, 특수문자를 포함해야 합니다.");

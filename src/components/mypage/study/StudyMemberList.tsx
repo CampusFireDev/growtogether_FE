@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import useStudyMemberList from "../../../hooks/study/useStudyMemberList";
 
 const StudyMemeberList = ({ studyId }: { studyId: number }): JSX.Element => {

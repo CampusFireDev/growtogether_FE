@@ -2,15 +2,15 @@ import { Link, Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Nav from "./Nav";
 import { IoIosArrowForward } from "react-icons/io";
-import useMemberId from "../hooks/auth/useMemberId";
+// import useMemberId from "../hooks/auth/useMemberId";
 import useMyPageInfo from "../hooks/mypage/useMyPageInfo";
 
 const MypageLayout = ():JSX.Element => {
     // 아이디 가져오기
-    const memberId = useMemberId();
+    // const memberId = useMemberId();
 
     // 회원 정보 가져오기
-    const { info, loading, error } = useMyPageInfo();
+    const { info } = useMyPageInfo();
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -25,7 +25,7 @@ const MypageLayout = ():JSX.Element => {
                                     <img src={info?.profileImageUrl} alt=""/>
                                 </div>
                                 <p className="nexon-bold">{info?.nickName}</p>
-                                <p className="text-black6 nexon text-sm mt-1">test@gmail.com</p>
+                                <p className="text-black6 nexon text-sm mt-1">{info?.email}</p>
                                 <div className="flex justify-between items-center w-full bg-white5 text-[14px] px-4 py-2 rounded-full mt-4">
                                     <p>
                                         내 기술스택 
@@ -47,10 +47,12 @@ const MypageLayout = ():JSX.Element => {
                                     <p className="text-[16px] nexon">내 스터디</p>
                                     <p className="nexon-bold">2</p>   
                                 </div>
-                                <div className="flex justify-between items-center">
-                                    <p className="text-[16px] nexon">좋아요 게시글</p>
-                                    <p className="nexon-bold">256</p>   
-                                </div>
+                                <Link to="/mypage/mylikes">
+                                    <div className="flex justify-between items-center">
+                                        <p className="text-[16px] nexon">좋아요 게시글</p>
+                                        <p className="nexon-bold">{info?.likedPostCount}</p>   
+                                    </div>
+                                </Link>
                             </div>
                             <Link to="/mypage/personalinfo">
                                 <div className="flex gap-3 p-4 border-b-1 border-gray5 justify-between items-center">

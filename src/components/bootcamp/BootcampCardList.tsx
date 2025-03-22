@@ -4,7 +4,6 @@ import Pagination from "../common/ui/Pagination";
 import usePagination from "../../hooks/common/usePagination";
 import { BootcampData } from "../../types/bootcamp";
 
-
 interface BootcampCardListProps {
     bootcampList: BootcampData[];
     totalElements: number;
@@ -13,7 +12,7 @@ interface BootcampCardListProps {
     setPage: (page: number) => void;
 }
 
-const BootcampCardList = ({ bootcampList, totalElements, totalPages, page, setPage, }: BootcampCardListProps): JSX.Element => {
+const BootcampCardList = ({ bootcampList,  totalPages, page, setPage, }: BootcampCardListProps): JSX.Element => {
     const { currentPage, nextPage, prevPage, goToPage} = usePagination(page, totalPages);
 
     useEffect(() => {

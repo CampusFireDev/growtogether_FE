@@ -1,4 +1,4 @@
-import { useState, useEffect, Children } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SignUpProcess from "./SignUpProcess";
 import SignUpStep2 from "./SignUpStep2";

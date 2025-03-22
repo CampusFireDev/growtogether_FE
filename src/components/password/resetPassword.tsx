@@ -7,7 +7,7 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 const resetPassword = ():JSX.Element => {
     const [password, setPassword] = useState<string>("");
     const [showPassword, setShowPassword ] = useState<boolean>(false);
-    const [error, setError] = useState<{ [key: string]: string }>({});
+    const [error] = useState<{ [key: string]: string }>({});
 
     const handleShow = () => {
         setShowPassword((prev) => !prev);
@@ -25,7 +25,7 @@ const resetPassword = ():JSX.Element => {
                                 {showPassword ? <IoEyeOutline/> : <IoEyeOffOutline/> }
                         </span>
                     </InputField>
-                    <ValidatePassword password={password}></ValidatePassword>
+                    <ValidatePassword password={password} onValidationChange={()=>password}></ValidatePassword>
                 </div>
                 <div className="relative mb-10">
                     <InputField label="새 비밀번호 확인" labelFor="confirmPassword" labelClassName="nexon-medium text-sm" type={showPassword ? "text" : "password"} id="confirmPassword" name="password" 
