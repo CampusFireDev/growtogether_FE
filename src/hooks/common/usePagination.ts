@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+// 한 페이지당 항목 수
 const usePagination = (page: number, totalPages: number) => {
     const [currentPage, setCurrentPage] = useState(page);
 

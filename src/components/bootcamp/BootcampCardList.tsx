@@ -6,13 +6,14 @@ import { BootcampData } from "../../types/bootcamp";
 
 interface BootcampCardListProps {
     bootcampList: BootcampData[];
-    totalElements: number;
+    filteredBootcampList: BootcampData[];
+    searchFilter: boolean;
     totalPages: number;
     page: number;
     setPage: (page: number) => void;
 }
 
-const BootcampCardList = ({ bootcampList,  totalPages, page, setPage, }: BootcampCardListProps): JSX.Element => {
+const BootcampCardList = ({ bootcampList, filteredBootcampList, searchFilter ,totalPages, page, setPage }: BootcampCardListProps): JSX.Element => {
     const { currentPage, nextPage, prevPage, goToPage} = usePagination(page, totalPages);
 
     useEffect(() => {
@@ -21,10 +22,15 @@ const BootcampCardList = ({ bootcampList,  totalPages, page, setPage, }: Bootcam
         }
     }, [currentPage, page, setPage]);
 
+    const paginatedList = (searchFilter ? filteredBootcampList.slice(
+        (currentPage - 1) * 9, currentPage * 9)
+        : bootcampList
+    );
+
     return (
         <>
             <div className="grid grid-cols-3 gap-[18px]">
-                {bootcampList.map((bootcamp, index) => (
+                {paginatedList.map((bootcamp, index) => (
                     <BootcampCard key={index} bootcamp={bootcamp} />
                 ))}
             </div>

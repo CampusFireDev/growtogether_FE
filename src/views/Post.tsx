@@ -1,6 +1,7 @@
 /**
  * 게시글 컴포넌트
  */
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import { useContentType } from "../context/ContentTypeContext"; 
 import { IoEyeOutline } from "react-icons/io5";
@@ -18,8 +19,13 @@ interface PostProps {
   children: React.ReactNode;
 }
 
-const Post = ({ post, postTitle, infoTitle, children,  }: PostProps):JSX.Element =>{
+const Post = ({ post, postTitle, infoTitle, children }: PostProps):JSX.Element =>{
+  const [likeCount, setLikeCount] = useState(post.likeCount);
   const { contentType } = useContentType();
+
+  useEffect(() => {
+    setLikeCount(post.likeCount); 
+  }, [post.likeCount]);
   const isBootcampPost = (post: BootcampData | StudyData): post is BootcampData => {
     return (post as BootcampData).bootCampName !== undefined;
   };
@@ -52,7 +58,7 @@ const Post = ({ post, postTitle, infoTitle, children,  }: PostProps):JSX.Element
 
         {/* 좋아요, 목록 버튼*/}
         <div className="flex justify-center items-center gap-3 my-5">
-            <LikeBtn likeCount={post.likeCount}/>
+            <LikeBtn likeCount={likeCount} postId={isBootcampPost(post) ? post.id : post.studyId}/>
             <Link to={`/${contentType}`}>
               <FormButton type="button" className="!w-[80px] !h-[50px] !flex !items-center !justify-center">목록</FormButton>
             </Link>

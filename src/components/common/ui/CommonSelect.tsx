@@ -1,5 +1,5 @@
 interface Option {
-    value: string | number;
+    value: string;
     label: string;
 }
 
@@ -7,9 +7,9 @@ interface CommonSelectProps {
     label?: string;
     id?: string;
     name?: string;
-    value: string | number;
+    value: string ;
     options: Option[];
-    onChange: (value: string | number) => void;
+    onChange: (value: string) => void;
     className?: string;
 }
 
