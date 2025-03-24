@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useContentType } from "../context/ContentTypeContext";
 import Create from "../views/Create";
 import SelectMenu from "../components/form/SelectMenu";
@@ -7,9 +7,12 @@ import SelectCalendar from "../components/form/SelectCalendar";
 import Rating from "../components/common/ui/Rating";
 import useBootcampProgramCourse from "../hooks/bootcamp/useBootcampProgramCourse";
 const BootcampCreate = ():JSX.Element => {
-    const { programCourse, loading, error } = useBootcampProgramCourse();
+    const { programCourse = [], loading, error } = useBootcampProgramCourse();
     const { setcontentType } = useContentType();
-    setcontentType("bootcamp");
+    
+    useEffect(() => {
+        setcontentType("bootcamp");
+    }, []);
     
     const [formData, setFormData] = useState({
         bootCampName: "",
@@ -33,15 +36,6 @@ const BootcampCreate = ():JSX.Element => {
             [ratingType]: newRate,
         })
     }
-
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const { name, value } = e.target;
-    //     console.log(">>",e.target);
-    //     setFormData({
-    //         ...formData,
-    //         [name]: value,
-    //     });
-    // };
 
     return(
         <div>

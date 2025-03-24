@@ -37,7 +37,6 @@ const useCreate = ({ title, content, formData }: UseCreateProps) => {
                             skillNames: formData.skillNames,
                         }),
                     ],
-                    { type: "application/json" }
                 );
 
                 formDataToSend.append("bootCampReview", jsonBlob);
@@ -54,7 +53,6 @@ const useCreate = ({ title, content, formData }: UseCreateProps) => {
                 };
 
                 response = await axios.post("/api/study", data, { headers });
-                console.log(">>>",data)
             }
 
             if (response) {

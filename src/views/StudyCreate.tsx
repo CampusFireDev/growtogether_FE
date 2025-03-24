@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useContentType } from "../context/ContentTypeContext";
 import Create from "../views/Create";
 import SelectMenu from "../components/form/SelectMenu";
@@ -14,7 +14,10 @@ const durationList = [30, 45, 60, 70, 80, 90, 100, 120]; // 진행 시간 (단�
 
 const StudyCreate = ():JSX.Element => {
     const { setcontentType } = useContentType();
-    setcontentType("study");
+    
+    useEffect(() => {
+        setcontentType("study");
+    }, []);
 
     const [formData, setFormData] = useState({
         type:"",
@@ -30,15 +33,6 @@ const StudyCreate = ():JSX.Element => {
         skillNames: [],
     });
 
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    //     const { name, value } = e.target;
-    //     console.log(">>",e.target);
-    //     setFormData((prev) => ({
-    //         ...prev,
-    //         [name]: value,
-    //     }));
-    // };
-        
     return(
         <div>
             <Create
