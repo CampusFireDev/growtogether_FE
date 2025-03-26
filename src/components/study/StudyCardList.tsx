@@ -3,6 +3,7 @@ import StudyCard from "./StudyCard";
 import Pagination from "../common/ui/Pagination";
 import usePagination from "../../hooks/common/usePagination";
 import { StudyData } from "../../types/study";
+import CreateBtn from "../common/ui/CreateBtn";
 
 interface StudyCardListProps {
     studyList: StudyData[];
@@ -10,9 +11,10 @@ interface StudyCardListProps {
     totalPages: number;
     page: number;
     setPage: (page: number) => void;
+    isHome?: boolean;
 }
 
-const StudyCardList = ({ studyList, totalPages, page, setPage }: StudyCardListProps):JSX.Element => {
+const StudyCardList = ({ studyList, totalPages, page, setPage, isHome }: StudyCardListProps):JSX.Element => {
 
     const { currentPage, nextPage, prevPage, goToPage} = usePagination(page, totalPages);
 
@@ -24,7 +26,8 @@ const StudyCardList = ({ studyList, totalPages, page, setPage }: StudyCardListPr
 
     return (
         <>
-            <div className="grid grid-cols-3 gap-[18px]">
+            {!isHome && <CreateBtn/>}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[18px]">
                 {studyList.map((study, index) => (
                     <StudyCard key={index} study={study} />
                 ))}

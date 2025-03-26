@@ -18,7 +18,7 @@ const TextArea = ({label, labelFor, labelClassName="", id, name, value, placehol
                 name={name} 
                 value={value}
                 placeholder={placeholder} 
-                className={`w-full border border-[#e5e5e5] rounded-[5px] p-2 bg-white ${className}`}
+                className={`w-full border border-gray5 rounded-[5px] p-2 bg-white ${className}`}
                 onChange={onChange}>
             </textarea>
         </>

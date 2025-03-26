@@ -13,7 +13,7 @@ const StudyCalendar = ({ onDataSelect }: StudyCalendarProps) => {
     const { studyId } = useParams(); // URL에서 studyId 가져오기
     const studyIdNumber = studyId ? parseInt(studyId, 10) : 0;
 
-    const { year, month, daysOfWeek, weeks, scheduleMap, loading, error, goToPreviousMonth, goToNextMonth, goToToday } = useCalendar(studyIdNumber);
+    const { year, month, daysOfWeek, weeks, scheduleMap, goToPreviousMonth, goToNextMonth, goToToday } = useCalendar(studyIdNumber);
     
     const [isPopupOpen, setIsPopupOpen] = useState(false); // 팝업 상태 관리
 

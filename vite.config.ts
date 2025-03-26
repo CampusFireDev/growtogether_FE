@@ -25,7 +25,6 @@ export default defineConfig({
         target: 'http://13.125.21.225:8080',  // API가 있는 서버 주소로 설정
         changeOrigin: true,
         secure: false,
-        // ws: true, // 웹소켓을 사용할 때 필요
         // headers: {
         //   Connection: "keep-alive", // SSE 연결을 유지하기 위한 설정
         //   CacheControl: "no-cache",

@@ -24,7 +24,7 @@ const CommonSelect = ({ label, id, name, value, options, onChange, className="" 
                 name={name}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className={`h-[45px] border border-gray5 rounded-[5px] px-[8px] ${className}`}
+                className={`h-[40px] border border-gray5 rounded-[5px] px-3 ${className}`}
             >
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>

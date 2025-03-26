@@ -13,16 +13,24 @@ interface SelectCalendarProps {
     labelClassName?: string;
     placeholder?: string;
     className?: string;
+    className2?: string;
     singleDate?: boolean; //단일 날짜 선택
     multiDate?: boolean; // 다중 날짜 선택
     onChange?: (selectedDates: string[]) => void;
 };
-const SelectCalendar = ({ type, label, labelFor, labelClassName="", placeholder, className, singleDate=false, multiDate=false, onChange }: SelectCalendarProps): JSX.Element =>{
+const SelectCalendar = ({ type, label, labelFor, labelClassName="", placeholder, className, className2, singleDate=false, multiDate=false, onChange }: SelectCalendarProps): JSX.Element =>{
     const [select, setSelect] = useState(false);
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
     const [selectedDates, setSelectedDates] = useState<Date[]>([]);
     const calendarRef = useRef<HTMLDivElement | null>(null);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // 오늘 + 90일 후 날짜 
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 90);
 
     // 캘린더 외부 클릭 시 닫히게 처리
     useEffect(() => {
@@ -43,6 +51,11 @@ const SelectCalendar = ({ type, label, labelFor, labelClassName="", placeholder,
     };
 
     const handleDateSelect = (selectedDate: Date) => {
+        if (selectedDate > maxDate) {
+            alert("선택할 수 있는 날짜는 오늘로부터 90일 이내입니다.");
+            return;
+        }
+        
         if (singleDate) {
             // 단일 날짜 선택 모드일 경우
             setStartDate(selectedDate);
@@ -115,14 +128,14 @@ const SelectCalendar = ({ type, label, labelFor, labelClassName="", placeholder,
     };
 
     return(
-        <div className={`mb-3 text-[13px] ${className}`}>
+        <div className={`text-[13px] ${className}`}>
             {label && (
                 <label htmlFor={labelFor} className={`block mb-2 ${labelClassName}`}>
                     {label}
                 </label>
             )}
-            <div className="relative w-full h-[50px] pl-[15px] pr-[15px] border border-[#e5e5e5] 
-                rounded-[5px] flex items-center" onClick={handleSelect}
+            <div className={`relative w-full h-[50px] pl-[15px] pr-[15px] border border-gray5
+                rounded-[5px] flex items-center ${className2}`} onClick={handleSelect}
             >
                 <div className="flex justify-between items-center gap-5 w-full">
                     <p className="text-nowrap" >{renderDate()}</p>

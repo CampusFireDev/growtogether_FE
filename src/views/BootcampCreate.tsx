@@ -47,7 +47,7 @@ const BootcampCreate = ():JSX.Element => {
             >
                 <div>
                     <InputField label="부트캠프 명" labelFor="bootCampName" labelClassName="nexon-medium text-sm" type="text" id="bootCampName"
-                        name="bootCampName" placeholder="부트캠프명을 입력해주세요." className="text-[13px] my-1" value={formData.bootCampName} onChange={(e) => setFormData(prev => ({...prev, bootCampName: e.target.value}))}>
+                        name="bootCampName" placeholder="부트캠프명을 입력해주세요." className="text-[13px] mb-3" value={formData.bootCampName} onChange={(e) => setFormData(prev => ({...prev, bootCampName: e.target.value}))}>
                     </InputField>
                     <div className="flex gap-5 items-center">
                         <SelectCalendar label="참여 기간" labelClassName="nexon-medium text-sm" 

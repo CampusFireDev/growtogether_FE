@@ -29,18 +29,24 @@ const useCreate = ({ title, content, formData }: UseCreateProps) => {
                             content,
                             bootCampName: formData.bootCampName,
                             startdate: formData.startdate,
-                            enddate: formData.enddate,
+                            enddate: formData.enddate ,
                             learningLevel: formData.learningLevel || 0,
                             assistantSatisfaction: formData.assistantSatisfaction || 0,
                             programSatisfaction: formData.programSatisfaction || 0,
-                            programCourse: formData.programCourse,
+                            programCourse: formData.programCourse || "",
                             skillNames: formData.skillNames || [],
                         }),
                     ],
+                    { type: "application/json" } 
                 );
 
                 formDataToSend.append("bootCampReview", jsonBlob);
-                response = await axios.post("/api/bootcamp", formDataToSend, { headers });
+                response = await axios.post("/api/bootcamp", formDataToSend, { 
+                    headers: {
+                        ...headers,
+                        "Content-Type": "multipart/form-data", // 명시적으로 추가
+                    },
+                });
             } else if (contentType === "study") {
                 const data = {
                     title,
@@ -48,7 +54,7 @@ const useCreate = ({ title, content, formData }: UseCreateProps) => {
                     maxParticipant: formData.maxParticipant || 0,
                     studyClosingDate: formData.studyClosingDate || "",
                     mainScheduleList: formData.mainScheduleList || [],
-                    type: formData.type,
+                    type: formData.type || "",
                     skillNames: formData.skillNames || [],
                 };
 

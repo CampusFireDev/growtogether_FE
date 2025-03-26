@@ -11,6 +11,7 @@ import LikeBtn from "../components/common/ui/LikeBtn";
 import CommentList from "../components/common/ui/CommentList";
 import { BootcampData  } from "../types/bootcamp";
 import { StudyData } from "../types/study";
+import { formatDate } from "../components/common/utils/formatDate";
 
 interface PostProps {
   post: BootcampData | StudyData;
@@ -38,7 +39,7 @@ const Post = ({ post, postTitle, infoTitle, children }: PostProps):JSX.Element =
             <div className="flex items-center gap-2 text-black4 text-[13px] text-nowrap py-3">
                 <img src="/images/profile.png" alt="" className="w-6 h-6"/>
                 <span className="nexon-medium">{post.author} | 작성일</span>
-                <span>{post.createdAt.split("T")[0]}</span>
+                <span>{formatDate(post.createdAt)}</span>
             </div>
             <div className="flex text-black6 items-center gap-1">
                 <IoEyeOutline className="w-4 h-4" />

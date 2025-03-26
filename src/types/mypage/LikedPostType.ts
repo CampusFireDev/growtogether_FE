@@ -19,10 +19,6 @@ interface BootcampPost extends BasePost {
     skillNames: string[];
 }
 
-interface StudyPost extends BasePost {
-
-}
-
 export interface LikedPostsResponse {
     reviews: BootcampPost[];
     totalPages: number;

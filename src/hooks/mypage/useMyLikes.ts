@@ -1,40 +1,68 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import useAuth from "../login/useAuth";
-import { MyLikesData } from "../../types/mylikes";
 
+interface MyLikesData{
+    people?: number;
+    postId: number;
+    title: string;
+    type: string;
+    skillName?: string[];
+    bootcampSkillNames?: string[];
+    programCourse: string;
+    status?: string | null;
+}
 const useMyLikes = () => {
     const { token } = useAuth();
-    const [ myLikes, setMyLikes ] = useState<MyLikesData>({
-        page: 0,
-        reviews: [],
-        size: 0,
-        totalElements: 0,
-        totalPages: 0
-    });
+    const [ myLikes, setMyLikes ] = useState<MyLikesData[]>([]);
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fethLikes = async () => {
-            try {
-                const res = await axios.get("/api/mypage/myLikes", {
-                    headers: { Authorization: `${token}` },
-                    withCredentials: true,
-                });
-                setMyLikes(res.data);
-            } catch(error) {
-                console.log(error);
-                setError("회원정보를 불러오는 중 오류가 발생했습니다.");
-            } finally {
-                setLoading(false);
-            }
-        };
+    const headers = { 
+        ...(token ? { Authorization: `${token}` } : {}), 
+        "Content-Type": "application/json", 
+    };
 
+    useEffect(() => {
         fethLikes();
     }, [token]);
+    
+    const fethLikes = async () => {
+        setLoading(true);
+        try {
+            const res = await axios.get("/api/mypage/liked-posts", { headers });
+            const myLikes = res.data; 
+            setMyLikes(myLikes);
+        } catch(error) {
+            console.log(error);
+            setError("회원정보를 불러오는 중 오류가 발생했습니다.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    return { myLikes, loading, error }
+    const handleBootcampLike = async (postId: number) => {
+        try {
+            const res = await axios.post(`/api/bootcamp/${postId}/like`,{},{ headers });
+            console.log(res);
+            window.location.reload();
+            fethLikes();
+        } catch (error){
+            console.log("> Bootcamp", error);
+        }
+    };
+    const handleStudyLike = async (postId: number) =>{
+        try {
+            const res = await axios.post(`/api/study/bookmark/${postId}`,{},{ headers });
+            console.log(res); //{data: '좋아요 상태가 변경되었습니다.', status: 200, statusText: 'OK', headers: AxiosHeaders, config: {…}, …}
+            window.location.reload();
+            fethLikes();
+        } catch(error){
+            console.log("> Study",error);
+        }
+    };
+
+    return { myLikes, handleBootcampLike, handleStudyLike, loading, error }
 };
 
 export default useMyLikes;

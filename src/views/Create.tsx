@@ -42,6 +42,7 @@ const Create = ({ firstTitle, secondTitle, children, formData, setFormData }:Cre
             return false;
         }
     };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (title && content && formDataIsValid(formData)) {

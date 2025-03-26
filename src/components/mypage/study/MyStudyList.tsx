@@ -6,7 +6,7 @@ const MyStudyList = (): JSX.Element => {
     return (
         <>
             <strong className="block nexon-bold text-xl text-black4 mb-2">
-                좋아요한 게시글
+                내 스터디
                 <span className="inline-block ml-1 text-myBlue">5</span>
             </strong>
             <div className="border border-gray5 bg-white">

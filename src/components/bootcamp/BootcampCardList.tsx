@@ -3,9 +3,10 @@ import BootcampCard from "./BootcampCard";
 import Pagination from "../common/ui/Pagination";
 import usePagination from "../../hooks/common/usePagination";
 import { BootcampData } from "../../types/bootcamp";
+import CreateBtn from "../common/ui/CreateBtn";
 
 interface BootcampCardListProps {
-    bootcampList: BootcampData[];
+    // bootcampList: BootcampData[];
     filteredBootcampList: BootcampData[];
     searchFilter: boolean;
     totalPages: number;
@@ -13,7 +14,7 @@ interface BootcampCardListProps {
     setPage: (page: number) => void;
 }
 
-const BootcampCardList = ({ bootcampList, filteredBootcampList, searchFilter ,totalPages, page, setPage }: BootcampCardListProps): JSX.Element => {
+const BootcampCardList = ({ filteredBootcampList, searchFilter ,totalPages, page, setPage }: BootcampCardListProps): JSX.Element => {
     const { currentPage, nextPage, prevPage, goToPage} = usePagination(page, totalPages);
 
     useEffect(() => {
@@ -24,12 +25,13 @@ const BootcampCardList = ({ bootcampList, filteredBootcampList, searchFilter ,to
 
     const paginatedList = (searchFilter ? filteredBootcampList.slice(
         (currentPage - 1) * 9, currentPage * 9)
-        : bootcampList
+        : filteredBootcampList
     );
 
     return (
         <>
-            <div className="grid grid-cols-3 gap-[18px]">
+            <CreateBtn/>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[18px]">
                 {paginatedList.map((bootcamp, index) => (
                     <BootcampCard key={index} bootcamp={bootcamp} />
                 ))}

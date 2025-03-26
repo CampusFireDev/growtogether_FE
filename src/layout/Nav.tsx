@@ -20,11 +20,11 @@ const Nav = ():JSX.Element =>{
     };
 
     return (
-        <div className="fixed top-0 left-0 w-full border-b border-[#e5e5e5] bg-white z-10">
+        <div className="fixed top-0 left-0 w-full border-b border-gray5 bg-white z-10">
             <div className="w-full max-w-[1200px] mx-auto flex justify-between items-center pt-[20px] pb-[20px]">
                 <div className="flex gap-6">
                     <Link to="/" className="text-xl nexon-bold">GrowTogether</Link>
-                    <ul className="list-none items-center flex gap-4 text-base mx-4">
+                    <ul className="list-none items-center flex gap-4 text-[13px] mx-2 lg:text-[15px] lg:mx-4 text-nowrap">
                         <li>
                             <Link to="/study" className="nexon-medium">스터디</Link>
                         </li>

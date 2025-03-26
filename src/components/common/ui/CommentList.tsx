@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useContentType } from "../../../context/ContentTypeContext"
 import { FiEdit } from "react-icons/fi";
 import { IoTrashOutline } from "react-icons/io5";
@@ -9,7 +9,6 @@ import TextArea from "../../form/TextArea";
 import { CommentData } from "../../../types/comment";
 import useComments from "../../../hooks/common/useComments";
 import useMyPageInfo from "../../../hooks/mypage/useMyPageInfo";
-import StatusHandler from "./StatusHandler";
 import { formatDate } from "../../common/utils/formatDate";
 
 interface CommentProps {
@@ -17,19 +16,45 @@ interface CommentProps {
 }
 const CommentList = ({ postId }: CommentProps): JSX.Element => {
   const { contentType } = useContentType();
-  const [commentList, setCommentList] = useState<CommentData[]>([]);
   const [newComment, setNewComment] = useState("");
   const [replyComment, setReplyComment] = useState("");
   const [replyingTo, setReplyingTo] = useState<number | null>(null); // 댓글별로 답변창 열기
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null); // 수정 중인 댓글 ID
   const [editContent, setEditContent] = useState(""); // 수정할 댓글 내용
-
-  const { comments,loading, error, fetchComment, addComment, deleteComment, editComment } = useComments(postId);
+  
+  const { comments, loading, fetchComment, addComment, deleteComment, editComment, hasMore } = useComments(postId);
   const { info } = useMyPageInfo();
+  const observer = useRef<IntersectionObserver | null>(null); // Intersection Observer로 무한 스크롤 구현
+  const commentsEndRef = useRef<HTMLDivElement | null>(null); // 댓글 목록 끝을 참조하는 ref
 
   useEffect(() => {
-    setCommentList(comments);
-  }, [comments]);
+    if (!loading && hasMore) fetchComment(0);
+  }, [postId]);
+
+  useEffect(() => {
+    if (commentsEndRef.current) {
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && !loading && hasMore) {
+            const lastCommentId = contentType === "bootcamp" 
+              ? comments[comments.length - 1]?.commentId 
+              : comments[comments.length - 1]?.studyCommentId;
+  
+            fetchComment(lastCommentId);
+          }
+        },
+        { rootMargin: "100px" }  // 끝에 조금 더 가까워지면 자동으로 추가 댓글 로드
+      );
+      if (commentsEndRef.current) observer.current.observe(commentsEndRef.current);
+    }
+    return () => {
+      if (observer.current && commentsEndRef.current) {
+        observer.current.unobserve(commentsEndRef.current);
+      }
+    };
+  }, [comments, loading, hasMore]);
+
+  
 
   const getCommentId = (comment: CommentData) => {
     return contentType === "bootcamp" ? comment.commentId : comment.studyCommentId;
@@ -62,14 +87,14 @@ const CommentList = ({ postId }: CommentProps): JSX.Element => {
     };
     try {
       await addComment(commentData);  
-      await fetchComment();
+      await fetchComment(0);
     } catch (error) {
       console.error("댓글 추가 실패:", error);
     }
  
     setNewComment("");
     setReplyComment("");
-    setReplyingTo(null); // 댓글 등록 후 답변창을 닫음
+    setReplyingTo(null);
   };
 
   const renderComments = (comments: CommentData[], level: number = 0) => {
@@ -169,8 +194,16 @@ const CommentList = ({ postId }: CommentProps): JSX.Element => {
     });
   };
 
+  const renderSkeletonComments = () => {
+    return (
+      <div className="flex justify-center items-center mt-1 text-black9 w-full">
+        <img src="/images/loading.gif" alt="로딩중..." className="w-50"></img>
+      </div>
+    );
+``};
+
   return (
-    <StatusHandler loading={loading} error={error}>
+    <>
       <div className="mb-5">
         <div className="text-[15px] nexon-bold">
           <span className="mr-1">댓글</span>
@@ -188,8 +221,22 @@ const CommentList = ({ postId }: CommentProps): JSX.Element => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-8">{renderComments(commentList)}</div>
-    </StatusHandler>
+      <div className="flex flex-col gap-8">{renderComments(comments)}</div>
+    
+      {loading && (
+        <div className="mt-5">
+          {renderSkeletonComments()}
+        </div>
+      )}
+
+      {hasMore && comments.length > 0 ? (
+        <div ref={commentsEndRef}></div> 
+      ) : (
+        comments.length > 0 && !hasMore && (
+          <div className="text-center text-sm text-black9 mt-5">더 이상 댓글이 없습니다.</div>
+        )
+      )}
+    </>
   );
 };
 

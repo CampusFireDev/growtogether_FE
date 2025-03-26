@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BootcampData } from "../../types/bootcamp";
+
 // import { useContentType } from "../../context/ContentTypeContext";
 const useSearch = () => {
     const [searchList, setsearchList] = useState<BootcampData[]>([]);

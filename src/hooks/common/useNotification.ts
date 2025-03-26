@@ -15,11 +15,9 @@ const useNotification = () => {
     const [notification, setNotification] = useState<NotificationData[]>([]);
     const [notificationCount, setNotificationCount] = useState<number>(0);
     const [error, setError] = useState<string | null>(null)
+    
     const headers = { 
-        ...(token ? { Authorization: `${token.token}` } : {}), 
-        // "Content-Type": "application/json",
-        // "Accept": "application/json",
-    }; 
+        ...(token ? { Authorization: `${token.token}` } : {})}; 
 
     // 이전에 읽지 않은 알람 로드
     const loadNotification = async () =>{
@@ -43,6 +41,7 @@ const useNotification = () => {
             setNotification((prevNotifications) => 
                 prevNotifications.filter((noti) => noti.id !== notiId)
             );
+            window.location.reload();
             setNotificationCount((prev) => prev - 1);
             loadNotification();
         } catch (error){
@@ -52,6 +51,7 @@ const useNotification = () => {
     };
 
     useEffect(() =>{
+        // console.log(notification?.content);
         if (!memberId) return;
         const BASE_URL = "http://13.125.21.225:8080"; // 백엔드 API 서버 주소
         const EventSource = EventSourcePolyfill;
@@ -64,10 +64,31 @@ const useNotification = () => {
             console.log("⭐ SSE 연결 성공");
             setError(null); // 연결 성공시 오류 초기화
         };
+        eventSource.addEventListener("notification", (event: MessageEvent) => {
+            const data = JSON.parse(event.data);
+            if (data.type !== "connection" && data.type !== "heartbeat") {
+                console.log("📢 실시간 알림 수신:", data);
+
+                // 알림 중복 체크 후 업데이트
+                setNotification(prev => {
+                    if (!prev.some(noti => noti.id === data.id)) {
+                        return [data, ...prev];
+                    }
+                    return prev;
+                });
+                setNotificationCount(prev => prev + 1);
+            }
+        });
 
         // eventSource.addEventListener("message", (event: any) => {
         //     const notificationData = event;
         //     console.log("📢 실시간 알림 수신:", notificationData);
+        //     setNotification((prev) => {
+        //         if (!prev.some((noti) => noti.content === notificationData.content)) {
+        //             return [...prev, notificationData]; 
+        //         }
+        //         return prev;
+        //     });
 
         //     // setNotification((prev) => {
         //     //     if (!prev.some((noti) => noti.content === notificationData.content)) {
@@ -79,6 +100,12 @@ const useNotification = () => {
         // eventSource.addEventListener("notification", (event: any) => {
         //     const notificationData = event;
         //     console.log("📢 실시간 알림 수신:", notificationData);
+        //         setNotification((prev) => {
+        //         if (!prev.some((noti) => noti.content === notificationData.content)) {
+        //             return [...prev, notificationData]; 
+        //         }
+        //         return prev;
+        //     });
 
         //     // setNotification((prev) => {
         //     //     if (!prev.some((noti) => noti.content === notificationData.content)) {
@@ -87,16 +114,16 @@ const useNotification = () => {
         //     //     return prev;
         //     // });
         // });
-        eventSource.onmessage = async (event: any) => {
-            const notificationData = event; 
-            console.log("📢 실시간 알림 수신:", notificationData);
-        };
+        // eventSource.onmessage = async (event: any) => {
+        //     const notificationData = event; 
+        //     console.log("📢 실시간 알림 수신:", notificationData);
+        // };
 
-        eventSource.onerror = async (error: any) => {
-            console.error("🚨 SSE 연결 오류 발생:", error.message);
-            // setError("실시간 알림 연결 오류")
-            eventSource.close();
-        };
+        // eventSource.onerror = async (error: any) => {
+        //     console.error("🚨 SSE 연결 오류 발생:", error.message);
+        //     // setError("실시간 알림 연결 오류")
+        //     eventSource.close();
+        // };
 
         loadNotification();
 

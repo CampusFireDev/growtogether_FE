@@ -10,7 +10,7 @@ const StudyPopularCardList = (): JSX.Element => {
 
     return (
         <StatusHandler loading={loading} error={error}>
-            <div className="grid grid-cols-3 gap-[18px]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[18px]">
                 {popularStudy.map((study, index) => (
                     <StudyCard key={index} study={study} showTechStack={false} />
                 ))}

@@ -53,11 +53,11 @@ const StudyCreate = ():JSX.Element => {
                     <div className="flex gap-5 items-center">
                     </div>
                         <SelectCalendar type="study" label="모집 마감일" labelClassName="nexon-medium text-sm" 
-                            className="my-1 flex-1" placeholder="모집 마감일을 선택해주세요." singleDate={true} onChange={(selectedDates) => setFormData(prev => ({...prev, studyClosingDate: selectedDates[0] || ""}))}>
+                            className="my-1 flex-1 mb-3" placeholder="모집 마감일을 선택해주세요." singleDate={true} onChange={(selectedDates) => setFormData(prev => ({...prev, studyClosingDate: selectedDates[0] || ""}))}>
                         </SelectCalendar>
 
                         <SelectCalendar type="study" label="참여 날짜" labelClassName="nexon-medium text-sm" 
-                            className="my-1 flex-1" placeholder="참여 날짜를 선택해주세요." multiDate={true} 
+                            className="my-1 flex-1 mb-3" placeholder="참여 날짜를 선택해주세요." multiDate={true} 
                             onChange={(selectedDates) => setFormData(prev => ({
                                 ...prev,
                                 mainScheduleList: {
@@ -94,7 +94,3 @@ const StudyCreate = ():JSX.Element => {
 };
 
 export default StudyCreate;
-
-{/* <SelectMenu label="참여 시간" labelClassName="nexon-medium text-sm" 
-    className="my-1 flex-1" placeholder="참여 시간을 선택해주세요." options={timeList}>
-</SelectMenu> */}

@@ -26,7 +26,7 @@ const TiptapEditor = ({ content, onChange }: TiptapEditorProps) => {
   }
 
   return (
-    <div className="w-full h-100 border border-[#e5e5e5] rounded-[5px] text-[13px]">
+    <div className="w-full h-100 border border-gray5 rounded-[5px] text-[13px]">
       {/* 툴바 */}
       <div className="flex gap-2 mb-2">
         <button onClick={() => editor.chain().focus().toggleBold().run()} className="px-3 py-1 border rounded">

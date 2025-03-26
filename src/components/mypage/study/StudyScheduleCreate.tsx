@@ -41,7 +41,7 @@ const StudyScheduleCreate = ({ onClose }: { onClose: () => void }): JSX.Element 
         }
     };
 
-
+    
     return (
         <>
             {/* 일정 등록 팝업 */}

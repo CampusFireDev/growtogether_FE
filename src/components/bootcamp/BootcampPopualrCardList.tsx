@@ -9,7 +9,7 @@ const BootcampPopualrCardList = (): JSX.Element => {
 
     return (
         <StatusHandler loading={loading} error={error}>
-            <div className="grid grid-cols-3 gap-[18px]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[18px]">
                 {popularBootcamp.map((bootcamp, index) => (
                     <BootcampCard key={bootcamp.id ?? index} bootcamp={bootcamp} showTechStack={false} />
                 ))}
