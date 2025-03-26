@@ -12,6 +12,8 @@ const useComments = (id: number) => {
     const { token } = useAuth();
     const { contentType } = useContentType();
 
+    console.log(lastIdx);
+
     const headers = { 
         ...(token ? { Authorization: `${token}` } : {}), 
         "Content-Type": "application/json", 

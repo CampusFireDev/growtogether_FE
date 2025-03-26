@@ -4,6 +4,8 @@ import axios from "axios";
 import useAuth from "../../hooks/login/useAuth";
 import useMemberId from "../../hooks/auth/useMemberId";
 import { useEffect, useRef, useState } from "react";
+// import TechSelectBox from "../common/ui/TechSelectBox";
+// import useBootcampSkillName from "../../hooks/bootcamp/useBootcampSkillList";
 
 const PersonalInfo = ():JSX.Element => {
     // 내 정보 가져오기
@@ -13,6 +15,7 @@ const PersonalInfo = ():JSX.Element => {
     const [githubUrl, setGithubUrl] = useState("");
     const [phone, setPhone] = useState("");
     const [profileImgUrl, setProfileImgUrl] = useState("");
+    const [selectedStacks, setSelectedStacks] = useState<string[]>([]);
 
 
     useEffect(() => {
@@ -21,6 +24,7 @@ const PersonalInfo = ():JSX.Element => {
             setGithubUrl(info.githubUrl || "");
             setPhone(info.phone || "");
             setProfileImgUrl(info.profileImageUrl || "");
+            setSelectedStacks(info.skills || [])
         }
     }, [info]);
 
@@ -29,6 +33,9 @@ const PersonalInfo = ():JSX.Element => {
 
     // 로그인한 유저 memberId 가져오기
     const memberId = useMemberId();
+
+    // 기술스택 리스트 가져오기
+    // const { skillName } = useBootcampSkillName();
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -70,6 +77,7 @@ const PersonalInfo = ():JSX.Element => {
             githubUrl,
             phone,
             profileImgUrl,
+            techStacks: selectedStacks,
         };
 
         try {
@@ -171,9 +179,9 @@ const PersonalInfo = ():JSX.Element => {
                             onChange={(e) => setGithubUrl(e.target.value)}
                         />
                     </div>
-                    <div>
-                        {/* <SkillMenu setFormData={setFormData} formData={formData}/> */}
-                    </div>
+                    {/* <div className="mb-5">
+                        <TechSelectBox availableStacks={skillName} selectedStacks={selectedStacks} onChangeSelectedStacks={setSelectedStacks} />
+                    </div> */}
                     <FormButton
                         type="submit"
                         children="수정하기"

@@ -10,10 +10,15 @@ export interface StudyVoteResponse {
   
     // CHANGE 전용
     content?: string;
-    prevStartDate?: string;
-    prevEndDate?: string;
-    prevTotalTime?: number;
-    changeStartDate?: string;
-    changeEndDate?: string;
-    changeTotalTime?: number;
+    prevStartDate: string;  
+    prevStartTime: string; 
+    prevEndDate: string;    
+    prevEndTime: string;      
+    prevTotalTime: number;    
+  
+    changeStartDate: string;  
+    changeStartTime: string;   
+    changeEndDate: string;     
+    changeEndTime: string;   
+    changeTotalTime: number; 
   }

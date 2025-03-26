@@ -3,3 +3,8 @@ export interface PointHistory {
     type: "REWARD" | "USE" | "CHARGE";
     amount: string;
 }
+
+export interface PointApiResponse {
+    availablePoints: number;
+    history: PointHistory[];
+}

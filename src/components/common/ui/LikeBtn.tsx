@@ -36,7 +36,7 @@ const LikeBtn = ({ likeCount, className, postId }:LikeBtnProps):JSX.Element => {
 
     return(
         <>
-            <FormButton type="button" className={`!w-[80px] !h-[50px] !flex !items-center !justify-center border !bg-white !text-black6 text-[16px] ${liked ? "border-[#F74175]": "border-gray5"}`}>
+            <FormButton type="button" className={`!w-[80px] !flex !items-center !justify-center border !bg-white !text-black6 text-[16px] ${liked ? "border-[#F74175]": "border-gray5"}`}>
                 <div className={`flex items-center justify-center gap-1 ${className}`} onClick={likeHandle}>
                     <div>
                         {liked ? <IoMdHeart className="text-[#F74175]"/> : <IoMdHeartEmpty className="text-black6"/>}

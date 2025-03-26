@@ -1,11 +1,11 @@
-import { PointHistory } from "../../../types/mypage/point/pointType";
+import { PointApiResponse } from "../../../types/mypage/point/pointType";
 import useApi from "../../useApi";
 
 const usePointHistory = () => {
     const url = `https://www.growtogether.store/api/points/history`;
-    const { data: points, loading, error } = useApi<PointHistory[]>(url, true, "GET");
+    const { data, loading, error } = useApi<PointApiResponse>(url, true, "GET");
 
-    return { points, loading, error }
+    return { points: data?.history, availablePoints: data?.availablePoints, loading, error };
 }
 
 export default usePointHistory;

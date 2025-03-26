@@ -23,6 +23,8 @@ const useApi = <T>(
         }
 
         const fetchData = async () => {
+            setLoading(true);
+
             try {
                 const res = await axios({
                     url,
@@ -46,7 +48,7 @@ const useApi = <T>(
         };
 
         fetchData();
-    }, [url, token, method, body]);
+    }, [url, token, method, body, requireAuth]);
 
     return { data, loading, error };
 };

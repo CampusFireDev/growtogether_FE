@@ -38,7 +38,7 @@ const StudyMemeberList = (): JSX.Element => {
         }
 
         try {
-            await trigger(`http://www.growtogether.store/study/${studyId}/vote`, { studyMemberId: selectedMemberId });
+            await trigger(`https://www.growtogether.store/study/${studyId}/vote`, { studyMemberId: selectedMemberId });
             alert("추방 투표가 등록되었습니다.");
             
             setIsOpen(false); // 팝업 닫기

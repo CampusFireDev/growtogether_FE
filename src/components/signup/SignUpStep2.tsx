@@ -5,6 +5,8 @@ import { FormButton, InputField } from "../login";
 import { useState } from "react";
 import ValidatePassword from "../password/ValidatePassword";
 import axios from "axios";
+import TechSelectBox from "../common/ui/TechSelectBox";
+import useBootcampSkillName from "../../hooks/bootcamp/useBootcampSkillList";
 
 interface PasswordCriteria {
     length: boolean;
@@ -15,6 +17,11 @@ interface PasswordCriteria {
 
 const SignUpStep2 = ():JSX.Element=>{
     const navigate = useNavigate();
+
+    const [selectedStacks, setSelectedStacks] = useState<string[]>([]);
+
+    // 기술스택 리스트 가져오기
+    const { skillName } = useBootcampSkillName();
 
     // 회원가입 폼 상태
     const [ formData, setFormData ] = useState({
@@ -101,12 +108,19 @@ const SignUpStep2 = ():JSX.Element=>{
     const handleSignup = async () => {
         if (!validateForm()) return;
 
+        const signupData = {
+            ...formData,
+            techStacks: selectedStacks, // ✅ 기술스택 추가
+        };
+
         try {
-            const response = await axios.post("http://13.125.21.225:8080/member/register", formData);
+            const response = await axios.post("http://13.125.21.225:8080/member/register", signupData);
 
             if (response.data.message === "회원가입이 완료되었습니다.") {
                 localStorage.setItem("nickName", formData.nickName);
-                navigate("/signup/step3"); // 회원가입 완료 페이지로 이동
+                navigate("/signup/step3", {
+                    state: { nickName: formData.nickName }, // ✅ 닉네임 전달
+                });
             }
         } catch (e) {
             alert("회원가입 요청에 실패했습니다.");
@@ -258,6 +272,9 @@ const SignUpStep2 = ():JSX.Element=>{
                         placeholder="깃허브 주소를 입력해주세요."
                         onChange={handleInputChange}
                     />
+                </div>
+                <div className="mb-5">
+                    <TechSelectBox availableStacks={skillName} selectedStacks={selectedStacks} onChangeSelectedStacks={setSelectedStacks} />
                 </div>
 
 

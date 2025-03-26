@@ -22,6 +22,7 @@ const formatSkills = (skills: string[] | string | undefined): string => {
 
 const MyLikes = ():JSX.Element => {
     const { myLikes } = useMyLikes();
+    
     return (
         <>
             <strong className="block nexon-bold text-xl text-black4 mb-2">
@@ -33,7 +34,7 @@ const MyLikes = ():JSX.Element => {
                     myLikes.length > 0 ? (
                         myLikes.map((like, index) => (
                             <Link to={`/${like.type === "PROJECT" ? "study" : like.type.toLowerCase()}/${like.postId}`} key={index}>
-                                <div className="flex justify-between items-center border-b border-gray5 py-5 px-7">  
+                                <div className={`flex justify-between items-center py-5 px-7 ${index !== myLikes.length -1 ? "border-b border-gray5" : ""}`}>  
                                     <div className="flex items-center gap-5">
                                         {like.status && <StatusBadge status={like.status} />}
                                         {like.programCourse && <BootcampCourseBadge type={like.programCourse}></BootcampCourseBadge>}

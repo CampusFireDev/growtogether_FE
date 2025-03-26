@@ -69,7 +69,7 @@ const Study = ({ isHome }: StudyProps):JSX.Element=>{
             <div className="pt-[110px] pb-[70px]">
                 {Object.keys(filters).length === 0 && (
                     <>
-                        <div className="m`b-[20px]">
+                        <div className="mb-[20px]">
                             <h3 className="nexon-bold text-[24px] text-black4">🔥 현재 급상승 중인 인기글</h3>
                         </div>
                         <StudyPopularCardList />

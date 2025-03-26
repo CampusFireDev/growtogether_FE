@@ -4,7 +4,7 @@ import usePointHistory from "../../hooks/mypage/point/usePointHistory";
 import useMyPageInfo from "../../hooks/mypage/useMyPageInfo";
 
 const Point = () : JSX.Element =>{
-    const { points } = usePointHistory();
+    const { points, availablePoints } = usePointHistory();
 
     // 회원 정보 가져오기
     const { info } = useMyPageInfo();
@@ -18,7 +18,7 @@ const Point = () : JSX.Element =>{
                             현재 사용 가능한 포인트
                         </em>
                         <strong className="nexon-bold text-3xl text-black4">
-                            <span className="text-myBlue">{info?.points}</span>P
+                            <span className="text-myBlue">{availablePoints ?? info?.points}</span>P
                         </strong>
                     </div>
                     <Link to="/mypage/point/charge" state={{ currentPoints: info?.points }}>
@@ -35,8 +35,8 @@ const Point = () : JSX.Element =>{
                     </div>
                 ): (
                     <div>
-                        {points?.map((point) => (
-                            <div className="flex items-center justify-between px-5 py-5 border-t border-gray5">
+                        {points?.map((point, index) => (
+                            <div key={point.date} className={`flex items-center justify-between px-5 py-5 border-t border-gray5 ${index === points.length -1 && "border-b border-gray5"}`}>
                                 <div>
                                     <strong className="block text-lg nexon-medium text-black4">
                                         {
