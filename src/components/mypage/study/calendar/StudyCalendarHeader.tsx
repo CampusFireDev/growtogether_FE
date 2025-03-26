@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import ButtonStyle1 from "../../../common/ui/ButtonStyle1";
 
-const StudyCalendarHeader = ({ onPrev, onNext, onToday, onOpenPopup, onOpenChat, year, month }: {
+const StudyCalendarHeader = ({ onPrev, onNext, onToday, onOpenPopup, year, month }: {
     onPrev: () => void;
     onNext: () => void;
     onToday: () => void;

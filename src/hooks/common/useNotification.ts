@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { EventSourcePolyfill } from "event-source-polyfill";
@@ -35,7 +34,6 @@ const useNotification = () => {
 
     // 읽은 알람은 리스트에서 삭제 
     const readNotification= async (notiId: number) => {
-        console.log("⚫",notiId)
         try{
             await axios.put(`/noti/${notiId}/read`,{},{headers});
             setNotification((prevNotifications) => 
@@ -45,29 +43,30 @@ const useNotification = () => {
             setNotificationCount((prev) => prev - 1);
             loadNotification();
         } catch (error){
-            console.log("✔️",error);
+            console.log(error);
             setError("알람 읽는 처리 중 오류 발생하였습니다.");
         }
     };
 
     useEffect(() =>{
-        // console.log(notification?.content);
         if (!memberId) return;
         const BASE_URL = "http://13.125.21.225:8080"; // 백엔드 API 서버 주소
         const EventSource = EventSourcePolyfill;
         const eventSource = new EventSource(`${BASE_URL}/sse/subscribe/${memberId}`, {
             headers,
-            withCredentials: true, // 쿠키를 포함하려면 설정
+            withCredentials: true, 
         } as EventSourcePolyfillInit);
 
+
         eventSource.onopen = async () => {
-            console.log("⭐ SSE 연결 성공");
+            // console.log("✅  SSE 연결 성공");
             setError(null); // 연결 성공시 오류 초기화
         };
+        
         eventSource.addEventListener("notification", (event: MessageEvent) => {
             const data = JSON.parse(event.data);
             if (data.type !== "connection" && data.type !== "heartbeat") {
-                console.log("📢 실시간 알림 수신:", data);
+                // console.log("📢 실시간 알림 수신:", data);
 
                 // 알림 중복 체크 후 업데이트
                 setNotification(prev => {
@@ -80,45 +79,6 @@ const useNotification = () => {
             }
         });
 
-        // eventSource.addEventListener("message", (event: any) => {
-        //     const notificationData = event;
-        //     console.log("📢 실시간 알림 수신:", notificationData);
-        //     setNotification((prev) => {
-        //         if (!prev.some((noti) => noti.content === notificationData.content)) {
-        //             return [...prev, notificationData]; 
-        //         }
-        //         return prev;
-        //     });
-
-        //     // setNotification((prev) => {
-        //     //     if (!prev.some((noti) => noti.content === notificationData.content)) {
-        //     //         return [...prev, notificationData];
-        //     //     }
-        //     //     return prev;
-        //     // });
-        // });
-        // eventSource.addEventListener("notification", (event: any) => {
-        //     const notificationData = event;
-        //     console.log("📢 실시간 알림 수신:", notificationData);
-        //         setNotification((prev) => {
-        //         if (!prev.some((noti) => noti.content === notificationData.content)) {
-        //             return [...prev, notificationData]; 
-        //         }
-        //         return prev;
-        //     });
-
-        //     // setNotification((prev) => {
-        //     //     if (!prev.some((noti) => noti.content === notificationData.content)) {
-        //     //         return [...prev, notificationData];
-        //     //     }
-        //     //     return prev;
-        //     // });
-        // });
-        // eventSource.onmessage = async (event: any) => {
-        //     const notificationData = event; 
-        //     console.log("📢 실시간 알림 수신:", notificationData);
-        // };
-
         // eventSource.onerror = async (error: any) => {
         //     console.error("🚨 SSE 연결 오류 발생:", error.message);
         //     // setError("실시간 알림 연결 오류")
@@ -126,9 +86,9 @@ const useNotification = () => {
         // };
 
         loadNotification();
-
+        
         return () => {
-            console.log("🔌 SSE 연결 해제");
+            // console.log("🔌 SSE 연결 해제");
             eventSource.close();
         };
     },[memberId, window.location.pathname]);

@@ -73,7 +73,7 @@ const PersonalInfo = ():JSX.Element => {
         };
 
         try {
-            const res = await axios.put(
+            await axios.put(
                 "https://www.growtogether.store/api/mypage/update-my-Info",
                 updateData,
                 {

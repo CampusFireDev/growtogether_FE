@@ -21,10 +21,11 @@ const useComments = (id: number) => {
         fetchComment(0);
     }, [id, contentType]);
 
+    console.log(lastIdx);
+
     // 댓글 리스트 불러오기
     const fetchComment = useCallback(
         async (lastIdx: number, size: number = 1) => {
-            // if (loading) return; // 로딩 중에는 중복 요청을 방지
             if (!hasMore) return;
             setLoading(true);
 

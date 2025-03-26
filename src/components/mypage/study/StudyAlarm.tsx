@@ -5,7 +5,7 @@ import useStudyJoin from "../../../hooks/mypage/study/useStudyJoin";
 import useAuth from "../../../hooks/login/useAuth";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import useVoteDetail from "../../../hooks/mypage/study/useVoteDetail";
+// import useVoteDetail from "../../../hooks/mypage/study/useVoteDetail";
 
 interface VoteDetail {
     voteId: number;
@@ -65,7 +65,7 @@ const StudyAlarm = (): JSX.Element => {
                 agree: Boolean(agree),
             };
 
-            const res = await axios.post(
+            await axios.post(
                 `https://www.growtogether.store/study/vote/${voteId}`,
                 data,
                 {

@@ -22,7 +22,7 @@ const ValidatePassword = ({ password, onValidationChange }: ValidatePasswordProp
         const length = password.length >=8;
         const letter = /[A-Za-z]/.test(password);
         const number = /\d/.test(password);
-        const specialChar = /[@$!%*?&]/.test(password);
+        const specialChar = /[!@#$%^&*(),.?":{}|<>^]/.test(password);
         
         const updatedCriteria = { length, letter, number, specialChar };
         

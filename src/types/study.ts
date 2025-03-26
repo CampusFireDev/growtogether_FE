@@ -15,6 +15,7 @@ export interface StudyData {
     studyEndDate: string;
     studyClosingDate: string;
     author: string;
+    profileImageUrl: string;
     commentCount: number;
     createdAt: string;
 }

@@ -17,6 +17,7 @@
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
     "axios": "^1.8.3",
+    "buffer": "^6.0.3",
     "cors": "^2.8.5",
     "crypto-browserify": "^3.12.1",
     "event-source-polyfill": "^1.0.31",

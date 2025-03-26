@@ -29,7 +29,7 @@ const Point = () : JSX.Element =>{
                         />
                     </Link>
                 </div>
-                { points?.length === 0 ? (
+                {/* { points?.length === 0 ? (
                     <div className="flex-grow flex items-center justify-center border-t border-gray5">
                         <p className="text-sm text-black6 text-center">내역이 없습니다.</p>
                     </div>
@@ -50,7 +50,7 @@ const Point = () : JSX.Element =>{
                             </div>
                         ))}
                     </div>
-                )}
+                )} */}
                 
             </div>
         </>

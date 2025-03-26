@@ -117,11 +117,6 @@ export default defineConfig({
         target: 'http://13.125.21.225:8080',
         changeOrigin: true,
         secure: false,
-        // headers: {
-        //   Connection: "keep-alive", // SSE 연결을 유지하기 위한 설정
-        //   CacheControl: "no-cache",
-        //   Accept: "text/event-stream",
-        // },
       },
       "/ws-chat": {
         // WebSocket 프록시 설정
@@ -130,7 +125,20 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      "/payment": {
+
+      "/payment/ready": {
+        target: 'http://13.125.21.225:8080',
+      },
+
+      "/payment/approve/callback": {
+        target: 'http://13.125.21.225:8080',
+      },
+
+      "/payment/approve2": {
+        target: 'http://13.125.21.225:8080',
+      },
+
+      "/member": {
         target: 'http://13.125.21.225:8080',
       },
     },

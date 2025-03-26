@@ -47,7 +47,7 @@ const PointCharge = (): JSX.Element => {
                         onClick={() => handlePointClick(item.amount)}
                     >
                         <div className="flex gap-3 items-center cursor-pointer">
-                            <FaRegCircleCheck className={selectedPoint === item.amount ? "text-myGreen" : "text-gray-400"} />
+                            <FaRegCircleCheck className={selectedPoint === item.amount ? "text-myBlue" : "text-gray-400"} />
                             {item.amount !== 0 ? (
                                 <p>{item.amount} P</p>
                             ) : (
@@ -65,7 +65,7 @@ const PointCharge = (): JSX.Element => {
 
             <div>
                 <p className="nexon-bold my-7 text-right mr-10 text-black4">
-                    충전 후 포인트: <span className="text-myGreen">{totalPoints} P</span>
+                    충전 후 포인트: <span className="text-myBlue">{totalPoints} P</span>
                 </p>
             </div>
 

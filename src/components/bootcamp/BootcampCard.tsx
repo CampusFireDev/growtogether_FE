@@ -26,7 +26,7 @@ const BootcampCard = ({ bootcamp, showTechStack = true }: BootcampCardProps): JS
                 {showTechStack && <TechStackList stacks={bootcamp.skillNames}/>}
                 <div className="flex justify-between mt-[15px] pt-[15px] border-t border-gray5">
                     <div className="flex items-center gap-1">
-                        <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5"></div>
+                        <img src={bootcamp.profileImageUrl}  className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5"></img>
                         <p className="text-sm text-black6">{bootcamp.author}</p>
                     </div>
                     <ul className="flex text-sm text-black6 gap-3">

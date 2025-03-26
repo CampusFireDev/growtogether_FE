@@ -17,6 +17,7 @@ const StudyCalendar = ({ onDataSelect }: StudyCalendarProps) => {
     
     const [ isPopupOpen, setIsPopupOpen ] = useState(false); // 팝업 상태 관리
     const [ isChatOpen, setIsChatOpen ] = useState(false);
+    console.log(isChatOpen);
 
     const handleOpenChat = () => setIsChatOpen(true);
 
