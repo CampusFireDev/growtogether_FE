@@ -5,9 +5,10 @@ interface StudyCalendarGridProps {
     daysOfWeek: string[];
     scheduleMap: Map<string, StudyScheduleByDate>;
     onClickDate?: (dateStr: string) => void;
+    month: number;
 }
 
-const StudyCalendarGrid = ({ weeks, daysOfWeek, scheduleMap, onClickDate }: StudyCalendarGridProps) => {
+const StudyCalendarGrid = ({ weeks, daysOfWeek, scheduleMap, onClickDate, month }: StudyCalendarGridProps) => {
     return (
         <div className="grid grid-cols-7 border-b border-t border-gray5">
             {weeks.map((week, weekIndex) => (
@@ -16,15 +17,28 @@ const StudyCalendarGrid = ({ weeks, daysOfWeek, scheduleMap, onClickDate }: Stud
                         const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
                         const scheduleForDay = scheduleMap.get(formattedDate)?.schedule || [];
 
+                        // 현재 달에 속하는 날짜인지 확인
+                        const isCurrentMonth = date.getMonth() + 1 === month;
+
                         return (
-                            <div key={index} onClick={() => onClickDate?.(formattedDate)} className={`relative h-43 p-[10px] text-sm border-gray5 ${index !== 0 ? "border-l" : ""} ${weekIndex !== 0 ? "border-t" : ""} ${weekIndex === 0 ? "pt-9" : ""} `}>
+                            <div 
+                                key={index}
+                                onClick={() => isCurrentMonth && onClickDate?.(formattedDate)} // 다른 달 클릭 방지
+                                className={`relative h-43 p-[10px] text-sm border-gray5
+                                    ${index !== 0 ? "border-l" : ""}
+                                    ${weekIndex !== 0 ? "border-t" : ""}
+                                    ${weekIndex === 0 ? "pt-9" : ""} 
+                                `}
+                            >
                                 {weekIndex === 0 && (
-                                    <div className="absolute top-0 left-0 w-full pt-[12px] pb-[6px] text-xs text-gray-500 text-center">
+                                    <div className={`absolute top-0 left-0 w-full pt-[12px] pb-[6px] text-xs text-gray-500 text-center`}>
                                         {daysOfWeek[index]}
                                     </div>
                                 )}
 
-                                <div className="nexon-medium text-black4 text-center">{date.getDate()}</div>
+                                <div className={`nexon-medium text-black4 text-center ${!isCurrentMonth ? "hidden" : ""}`}>
+                                    {date.getDate()}
+                                </div>
 
                                 {/* 📌 일정 데이터 표시 */}
                                 {scheduleForDay.slice(0, 3).map((schedule: StudyScheduleByDate["schedule"][0], idx: number) => (

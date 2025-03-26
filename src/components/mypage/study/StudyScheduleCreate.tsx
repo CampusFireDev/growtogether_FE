@@ -4,18 +4,30 @@ import IconButton from "../../common/ui/IconButton";
 import { useParams } from "react-router-dom";
 import useApiMutation from "../../../hooks/useApiMutation";
 
-const StudyScheduleCreate = ({ onClose }: { onClose: () => void }): JSX.Element => {
+interface StudyScheduleCreateProps {
+    onClose: () => void;
+    editData?: {
+        scheduleId: number;
+        title: string;
+        startDate: string;
+        startTime: string;
+        totalTime: number;
+    };
+}
+
+const StudyScheduleCreate = ({ onClose, editData }: StudyScheduleCreateProps): JSX.Element => {
     const { studyId } = useParams<{ studyId: string }>();
     const id = Number(studyId); // 숫자로 변환
 
     // 일정 등록을 위한 상태 관리
-    const [title, setTitle] = useState(''); // 일정 제목 상태
-    const [scheduleDate, setScheduleDate] = useState(''); // 일정 날짜 상태
-    const [scheduleTime, setScheduleTime] = useState("");
-    const [totalTime, setTotalTime] = useState(60);
+    const [title, setTitle] = useState(editData?.title || "");
+    const [scheduleDate, setScheduleDate] = useState(editData?.startDate || "");
+    const [scheduleTime, setScheduleTime] = useState(editData?.startTime || "");
+    const [totalTime, setTotalTime] = useState(editData?.totalTime || 60);
 
-    // POST API 가져오기
-    const { trigger } = useApiMutation();
+    // POST, PUT API 가져오기
+    const isEdit = !!editData;
+    const { trigger } = useApiMutation(isEdit ? "PUT" : "POST");
 
     // 버튼 클릭 시 실행할 API 요청 함수
     const handleSubmit = async () => { 
@@ -32,12 +44,17 @@ const StudyScheduleCreate = ({ onClose }: { onClose: () => void }): JSX.Element 
         };
     
         try {
-            await trigger (`http://www.growtogether.store/study/${id}/schedule`, requestData);
-            alert("일정이 성공적으로 등록되었습니다.");
+            const url = isEdit
+                ? `https://www.growtogether.store/study/schedule/${editData.scheduleId}`
+                : `https://www.growtogether.store/study/${id}/schedule`;
+
+            await trigger(url, requestData);
+            
+            alert(isEdit ? "일정이 수정되었습니다." : "일정이 등록되었습니다.");
 
             window.location.reload(); // 새로고침
         } catch (error: any) {
-            alert("일정 등록 중 오류가 발생했습니다.");
+            alert(isEdit ? "일정 등록 중 오류가 발생했습니다." : "일정 수정 중 오류가 발생했습니다.");
         }
     };
 
@@ -57,7 +74,7 @@ const StudyScheduleCreate = ({ onClose }: { onClose: () => void }): JSX.Element 
                                         <path d="M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C9.09826 1 10.1375 1.25292 11.0625 1.7037M13.6875 3.625L7.5625 9.75L5.8125 8" stroke="#34A853" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                     </svg>
                                 }
-                                label="등록하기"
+                                label={isEdit ? "수정하기" : "등록하기"}
                                 color="green"
                                 onClick={ handleSubmit }
                             />
@@ -84,6 +101,7 @@ const StudyScheduleCreate = ({ onClose }: { onClose: () => void }): JSX.Element 
                                 id="scheduleTitle"
                                 name="scheduleTitle" 
                                 placeholder="일정 제목을 입력해주세요."
+                                value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
@@ -96,6 +114,7 @@ const StudyScheduleCreate = ({ onClose }: { onClose: () => void }): JSX.Element 
                                 id="scheduleStartTime"
                                 name="scheduleStartTime" 
                                 placeholder="일정 시작시간을 입력해주세요."
+                                value={scheduleTime}
                                 onChange={(e) => setScheduleTime(e.target.value)}
                             />
                         </div>
@@ -108,12 +127,14 @@ const StudyScheduleCreate = ({ onClose }: { onClose: () => void }): JSX.Element 
                                 id="scheduleTotalTime"
                                 name="scheduleTotalTime" 
                                 placeholder="일정 진행시간을 입력해주세요."
+                                value={String(totalTime)}
                                 onChange={(e) => setTotalTime(Number(e.target.value))}
                             />
                         </div>
                         <input
                             type="date"
                             placeholder="일정 날짜를 선택해주세요."
+                            value={scheduleDate}
                             onChange={(e) => setScheduleDate(e.target.value)}
                         />
                     </div>

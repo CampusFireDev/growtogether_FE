@@ -35,10 +35,11 @@ api.interceptors.request.use((config) => {
     return Promise.reject(error);
 });
 
+export default api;
+
 /**
  * 로그인 API 호출 함수
  */
-
 export const login = async (email: string, password: string) => {
     const response = await api.post(`${API_URL.API_BASE_URL}member/memberLogin`, { email, password });
 
@@ -59,4 +60,12 @@ export const login = async (email: string, password: string) => {
     return response.data;
 }
 
-export default api;
+/**
+ * 로그아웃 함수
+ */
+export const logout = () => {
+    localStorage.removeItem("token");
+
+    delete api.defaults.headers.common["Authorization"];
+}
+

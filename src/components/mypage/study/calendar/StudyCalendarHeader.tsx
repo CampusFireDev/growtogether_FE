@@ -1,17 +1,34 @@
+import { useParams } from "react-router-dom";
 import ButtonStyle1 from "../../../common/ui/ButtonStyle1";
 
-const StudyCalendarHeader = ({ onPrev, onNext, onToday, onOpenPopup, year, month }: {
+const StudyCalendarHeader = ({ onPrev, onNext, onToday, onOpenPopup, onOpenChat, year, month }: {
     onPrev: () => void;
     onNext: () => void;
     onToday: () => void;
     onOpenPopup: () => void;
+    onOpenChat: () => void;
     year: number;
     month: number;
 }) => {
+    const { studyId } = useParams(); // URL에서 studyId 가져오기
+
+    const handleOpenChat = () => {
+        const width = 500;
+        const height = 700;
+        const left = window.screenX + (window.outerWidth - width) / 2;
+        const top = window.screenY + (window.outerHeight - height) / 2;
+      
+        window.open(
+          `/study/${studyId}/chat`, // ✅ 라우터에 연결된 URL
+          "StudyChat",
+          `width=${width},height=${height},left=${left},top=${top},resizable=yes`
+        );
+      };
+
     return (
         <div className="relative flex items-center justify-between py-[30px] px-[30px]">
             <div className="flex items-center gap-2">
-                <ButtonStyle1 type="button" className="bg-black6 text-white" label="채팅방 입장" />
+                <ButtonStyle1 type="button" className="bg-black6 text-white" label="채팅방 입장" onClick={handleOpenChat} />
                 <ButtonStyle1 type="button" className="bg-myGreen text-white" label="일정 등록" onClick={onOpenPopup} />
             </div>
 

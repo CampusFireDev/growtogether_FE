@@ -1,9 +1,9 @@
 import ButtonStyle1 from "../common/ui/ButtonStyle1";
-import usePointHistory from "../../hooks/mypage/usePointHistory";
+import usePointHistory from "../../hooks/mypage/point/usePointHistory";
 import useMyPageInfo from "../../hooks/mypage/useMyPageInfo";
 
 const Point = () : JSX.Element =>{
-    const { points, loading } = usePointHistory();
+    const { points } = usePointHistory();
 
     // 회원 정보 가져오기
     const { info } = useMyPageInfo();
@@ -27,15 +27,13 @@ const Point = () : JSX.Element =>{
                         className="bg-myBlue text-white"
                     />
                 </div>
-                { loading ? (
-                    <p>포인트 내역을 불러오는 중</p>
-                ): points.length === 0 ? (
+                { points?.length === 0 ? (
                     <div className="flex-grow flex items-center justify-center border-t border-gray5">
                         <p className="text-sm text-black6 text-center">내역이 없습니다.</p>
                     </div>
                 ): (
                     <div>
-                        {points.map((point) => (
+                        {points?.map((point) => (
                             <div className="flex items-center justify-between px-5 py-5 border-t border-gray5">
                                 <div>
                                     <strong className="block text-lg nexon-medium text-black4">

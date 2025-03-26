@@ -15,13 +15,10 @@ const StudyCalendar = ({ onDataSelect }: StudyCalendarProps) => {
 
     const { year, month, daysOfWeek, weeks, scheduleMap, goToPreviousMonth, goToNextMonth, goToToday } = useCalendar(studyIdNumber);
     
-    const [isPopupOpen, setIsPopupOpen] = useState(false); // 팝업 상태 관리
+    const [ isPopupOpen, setIsPopupOpen ] = useState(false); // 팝업 상태 관리
+    const [ isChatOpen, setIsChatOpen ] = useState(false);
 
-    // 캘린더 날짜 클릭 핸들러
-    const handleDateClick = (date: Date) => {
-        const formatted = date.toISOString().slice(0, 10);
-        onDataSelect(formatted);
-    }
+    const handleOpenChat = () => setIsChatOpen(true);
 
     return (
         <div>
@@ -30,6 +27,7 @@ const StudyCalendar = ({ onDataSelect }: StudyCalendarProps) => {
                 onNext={goToNextMonth} 
                 onToday={goToToday} 
                 onOpenPopup={() => setIsPopupOpen(true)} 
+                onOpenChat={handleOpenChat}
                 year={year} 
                 month={month} 
             />
@@ -37,7 +35,7 @@ const StudyCalendar = ({ onDataSelect }: StudyCalendarProps) => {
             {isPopupOpen && <StudyScheduleCreate onClose={() => setIsPopupOpen(false)} />}
 
             {/* ✅ scheduleMap을 StudyCalendarGrid에 전달 */}
-            <StudyCalendarGrid weeks={weeks} daysOfWeek={daysOfWeek} scheduleMap={scheduleMap} onClickDate={(dateStr: string) => onDataSelect(dateStr)}/>
+            <StudyCalendarGrid weeks={weeks} daysOfWeek={daysOfWeek} scheduleMap={scheduleMap} month={month} onClickDate={(dateStr: string) => onDataSelect(dateStr)}/>
         </div>
     );
 };

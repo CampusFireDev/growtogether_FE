@@ -26,6 +26,7 @@ import LikedPostsView from "../views/mypage/LikedPostsView.tsx";
 import MyStudyListView from "../views/mypage/MyStudyListView.tsx";
 import Notification from "../components/mypage/Notification.tsx"
 import MyLikes from "../components/mypage/MyLikes.tsx"
+import StudyChatPage from "../views/chat/StudyChatPage.tsx";
 
 const Router = ():JSX.Element =>{
     return(
@@ -62,6 +63,7 @@ const Router = ():JSX.Element =>{
             <Route element={<StudyDashboardLayout />}>
                 <Route path="/mypage/:studyId/study-detail" element={<StudyDetail />} />
             </Route>
+            <Route path="/study/:studyId/chat" element={<StudyChatPage />} />
         </Routes>
     )
 }

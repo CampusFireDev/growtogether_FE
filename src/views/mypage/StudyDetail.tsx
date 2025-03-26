@@ -4,13 +4,30 @@ import StudyAlarmList from "../../components/mypage/study/StudyAlarmList";
 import StudyCalendar from "../../components/mypage/study/StudyCalendar";
 import StudyMemeberList from "../../components/mypage/study/StudyMemberList";
 import StudyScheduleList from "../../components/mypage/study/StudyScheduleList";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import useMyStudyList from "../../hooks/mypage/study/useMyStudyList";
 
 const StudyDetail = ():JSX.Element =>{
     const { studyId } = useParams();
     const numericStudyId = Number(studyId) || 0; // studyId 숫자로 변환 || 기본값 = 0;
 
-    const [ selectedDate, setSelectedDate ] = useState<string>("");
+    // 내 스터디 리스트 가져오기
+    const { studyList } = useMyStudyList();
+    const currentStudy = studyList?.find(study => study.studyId === numericStudyId);
+
+    const [ selectedDate, setSelectedDate ] = useState<string>(() => {
+        const today = new Date();
+        return today.toISOString().slice(0, 10);
+    });
+
+    const scheduleRef = useRef<HTMLDivElement>(null);
+
+    const handleDateSelect = (dateStr: string) => {
+        setSelectedDate(dateStr);
+        setTimeout(() => {
+            scheduleRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+    };
 
     return (
         <div>
@@ -74,21 +91,21 @@ const StudyDetail = ():JSX.Element =>{
                             </svg>
                         </Link>
                         <strong className="flex items-center nexon-bold text-2xl text-black4 gap-2">
-                            <StudyTypeBadge type={`PROJECT`} />
-                            [프론트엔드][보수O] 위시버니에서 모바일 초대장 웹 개발자 구합니다! (파트/사이드)
+                            <StudyTypeBadge type={currentStudy?.type || "STUDY"} />
+                            {currentStudy?.title || "스터디 제목 로딩 중..."}
                         </strong>
                     </div>
                     {/* 스터디 인원 */}
-                    <StudyMemeberList studyId={numericStudyId} />
+                    <StudyMemeberList/>
                 </div>
                 {/* 스터디 알림 리스트 */}
-                <StudyAlarmList studyId={5}/>
+                <StudyAlarmList/>
                 {/* 캘린더 영역 */}
                 <div>
-                    <StudyCalendar onDataSelect={setSelectedDate} />
+                    <StudyCalendar onDataSelect={handleDateSelect} />
                 </div>
                 {/* 일정 상세 영역 */}
-                <div className="py-[30px] px-[30px]">
+                <div ref={scheduleRef} className="py-[30px] px-[30px]">
                     <strong className="block text-xl text-black4 nexon-bold mb-3">
                         { selectedDate }
                     </strong>

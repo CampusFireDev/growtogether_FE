@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useStudyGetSchedules from "./useStudyGetSchedules";
-import { StudyGetScheduleResponse, StudyScheduleByDate } from "../../../types/mypage/study/studyScheduleType";
+import { StudyScheduleByDate } from "../../../types/mypage/study/studyScheduleType";
 
 const useCalendar = (studyId: number) => {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -38,7 +38,7 @@ const useCalendar = (studyId: number) => {
 
         while (currentDate <= end) {
             currentWeek.push(new Date(currentDate));
-            if (currentWeek.length === 7 || currentDate.getDay() === 6) {
+            if (currentWeek.length === 7) {
                 weeks.push(currentWeek);
                 currentWeek = [];
             }
@@ -60,7 +60,7 @@ const useCalendar = (studyId: number) => {
         month,
         daysOfWeek,
         weeks,
-        scheduleMap, // ✅ 일정 데이터를 Map 형태로 전달
+        scheduleMap, // 일정 데이터를 Map 형태로 전달
         loading,
         error,
         goToPreviousMonth,

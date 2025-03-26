@@ -8,8 +8,15 @@ const StudyNoticeList = ({ studyId, date }: { studyId: number, date: string }): 
 
     return (
         <ul className="flex flex-wrap gap-2">
-            {data.map((item, index) => (
-                <StudySchedule key={index} title={item.title} author={item.author} scheduleId={item.scheduleId} />
+            {data.map((item) => (
+                <StudySchedule 
+                    key={item.scheduleId}
+                    scheduleId={item.scheduleId}
+                    title={item.title}
+                    start={item.start}
+                    totalTime={item.totalTime}
+                    author={item.author}
+                />
             ))}
         </ul>
     )

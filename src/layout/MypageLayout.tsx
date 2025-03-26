@@ -1,16 +1,31 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Nav from "./Nav";
 import { IoIosArrowForward } from "react-icons/io";
 // import useMemberId from "../hooks/auth/useMemberId";
 import useMyPageInfo from "../hooks/mypage/useMyPageInfo";
+import { logout } from "../api/authApi";
+import useMyStudyList from "../hooks/mypage/study/useMyStudyList";
 
 const MypageLayout = ():JSX.Element => {
+    const navigate = useNavigate();
+
     // 아이디 가져오기
     // const memberId = useMemberId();
 
     // 회원 정보 가져오기
     const { info } = useMyPageInfo();
+
+    // 참여 스터디 리스트 가져오기
+    const { studyList } = useMyStudyList();
+
+    // 로그아웃
+    const handleLogout = () => {
+        logout();
+        if(confirm("로그아웃 하시겠습니까?")) {
+            navigate("/");
+        }
+    }
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -45,7 +60,7 @@ const MypageLayout = ():JSX.Element => {
                             <div className="flex flex-col gap-3 p-5 border-b-1 border-gray5">
                                 <Link to="/mypage/study" className="flex justify-between items-center">
                                     <em className="text-[16px] nexon">내 스터디</em>
-                                    <em className="nexon-bold">2</em>   
+                                    <em className="nexon-bold">{studyList?.length}</em>   
                                 </Link>
                                 <Link to="/mypage/mylikes">
                                     <div className="flex justify-between items-center">
@@ -60,7 +75,7 @@ const MypageLayout = ():JSX.Element => {
                                 </div>
                             </Link>
                             <div className="flex gap-3 p-4 border-gray5 justify-between items-center">
-                                <p className="text-[16px] text-[#F74175]">로그아웃</p> 
+                                <button onClick={handleLogout} className="text-[16px] text-[#F74175] cursor-pointer">로그아웃</button> 
                             </div>
                         </div>
                         <div className="flex-1">
