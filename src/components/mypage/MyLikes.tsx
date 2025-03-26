@@ -4,11 +4,20 @@ import BootcampCourseBadge from "../common/ui/BootcampCourseBadge";
 import { IoIosArrowForward } from "react-icons/io";
 import useMyLikes from "../../hooks/mypage/useMyLikes";
 
-
 const type: { [key: string]: string } = {
     BootCamp: "부트캠프",
     STUDY: "스터디",
     PROJECT: "프로젝트",
+};
+
+const formatSkills = (skills: string[] | string | undefined): string => {
+    if (!skills) return "";
+    
+    const skillArray = Array.isArray(skills) ? skills : skills.split(",");
+    if (skillArray.length > 7) {
+        return `${skillArray.slice(0, 7).join(", ")} 외 ${skillArray.length - 7}`;
+    }
+    return skillArray.join(", ");
 };
 
 const MyLikes = ():JSX.Element => {
@@ -47,7 +56,9 @@ const MyLikes = ():JSX.Element => {
                                                 <li>
                                                     <>
                                                         <em className="inline-block mr-1">사용 언어</em>
-                                                        <strong className="nexon-medium">{like.skillName || like.bootcampSkillNames}</strong>
+                                                        <strong className="nexon-medium">
+                                                            {formatSkills(like.skillName || like.bootcampSkillNames)}
+                                                        </strong>
                                                     </>
                                                 </li>
                                             </ul>
