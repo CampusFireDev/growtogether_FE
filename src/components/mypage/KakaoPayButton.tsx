@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import useMemberId from "../../hooks/auth/useMemberId";
 
 interface KakoPayButtonProps {
     amount: number;
@@ -7,6 +8,7 @@ interface KakoPayButtonProps {
 
 const KakaoPayButton = ({ amount }: KakoPayButtonProps) =>{
     const [isLoading, setIsLoading] = useState(false);
+    const memberId = useMemberId();
 
     const handlePayment = async () =>{
         if(!amount){
@@ -16,37 +18,26 @@ const KakaoPayButton = ({ amount }: KakoPayButtonProps) =>{
         
         setIsLoading(true);
         try{
-            const response = await axios.post (
-                "https://open-api.kakaopay.com/online/v1/payment/ready",
+            const response = await axios.post ("/payment/ready",
                 {
-                    cid: "TC0ONETIME",
-                    partner_order_id: "order_20250312_001",
-                    partner_user_id: "user_001",
-                    item_name: "포인트 충전",
-                    quantity: 1,
-                    total_amount: 2000,
-                    tax_free_amount: 0,
-                    approval_url: "http://localhost:5173/mypage",
-                    cancel_url: "http://localhost:5173/mypage/point",
-                    fail_url: "http://localhost:5173/mypage/point"
+                    id: memberId,
+                    name: "포인트 충전",
+                    totalPrice: amount
                 },
-                {   
-                    headers: {
-                        Authorization: "SECRET_KEY DEV8136D38F1315C04CD73192A5A4B07751C9E8A",
-                        "Content-Type": "application/json",
-                    },
-                }
+                {headers: {"Content-Type": "application/json"}}
             );
-            console.log(response.data);
-            const tid = response.data.tid;
-            if (tid) {
-                console.log("결제 ID:", tid);
+   
+            const { tid, next_redirect_pc_url } = response.data;
+           
+            console.log("결제 ID:", tid);
+            if (tid && next_redirect_pc_url) {
+                // 결제 준비 완료 후 카카오페이 결제 창으로 리디렉션
+                window.location.href = next_redirect_pc_url;
             } else {
-                console.error("tid 값이 응답에 없습니다.");
+                console.error("tid 또는 next_redirect_pc_url이 응답에 없습니다.");
             }
             
-        }
-        catch (error: any) {
+        } catch (error: any) {
             console.error("결제 오류:", error.response || error.message);
             alert("결제 요청 중 오류 발생");
         } finally {

@@ -129,7 +129,10 @@ export default defineConfig({
         ws: true, // 웹소켓용 프록시!
         changeOrigin: true,
         secure: false,
-      }
+      },
+      "/payment": {
+        target: 'http://13.125.21.225:8080',
+      },
     },
   },
 });

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ButtonStyle1 from "../common/ui/ButtonStyle1";
 import usePointHistory from "../../hooks/mypage/point/usePointHistory";
 import useMyPageInfo from "../../hooks/mypage/useMyPageInfo";
@@ -7,7 +8,6 @@ const Point = () : JSX.Element =>{
 
     // 회원 정보 가져오기
     const { info } = useMyPageInfo();
-
     return (
         <>
             <strong className="block nexon-bold text-xl text-black4 mb-2">포인트</strong>
@@ -21,11 +21,13 @@ const Point = () : JSX.Element =>{
                             <span className="text-myBlue">{info?.points}</span>P
                         </strong>
                     </div>
-                    <ButtonStyle1
-                        type="button"
-                        label="포인트 충전"
-                        className="bg-myBlue text-white"
-                    />
+                    <Link to="/mypage/point/charge" state={{ currentPoints: info?.points }}>
+                        <ButtonStyle1
+                            type="button"
+                            label="포인트 충전"
+                            className="bg-myBlue text-white cursor-pointer"
+                        />
+                    </Link>
                 </div>
                 { points?.length === 0 ? (
                     <div className="flex-grow flex items-center justify-center border-t border-gray5">

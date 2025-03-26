@@ -27,6 +27,7 @@ import MyStudyListView from "../views/mypage/MyStudyListView.tsx";
 import Notification from "../components/mypage/Notification.tsx"
 import MyLikes from "../components/mypage/MyLikes.tsx"
 import StudyChatPage from "../views/chat/StudyChatPage.tsx";
+import KakaoPayApproval from "../components/mypage/KakaPayApproval.tsx";
 
 const Router = ():JSX.Element =>{
     return(
@@ -49,6 +50,7 @@ const Router = ():JSX.Element =>{
                 <Route path="/mypage/" element={<MyPage/>} />
                 <Route path="/mypage/point" element={<Point />} />
                 <Route path="/mypage/point/charge" element={<PointCharge />} />
+                <Route path="/payment/approve" element={<KakaoPayApproval />} />
                 <Route path="/mypage/personalinfo" element={<PersonalInfo />} />
                 <Route path="/mypage/notification" element={<Notification />} />
                 <Route path="/mypage/mylikes" element={<MyLikes />} />
