@@ -29,28 +29,17 @@ const Point = () : JSX.Element =>{
                         />
                     </Link>
                 </div>
-                { points?.length === 0 ? (
-                    <div className="flex-grow flex items-center justify-center border-t border-gray5">
-                        <p className="text-sm text-black6 text-center">내역이 없습니다.</p>
+                {points?.map((point, index) => (
+                    <div key={`${point.date}-${index}`} className={`flex items-center justify-between px-5 py-5 border-t border-gray5 ${index === points.length -1 && "border-b border-gray5"}`}>
+                        <div>
+                            <strong className="block text-lg nexon-medium text-black4">
+                                {point.type === "REWARD" ? "적립" : point.type === "USE" ? "사용" : "충전"}
+                            </strong>
+                            <span className="block text-sm text-black9">{ point.date }</span>
+                        </div>
+                        <strong className="block text-lg nexon-bold text-myBlue">{ point.amount }</strong>
                     </div>
-                ): (
-                    <div>
-                        {points?.map((point, index) => (
-                            <div key={point.date} className={`flex items-center justify-between px-5 py-5 border-t border-gray5 ${index === points.length -1 && "border-b border-gray5"}`}>
-                                <div>
-                                    <strong className="block text-lg nexon-medium text-black4">
-                                        {
-                                            point.type === "REWARD" ? "적립" :
-                                            point.type === "USE" ? "사용" : "충전"
-                                        }
-                                    </strong>
-                                    <span className="block text-sm text-black9">{ point.date }</span>
-                                </div>
-                                <strong className="block text-lg nexon-bold text-myBlue">{ point.amount }</strong>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                ))}
                 
             </div>
         </>
