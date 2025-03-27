@@ -7,6 +7,7 @@ import { PiArrowBendDownRightBold } from "react-icons/pi";
 import FormButton from "../../form/FormButton";
 import TextArea from "../../form/TextArea";
 import { CommentData } from "../../../types/comment";
+import useAuth from "../../../hooks/login/useAuth";
 import useComments from "../../../hooks/common/useComments";
 import useMyPageInfo from "../../../hooks/mypage/useMyPageInfo";
 import { formatDate } from "../../common/utils/formatDate";
@@ -16,6 +17,7 @@ interface CommentProps {
 }
 const CommentList = ({ postId }: CommentProps): JSX.Element => {
   const { contentType } = useContentType();
+  const { isAuthenticated } = useAuth();
   const [newComment, setNewComment] = useState("");
   const [replyComment, setReplyComment] = useState("");
   const [replyingTo, setReplyingTo] = useState<number | null>(null); // 댓글별로 답변창 열기
@@ -23,7 +25,7 @@ const CommentList = ({ postId }: CommentProps): JSX.Element => {
   const [editContent, setEditContent] = useState(""); // 수정할 댓글 내용
   
   const { comments, loading, fetchComment, addComment, deleteComment, editComment, hasMore } = useComments(postId);
-  const { info } = useMyPageInfo();
+  const info = isAuthenticated ? useMyPageInfo().info : null; 
   const observer = useRef<IntersectionObserver | null>(null); // Intersection Observer로 무한 스크롤 구현
   const commentsEndRef = useRef<HTMLDivElement | null>(null); // 댓글 목록 끝을 참조하는 ref
 

@@ -15,6 +15,7 @@ interface MyLikesData{
 const useMyLikes = () => {
     const { token } = useAuth();
     const [ myLikes, setMyLikes ] = useState<MyLikesData[]>([]);
+
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState<string | null>(null);
 

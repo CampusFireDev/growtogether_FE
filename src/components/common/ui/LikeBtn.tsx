@@ -3,6 +3,7 @@ import { useContentType } from "../../../context/ContentTypeContext";
 import { IoMdHeart,IoMdHeartEmpty } from "react-icons/io";
 import FormButton from "../../form/FormButton";
 import useMyLikes from "../../../hooks/mypage/useMyLikes";
+import useAuth from "../../../hooks/login/useAuth";
 
 interface LikeBtnProps {
     likeCount?: number;
@@ -11,10 +12,16 @@ interface LikeBtnProps {
 };
 
 const LikeBtn = ({ likeCount, className, postId }:LikeBtnProps):JSX.Element => {
+    const { token } = useAuth(); // 로그인 여부 확인
     const [liked, setLiked] = useState(false);
+
+    const { myLikes, handleBootcampLike, handleStudyLike } = token
+    ? useMyLikes()
+    : { myLikes: [], handleBootcampLike: () => {}, handleStudyLike: () => {} };
+
     // const [count, setCount] = useState(likeCount);
     const { contentType } = useContentType();
-    const { myLikes, handleBootcampLike, handleStudyLike } = useMyLikes();
+    // const { myLikes, handleBootcampLike, handleStudyLike } = useMyLikes();
 
     useEffect(() => {
         const isLiked = myLikes.some((item) => item.postId === postId);
