@@ -23,7 +23,7 @@ const BootcampCard = ({ bootcamp, showTechStack = true }: BootcampCardProps): JS
                     <p>{bootcamp.createdAt.split("T")[0]}</p>
                 </div>
                 {/* showTechStack이 true일 때만 기술 스택 표시*/}
-                {showTechStack && <TechStackList stacks={bootcamp.skillNames}/>}
+                {showTechStack && <TechStackList stacks={bootcamp.skillNames} className="h-[68px] overflow-hidden"/>}
                 <div className="flex justify-between mt-[15px] pt-[15px] border-t border-gray5">
                     <div className="flex items-center gap-1">
                     <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5">

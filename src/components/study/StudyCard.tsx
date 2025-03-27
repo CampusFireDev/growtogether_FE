@@ -24,7 +24,7 @@ const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element
                 </div>
                 <strong className="text-xl/[31px] h-[64px] overflow-hidden line-clamp-2 nexon-bold mt-[6px] mb-[15px] text-black4">{study.title}</strong>
                 {/* showTechStack이 true일 때만 기술 스택 표시*/}
-                {showTechStack && <TechStackList stacks={study.skillNames}/>}
+                {showTechStack && <TechStackList stacks={study.skillNames} className="h-[68px] overflow-hidden"/>}
                 <div className="flex justify-between mt-[15px] pt-[15px] border-t border-gray5">
                     <div className="flex items-center gap-2">
                     <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5">

@@ -10,7 +10,7 @@ const CreateBtn = () => {
     return (
         <Link to={`/${contentType}/create`}>
             <button
-                className={`fixed bottom-13 right-5 flex items-center gap-2 px-4 h-[50px] text-[13px] text-white bg-myBlue/88 rounded-full shadow-lg cursor-pointer z-50 
+                className={`fixed bottom-13 right-15 flex items-center gap-2 px-4 h-[50px] text-[13px] text-white bg-myBlue/88 rounded-full shadow-lg cursor-pointer z-50 
                 transition-all duration-300 ${isHovered ? "w-[190px] pl-5 pr-5 rounded-[10px]" : "w-[50px] justify-center"}`}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
