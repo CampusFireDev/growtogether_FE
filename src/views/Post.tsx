@@ -53,7 +53,11 @@ const Post = ({ post, postTitle, infoTitle, children }: PostProps):JSX.Element =
         <h2 className="nexon-bold text-[20px] my-3">{postTitle}</h2>
         <div className="border-y border-gray5 flex items-center justify-between">    
             <div className="flex items-center gap-2 text-black4 text-[13px] text-nowrap py-3">
+<<<<<<< HEAD
                 <img src={isBootcampPost(post) && post.profileImageUrl ? post.profileImageUrl : "/images/noImage20.png"} alt="" className="w-6 h-6"/>
+=======
+				<img src={isBootcampPost(post) && post.profileImageUrl ? post.profileImageUrl : "/images/noImage20.png"} alt="" className="w-6 h-6"/>
+>>>>>>> 4a7cf9a (refactor: 페이지 리펙토링)
                 <span className="nexon-medium">{post.author} | 작성일</span>
                 <span>{formatDate(post.createdAt)}</span>
             </div>

@@ -26,7 +26,11 @@ const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element
                 {/* showTechStack이 true일 때만 기술 스택 표시*/}
                 {showTechStack && <TechStackList stacks={study.skillNames}/>}
                 <div className="flex justify-between mt-[15px] pt-[15px] border-t border-gray5">
+<<<<<<< HEAD
                     <div className="flex items-center gap-2">
+=======
+                    <div className="flex items-center gap-1">
+>>>>>>> 4a7cf9a (refactor: 페이지 리펙토링)
                         <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5">
                             <img src="/images/noImage20.png" />
                         </div>

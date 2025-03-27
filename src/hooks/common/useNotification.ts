@@ -27,7 +27,7 @@ const useNotification = () => {
                 setNotificationCount(res.data.length);
             }
         } catch (error: any) {
-            console.error("🎯 알림 로딩 오류:", error.message);
+            // console.error("🎯 알림 로딩 오류:", error.message);
             setError("알림을 로드하는 중 오류가 발생했습니다.");
         }
     };

@@ -25,7 +25,6 @@ import StudyDashboardLayout from "../layout/StudyDashboardLayout.tsx";
 import LikedPostsView from "../views/mypage/LikedPostsView.tsx";
 import MyStudyListView from "../views/mypage/MyStudyListView.tsx";
 import Notification from "../components/mypage/Notification.tsx"
-import MyLikes from "../components/mypage/MyLikes.tsx"
 import StudyChatPage from "../views/chat/StudyChatPage.tsx";
 import KakaoPayApproval from "../components/mypage/KakaoPayApproval.tsx";
 
@@ -53,8 +52,7 @@ const Router = ():JSX.Element =>{
                 <Route path="/payment/approve" element={<KakaoPayApproval />} />
                 <Route path="/mypage/personalinfo" element={<PersonalInfo />} />
                 <Route path="/mypage/notification" element={<Notification />} />
-                <Route path="/mypage/mylikes" element={<MyLikes />} />
-                <Route path="/mypage/like-post" element={<LikedPostsView />} />
+                <Route path="/mypage/mylikes" element={<LikedPostsView />} />
                 <Route path="/mypage/study" element={<MyStudyListView />} />
                 <Route path="/findId" element={<FindId />} />
             </Route>

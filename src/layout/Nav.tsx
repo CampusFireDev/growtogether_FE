@@ -1,4 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/login/useAuth";
 import useNotification from "../hooks/common/useNotification";
 import Notification from "../components/mypage/Notification";
@@ -10,6 +11,15 @@ const Nav = ():JSX.Element =>{
     const {notificationCount} = useNotification();
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // 현재 선택된 메뉴 상태 저장
+    const [activeMenu, setActiveMenu] = useState<string>("");
+
+    useEffect(() => {
+        setActiveMenu(location.pathname);
+    }, [location.pathname]);
+
 
     // 마이페이지 클릭 시 실행할 함수
     const handleMyPageClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -33,13 +43,13 @@ const Nav = ():JSX.Element =>{
                     <Link to="/" className="text-xl nexon-bold">GrowTogether</Link>
                     <ul className="list-none items-center flex gap-4 text-[13px] mx-2 lg:text-[15px] lg:mx-4 text-nowrap">
                         <li>
-                            <Link to="/study" className="nexon-medium">스터디</Link>
+                            <Link to="/study" className={`nexon-medium ${activeMenu === "/study" ? "text-myBlue border-b-2 pb-1" : ""}`}>스터디</Link>
                         </li>
                         <li>
-                            <Link to="/bootcamp" className="nexon-medium">부트캠프</Link>
+                            <Link to="/bootcamp" className={`nexon-medium ${activeMenu === "/bootcamp" ? "text-myBlue border-b-2 pb-1": ""}`}>부트캠프</Link>
                         </li>
                         <li>
-                            <Link to="/mypage" className="nexon-medium" onClick={handleMyPageClick}>마이페이지</Link>
+                            <Link to="/mypage" className={`nexon-medium ${activeMenu.startsWith("/mypage") ? "text-myBlue border-b-2 pb-1" : ""}`} onClick={handleMyPageClick}>마이페이지</Link>
                         </li>
                     </ul>
                 </div>

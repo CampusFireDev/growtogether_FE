@@ -22,9 +22,7 @@ const LikeBtn = ({ likeCount, className, postId }:LikeBtnProps):JSX.Element => {
     }, [myLikes, postId]);
     
     const likeHandle = () =>{
-        console.log("🎯",myLikes);
         setLiked(!liked);
-        console.log("⭕", postId);
         if(contentType === "bootcamp"){
             handleBootcampLike(postId);
         } else if(contentType === "study"){

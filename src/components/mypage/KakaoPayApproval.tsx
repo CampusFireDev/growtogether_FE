@@ -39,7 +39,7 @@ const KakaoPayApproval = ():JSX.Element =>{
                      throw new Error("tid 또는 memberId가 로컬 스토리지에 없습니다.");
                  }
  
-                 console.log("🟣", storedMemberId, tid, pgToken);
+                console.log("🟣", storedMemberId, tid, pgToken);
 
                 const approveResponse = await axios.post(`/payment/approve2`,
                     {
