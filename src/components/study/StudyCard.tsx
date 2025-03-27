@@ -26,7 +26,7 @@ const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element
                 {/* showTechStack이 true일 때만 기술 스택 표시*/}
                 {showTechStack && <TechStackList stacks={study.skillNames}/>}
                 <div className="flex justify-between mt-[15px] pt-[15px] border-t border-gray5">
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                     <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5">
                         <img 
                             src={study.profileImageUrl?.trim() ? study.profileImageUrl : "/images/noImage20.png"} 

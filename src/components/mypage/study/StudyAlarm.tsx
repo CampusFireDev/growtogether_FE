@@ -185,7 +185,7 @@ const StudyAlarm = (): JSX.Element => {
     return (
         <div>
             <ul>
-                {!isAlreadyInStudy && 
+                {isAlreadyInStudy && 
                     join?.map((join) => (
                         <li className="flex items-center justify-between py-[15px] px-[20px] bg-white9" key={join.studyMemberId}>
                         <div className="flex items-center gap-2">
