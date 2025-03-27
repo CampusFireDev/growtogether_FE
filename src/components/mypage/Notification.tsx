@@ -9,19 +9,19 @@ const Notification = ({ isPopup }: NotificationProps):JSX.Element => {
   const navigate = useNavigate();
   const { notification, notificationCount, readNotification, error } = useNotification();
 
-  // const extractRelativeUrl = (fullUrl: string) => {
-  //   const url = new URL(fullUrl);
-  //   // return url.pathname; // "/api/bootcamp/comments/35" 반환
+  const extractRelativeUrl = (fullUrl: string) => {
+    const url = new URL(fullUrl);
+    // return url.pathname; // "/api/bootcamp/comments/35" 반환
 
-  //   const pathname = url.pathname;
-  //   const modifiedPath = pathname.replace("/api", "").replace("/comments", "");
-  //   return `${modifiedPath}`; // "/bootcamp/36"
-  // };
+    const pathname = url.pathname;
+    const modifiedPath = pathname.replace("/api", "").replace("/comments", "");
+    return `${modifiedPath}`; // "/bootcamp/36"
+  };
 
   const handleNotificationClick = (notiId: number, url: string) => {
     readNotification(notiId);
-    // const relativeUrl = extractRelativeUrl(url);
-    navigate(url); // 해당 URL로 이동
+    const relativeUrl = extractRelativeUrl(url);
+    navigate(relativeUrl); // 해당 URL로 이동
   }; 
   // 팝업 알림
   if (isPopup) {

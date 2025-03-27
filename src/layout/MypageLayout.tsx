@@ -37,7 +37,7 @@ const MypageLayout = ():JSX.Element => {
                         <div className="flex flex-col border border-gray5 w-[250px] self-start bg-white nexon-medium text-black4">
                             <div className="flex flex-col pt-[30px] pb-[20px] px-[20px] border-b border-gray5 justify-center items-center">
                                 <div className="block w-[80px] h-[80px] overflow-hidden mb-3">
-                                    <img src={info?.profileImageUrl || "/images/noImage80.png"} alt="프로필 이미지" className="w-full"/>
+                                    <img src={info?.profileImageUrl || "/images/noImage80.png"} alt="" className="w-full"/>
                                 </div>
                                 <p className="nexon-bold">{info?.nickName}</p>
                                 <p className="text-black6 nexon text-sm mt-1">{info?.email}</p>
