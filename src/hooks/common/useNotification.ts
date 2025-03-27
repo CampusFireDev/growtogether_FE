@@ -52,7 +52,7 @@ const useNotification = () => {
         if (!memberId) return;
         const BASE_URL = "https://www.growtogether.store/"; // 백엔드 API 서버 주소
         const EventSource = EventSourcePolyfill;
-        const eventSource = new EventSource(`${BASE_URL}/sse/subscribe/${memberId}`, {
+        const eventSource = new EventSource(`${BASE_URL}sse/subscribe/${memberId}`, {
             headers,
             withCredentials: true, 
         } as EventSourcePolyfillInit);
