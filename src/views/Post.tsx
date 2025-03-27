@@ -51,8 +51,10 @@ const Post = ({ post, postTitle, infoTitle, children }: PostProps):JSX.Element =
   
   return(
     <div className="w-full max-w-[1200px] my-10">  
-        <StudyTypeBadge type={post.type}/>
-        <h2 className="nexon-bold text-[20px] my-3">{postTitle}</h2>
+		{contentType === "study" && (
+        	<StudyTypeBadge type={post.type}/>
+		)}
+        <h2 className="nexon-bold text-[28px] my-3">{postTitle}</h2>
         <div className="border-y border-gray5 flex items-center justify-between">    
             <div className="flex items-center gap-2 text-black4 text-[13px] text-nowrap py-3">
 			<img src={post.profileImageUrl?.trim() ? post.profileImageUrl : "/images/noImage20.png"} alt="프로필 이미지" className="w-6 h-6"/>
