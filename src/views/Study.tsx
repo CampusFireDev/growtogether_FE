@@ -76,7 +76,7 @@ const Study = ({ isHome }: StudyProps):JSX.Element=>{
                     </>
                 )}
                 <div className="flex justify-between items-center mb-[20px] mt-[60px]">
-                    <h3 className="nexon-bold text-2xl text-black4">모집 중인 게시글 <span className="text-myBlue">{openStudyList.length}</span>개를 찾았어요.</h3>
+                    <h3 className="nexon-bold text-2xl text-black4">총 게시글 <span className="text-myBlue">{totalElements}</span>개를 찾았어요.</h3>
                     <ListSearchBar searchTerm={searchTerm} onSearch={handleSearch}/>
                 </div>
                 <StudyCardList 
