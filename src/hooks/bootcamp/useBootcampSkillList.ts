@@ -29,7 +29,9 @@ const useBootcampSkillName = () => {
     // }, []);
 
     const url = `https://www.growtogether.store/api/bootcamp/skillName`;
-    const { data: skillName, loading, error } = useApi<SkillNameResponse>(url, true, "GET");
+    const { data: skillName, loading, error } = useApi<SkillNameResponse>(url, false, "GET");
+
+    console.log(skillName);
 
     return { skillName, loading, error };
 };

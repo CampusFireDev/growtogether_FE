@@ -31,7 +31,7 @@ const TechSelectBox = ({ availableStacks, selectedStacks, onChangeSelectedStacks
                 label="기술스택"
                 labelClassName="nexon-medium text-[15px] text-black4"
                 placeholder="기술 스택을 선택해주세요."
-                options={skillName}
+                options={skillName ?? []}
                 onChange={handleSelectChange}
             />
             <div className="flex flex-wrap gap-1 mt-2">

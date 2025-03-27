@@ -274,7 +274,7 @@ const SignUpStep2 = ():JSX.Element=>{
                     />
                 </div>
                 <div className="mb-5">
-                    <TechSelectBox availableStacks={skillName} selectedStacks={selectedStacks} onChangeSelectedStacks={setSelectedStacks} />
+                    <TechSelectBox availableStacks={skillName ?? []} selectedStacks={selectedStacks} onChangeSelectedStacks={setSelectedStacks} />
                 </div>
 
 
