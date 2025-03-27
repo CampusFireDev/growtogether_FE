@@ -18,7 +18,7 @@ const KakaoPayButton = ({ amount }: KakoPayButtonProps) =>{
         
         setIsLoading(true);
         try{
-            const response = await axios.post ("/payment/ready/callback",
+            const response = await axios.post ("https://www.growtogether.store/payment/ready/callback",
                 {
                     id: memberId,
                     name: "포인트 충전",

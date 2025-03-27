@@ -114,7 +114,7 @@ const SignUpStep2 = ():JSX.Element=>{
         };
 
         try {
-            const response = await axios.post("http://13.125.21.225:8080/member/register", signupData);
+            const response = await axios.post("https://www.growtogether.store/member/register", signupData);
 
             if (response.data.message === "회원가입이 완료되었습니다.") {
                 localStorage.setItem("nickName", formData.nickName);

@@ -3,7 +3,7 @@ import { StudyData } from "../../types/study";
 
 export const useStudyPost = async (id: number): Promise<StudyData> => {
   try {
-    const res = await axios.get(`/api/study/${id}`);
+    const res = await axios.get(`https://www.growtogether.store/api/study/${id}`);
     
     const data: StudyData = res.data;
     console.log("✅", data);

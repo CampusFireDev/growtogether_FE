@@ -30,7 +30,7 @@ const useMyLikes = () => {
     const fethLikes = async () => {
         setLoading(true);
         try {
-            const res = await axios.get("/api/mypage/liked-posts", { headers });
+            const res = await axios.get("https://www.growtogether.store/api/mypage/liked-posts", { headers });
             const myLikes = res.data; 
             setMyLikes(myLikes);
         } catch(error) {
@@ -43,7 +43,7 @@ const useMyLikes = () => {
 
     const handleBootcampLike = async (postId: number) => {
         try {
-            const res = await axios.post(`/api/bootcamp/${postId}/like`,{},{ headers });
+            const res = await axios.post(`https://www.growtogether.store/api/bootcamp/${postId}/like`,{},{ headers });
             console.log(res);
             window.location.reload();
             fethLikes();
@@ -53,7 +53,7 @@ const useMyLikes = () => {
     };
     const handleStudyLike = async (postId: number) =>{
         try {
-            const res = await axios.post(`/api/study/bookmark/${postId}`,{},{ headers });
+            const res = await axios.post(`https://www.growtogether.store/api/study/bookmark/${postId}`,{},{ headers });
             console.log(res); //{data: '좋아요 상태가 변경되었습니다.', status: 200, statusText: 'OK', headers: AxiosHeaders, config: {…}, …}
             window.location.reload();
             fethLikes();

@@ -11,7 +11,7 @@ const useBootcampPopularList = () => {
         
         const fetchBootcampPopularList = async() => {
             try{
-                const res = await axios.get("/api/bootcamp/top?strategyType=WeightStrategy&limit=5", {
+                const res = await axios.get("https://www.growtogether.store/api/bootcamp/top?strategyType=WeightStrategy&limit=5", {
                     headers: {
                         "Accept": "application/json"
                     }

@@ -13,9 +13,8 @@ const useMemberPw = () => {
             const urlencoded = new URLSearchParams();
             urlencoded.append("email", email); 
 
-            // axios 요청
             await axios.post(
-                "/member/forgot-password",
+                "https://www.growtogether.store/member/forgot-password",
                 urlencoded, 
                 {
                     headers: {
@@ -40,7 +39,7 @@ const useMemberPw = () => {
             urlencoded.append("token", resetToken);
             urlencoded.append("newPassword", newPassword);
 
-            const response = await axios.post("/member/reset-password", urlencoded, {
+            const response = await axios.post("https://www.growtogether.store/member/reset-password", urlencoded, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded", 
                 },

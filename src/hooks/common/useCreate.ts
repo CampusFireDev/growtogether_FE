@@ -41,7 +41,7 @@ const useCreate = ({ title, content, formData }: UseCreateProps) => {
                 );
 
                 formDataToSend.append("bootCampReview", jsonBlob);
-                response = await axios.post("/api/bootcamp", formDataToSend, { 
+                response = await axios.post("https://www.growtogether.store/api/bootcamp", formDataToSend, { 
                     headers: {
                         ...headers,
                         "Content-Type": "multipart/form-data", // 명시적으로 추가
@@ -58,7 +58,7 @@ const useCreate = ({ title, content, formData }: UseCreateProps) => {
                     skillNames: formData.skillNames || [],
                 };
 
-                response = await axios.post("/api/study", data, { headers });
+                response = await axios.post("https://www.growtogether.store/api/study", data, { headers });
             }
 
             if (response) {

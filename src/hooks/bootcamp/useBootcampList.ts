@@ -12,7 +12,7 @@ const useBootcampList = (page: number, sortType: string) => {
         const fetchFilterList = async () => {
             setLoading(true);
             try {
-                const res = await axios.get(`/api/bootcamp?page=${page}&sortType=${sortType}`);
+                const res = await axios.get(`https://www.growtogether.store/api/bootcamp?page=${page}&sortType=${sortType}`);
                 window.scrollTo(0, 0);
                 
                 if(Array.isArray(res.data.reviews)){

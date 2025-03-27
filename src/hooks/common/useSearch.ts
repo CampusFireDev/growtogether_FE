@@ -17,7 +17,7 @@ const useSearch = () => {
     const fetchSearch = async () => {
         setLoading(true);
         try {
-            const res = await axios.get("/api/bootcamp/search", {
+            const res = await axios.get("https://www.growtogether.store/api/bootcamp/search", {
                 headers: { "Accept": "application/json" }
             });
             setsearchList(res.data);

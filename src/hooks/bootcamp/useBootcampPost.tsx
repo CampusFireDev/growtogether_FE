@@ -3,7 +3,7 @@ import { BootcampData } from "../../types/bootcamp";
 
 export const useBootcampPost = async (id: number): Promise<BootcampData> => {
   try {
-    const res = await axios.get(`/api/bootcamp/${id}`);
+    const res = await axios.get(`https://www.growtogether.store/api/bootcamp/${id}`);
     
     const data: BootcampData = res.data;
     console.log("✅", data);

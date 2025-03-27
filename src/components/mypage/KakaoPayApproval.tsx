@@ -21,7 +21,7 @@ const KakaoPayApproval = ():JSX.Element =>{
         if (!pgToken) return;
         const approvePayment = async () => {
             try {
-                const response = await axios.get(`/payment/approve/callback?pg_token=${pgToken}`, {headers});
+                const response = await axios.get(`https://www.growtogether.store/payment/approve/callback?pg_token=${pgToken}`, {headers});
                 console.log("결제 승인 응답:", response);
                 // alert("결제가 완료되었습니다!");
 
@@ -41,7 +41,7 @@ const KakaoPayApproval = ():JSX.Element =>{
  
                 console.log("🟣", storedMemberId, tid, pgToken);
 
-                const approveResponse = await axios.post(`/payment/approve2`,
+                const approveResponse = await axios.post(`https://www.growtogether.store/payment/approve2`,
                     {
                         id: storedMemberId, 
                         tid: tid, 

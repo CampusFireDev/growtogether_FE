@@ -32,7 +32,7 @@ const useComments = (id: number) => {
             setLoading(true);
 
             try {
-                const res = await axios.get(`/api/${contentType}/comments/${id}?lastIdx=${lastIdx}&size=${size}`, {
+                const res = await axios.get(`https://www.growtogether.store/api/${contentType}/comments/${id}?lastIdx=${lastIdx}&size=${size}`, {
                     headers: { "Accept": "application/json" }
                 });
                 if (res.data && res.data.length > 0) {
@@ -77,7 +77,7 @@ const useComments = (id: number) => {
                     parentCommentId: commentData.parentCommentId ?? 0,
                 };
             }
-            const res = await axios.post(`/api/${contentType}/comments`, data, { headers });
+            const res = await axios.post(`https://www.growtogether.store/api/${contentType}/comments`, data, { headers });
             console.log("✅POST", res);
             // if (res.data === "댓글 작성이 완료되었습니다." || res.data === "" || res.data === null) {
             //     await fetchComment(); 
@@ -93,7 +93,7 @@ const useComments = (id: number) => {
     // 댓글 삭제하기
     const deleteComment = async (commentId: number) => {
         try {
-            const res  = await axios.delete(`/api/${contentType}/comments/${commentId}`, { headers });
+            const res  = await axios.delete(`https://www.growtogether.store/api/${contentType}/comments/${commentId}`, { headers });
             await fetchComment(0);
             window.location.reload();
             console.log("✅DELET", res);

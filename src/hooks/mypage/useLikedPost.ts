@@ -17,7 +17,7 @@ const useLikedPost = () => {
     useEffect(() => {
         const fetchLikedPosts = async () => {
             try {
-                const res = await axios.get("http://www.growtogether.store/api/mypage/myLikes", {
+                const res = await axios.get("https://www.growtogether.store/api/mypage/myLikes", {
                     headers: { Authorization: `${token}` },
                     withCredentials: true,
                 });

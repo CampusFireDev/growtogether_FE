@@ -33,7 +33,7 @@ const useStudyList = (page: number, searchTerm?: string, filters?: StudyFilters)
                 if (filters?.selectedDates?.length) queryParams.append("date", filters.selectedDates.join(","));
                 if (filters?.sortBy) queryParams.append("sortBy", filters.sortBy);
 
-                const finalUrl = `/api/study?${queryParams.toString()}`;
+                const finalUrl = `https://www.growtogether.store/api/study?${queryParams.toString()}`;
                 const res = await axios.get(finalUrl, {
                     headers: { "Accept": "application/json" }
                 });
@@ -61,7 +61,7 @@ const useStudyList = (page: number, searchTerm?: string, filters?: StudyFilters)
             setLoading(true);
             setError(null);
             try {
-                const res = await axios.get(`/api/study/search?page=${page}&size=9&title=${searchTerm}`);
+                const res = await axios.get(`https://www.growtogether.store/api/study/search?page=${page}&size=9&title=${searchTerm}`);
                 window.scrollTo(0, 0);
 
                 if (Array.isArray(res.data.studyList)) {

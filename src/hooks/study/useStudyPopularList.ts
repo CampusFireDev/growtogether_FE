@@ -11,7 +11,7 @@ const useStudyPopularList = () =>{
         const fetchPopularStudyList = async() =>{
             setLoading(true);
             try {
-                const res = await axios.get("/api/study/popular", {
+                const res = await axios.get("https://www.growtogether.store/api/study/popular", {
                     headers: {
                         "Accept": "application/json",
                     }

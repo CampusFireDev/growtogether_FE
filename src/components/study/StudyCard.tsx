@@ -27,9 +27,12 @@ const StudyCard = ({ study, showTechStack = true }: StudyCardProps): JSX.Element
                 {showTechStack && <TechStackList stacks={study.skillNames}/>}
                 <div className="flex justify-between mt-[15px] pt-[15px] border-t border-gray5">
                     <div className="flex items-center gap-1">
-                        <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5">
-                            <img src="/images/noImage20.png" />
-                        </div>
+                    <div className="w-[20px] h-[20px] rounded-full overflow-hidden bg-gray5">
+                        <img 
+                            src={study.profileImageUrl?.trim() ? study.profileImageUrl : "/images/noImage20.png"} 
+                            alt="" className="w-full h-full object-cover"
+                        />
+                    </div>
                         <p className="text-sm text-black6">{study.author}</p>
                     </div>
                     <ul className="flex text-sm text-black6 gap-3">

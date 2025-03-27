@@ -21,7 +21,7 @@ const useNotification = () => {
     // 이전에 읽지 않은 알람 로드
     const loadNotification = async () =>{
         try{
-            const res = await axios.get("/noti/unread", {headers});
+            const res = await axios.get("https://www.growtogether.store/noti/unread", {headers});
             if (res.data && Array.isArray(res.data)) {
                 setNotification(res.data);
                 setNotificationCount(res.data.length);
@@ -50,7 +50,7 @@ const useNotification = () => {
 
     useEffect(() =>{
         if (!memberId) return;
-        const BASE_URL = "http://13.125.21.225:8080"; // 백엔드 API 서버 주소
+        const BASE_URL = "https://www.growtogether.store/"; // 백엔드 API 서버 주소
         const EventSource = EventSourcePolyfill;
         const eventSource = new EventSource(`${BASE_URL}/sse/subscribe/${memberId}`, {
             headers,
