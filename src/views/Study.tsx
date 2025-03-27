@@ -24,7 +24,7 @@ const Study = ({ isHome }: StudyProps):JSX.Element=>{
     const { studyList, totalElements, totalPages, loading, error } = useStudyList(page, searchTerm, filters);
 
     // 모집중인 게시글만 필터링
-    const openStudyList = studyList.filter((study) => study.studyStatus === "RECRUIT" || [])
+    //const openStudyList = studyList.filter((study) => study.studyStatus === "RECRUIT" || [])
 
     const handleTempFilterChange = (newFilters: { studyPurpose?: string; skillNames?: string[]; selectedDates?: string[]; sortBy?: string}) => {
         setTempFilters(newFilters);
