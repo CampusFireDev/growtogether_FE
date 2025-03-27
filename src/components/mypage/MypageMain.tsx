@@ -15,8 +15,9 @@ const MypageMain = (): JSX.Element | null => {
             {/* 내 정보 */}
             <div className="py-7 px-7 mb-2 mt-3 border border-gray5 bg-white">
                 <div>
-                    <strong className="block nexon-medium text-lg">
-                        {info?.nickName}
+                    <strong className="block nexon-bold text-[26px] text-black4">
+                        <span className="block nexon-medium text-[17px]">안녕하세요,</span>
+                        {info?.nickName}님
                     </strong>
                 </div>
             </div>
