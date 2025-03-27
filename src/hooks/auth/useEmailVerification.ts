@@ -22,7 +22,7 @@ export const useEmailVerification = () => {
         formData.append("email", email);
 
         try {
-            await axios.post("http://13.125.21.225:8080/api/email/send", formData);
+            await axios.post("https://www.growtogether.store/api/email/send", formData);
             alert("인증번호가 이메일로 전송되었습니다.");
             setHasSentCode(true); // 인증번호 전송 완료 상태 변경
         } catch (e) {
@@ -40,7 +40,7 @@ export const useEmailVerification = () => {
         formData.append("code", code);
 
         try {
-            const response = await axios.post("http://13.125.21.225:8080/api/email/verify", formData);
+            const response = await axios.post("https://www.growtogether.store/api/email/verify", formData);
 
             if (response.data.message === "이메일 인증이 완료되었습니다.") {
                 setIsVerified(true);
