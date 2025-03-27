@@ -45,7 +45,7 @@ const SkillMenu = ({ setFormData, formData, navLabel}: SkillMenuProps) =>{
                 labelClassName="nexon-medium text-sm"
                 className={!navLabel ? "my-1" : "!h-[40px] text-[11px] sm:text-[15px] !w-full !min-w-50"}
                 placeholder={!navLabel ? "사용 언어를 선택해주세요." : contentType === "bootcamp" ? "학습 언어" : "기술 스택"}
-                options={skillName}
+                options={skillName ?? []}
                 onChange={handleTechStackChange}
             />
             
