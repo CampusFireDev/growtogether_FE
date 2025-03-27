@@ -20,7 +20,7 @@ const useBootcampProgramCourse = () => {
     useEffect(() => {
         const fetchCourses = async () =>{
             try{
-                const res = await fetch("/api/bootcamp/programCourses",{
+                const res = await fetch("https://www.growtogether.store/api/bootcamp/programCourses",{
                     headers: {"Accept": "application/json"}
                 }); 
                 const data = await res.json();
