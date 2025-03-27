@@ -11,14 +11,16 @@ const MypageMain = (): JSX.Element | null => {
 
     return (
         <div>
+            <img src="./images/mypageBanner.png" alt="" className="border border-gray5" />
             {/* 내 정보 */}
-            <div className="py-7 px-7 border border-gray5 bg-white">
+            <div className="py-7 px-7 mb-2 mt-3 border border-gray5 bg-white">
                 <div>
                     <strong className="block nexon-medium text-lg">
                         {info?.nickName}
                     </strong>
                 </div>
             </div>
+            
         </div>
     )
 }

@@ -81,7 +81,7 @@ const Post = ({ post, postTitle, infoTitle, children }: PostProps):JSX.Element =
 				<Link to={`/${contentType}`}>
 				<FormButton type="button" className="!w-[80px] bg-black6">목록</FormButton>
 				</Link>
-				{!isAlreadyInStudy && (
+				{!isAlreadyInStudy && contentType === "study" && (
 					<FormButton type="button" className="!w-[150px] bg-myBlue" onClick={() => setIsPopupOpen(true)}>
 						참여신청
 					</FormButton>
