@@ -110,9 +110,13 @@ const PersonalInfo = ():JSX.Element => {
             <div className="border border-gray5 bg-white py-10 px-10">
                 <form onSubmit={handleUpdate}>
                     <div className="relative w-[120px] h-[120px] m-auto">
-                        <div className=" w-full h-full rounded-full border border-gray5 overflow-hidden">
-                            <img src={profileImgUrl} alt={`${info?.nickName} 프로필 이미지`} />
-                        </div>
+                    <div className="w-full h-full rounded-full border border-gray5 overflow-hidden">
+                        <img 
+                            src={profileImgUrl || "/images/noImage80.png"} 
+                            alt={`${info?.nickName || "사용자"} 프로필 이미지`} className="w-full"
+                        />
+                    </div>
+
                         <input
                             type="file"
                             accept="image/*"
