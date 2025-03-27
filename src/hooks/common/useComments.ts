@@ -117,7 +117,7 @@ const useComments = (id: number) => {
                     parentCommentId: commentData.parentCommentId ?? 0,
                 };
             }
-            const res = await axios.put(`/api/${contentType}/comments/${commentData.commentId}`, data, { headers });
+            const res = await axios.put(`https://www.growtogether.store/api/${contentType}/comments/${commentData.commentId}`, data, { headers });
             console.log("✅PUT", res);
 
             await fetchComment(0);
