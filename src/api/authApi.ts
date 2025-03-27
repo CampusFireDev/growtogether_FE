@@ -41,7 +41,7 @@ export default api;
  * 로그인 API 호출 함수
  */
 export const login = async (email: string, password: string) => {
-    const response = await api.post(`${API_URL.API_BASE_URL}member/memberLogin`, { email, password });
+    const response = await api.post(`https://www.growtogether.store/member/memberLogin`, { email, password });
 
     // 응답에서 토큰 추출
     const accessToken = response.data.accessToken;
