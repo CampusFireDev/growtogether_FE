@@ -30,10 +30,13 @@ const LikeBtn = ({ likeCount, className, postId }:LikeBtnProps):JSX.Element => {
     
     const likeHandle = () =>{
         setLiked(!liked);
+        
         if(contentType === "bootcamp"){
             handleBootcampLike(postId);
         } else if(contentType === "study"){
             handleStudyLike(postId);
+        } else{
+            return
         }
 
     };
