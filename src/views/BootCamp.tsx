@@ -90,7 +90,7 @@ const BootCamp = ():JSX.Element=>{
                     </>
                 }
                 <div className="flex justify-between items-center mb-[20px] mt-[60px]">
-                    <h3 className="nexon-bold text-[24px] text-black4">부트캠프 후기 <span className="text-myBlue">{filteredBootcampList.length}</span>개를 찾았어요.</h3>
+                    <h3 className="nexon-bold text-[24px] text-black4">부트캠프 후기 <span className="text-myBlue">{filteredTotalElements}</span>개를 찾았어요.</h3>
                     <ListSearchBar searchTerm={searchTerm}  onSearch={handleSearch} />
                 </div>
                 <BootcampCardList 
