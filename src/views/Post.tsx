@@ -12,9 +12,9 @@ import CommentList from "../components/common/ui/CommentList";
 import { BootcampData  } from "../types/bootcamp";
 import { StudyData } from "../types/study";
 import { formatDate } from "../components/common/utils/formatDate";
-import useMyPageInfo from "../hooks/mypage/useMyPageInfo";
+// import useMyPageInfo from "../hooks/mypage/useMyPageInfo";
 import StudyJoinPopup from "../components/study/StudyJoinPopup";
-import useStudyGetMembers from "../hooks/mypage/study/useStudyGetMembers";
+// import useStudyGetMembers from "../hooks/mypage/study/useStudyGetMembers";
 
 interface PostProps {
 post: BootcampData | StudyData;
@@ -28,7 +28,7 @@ const Post = ({ post, postTitle, infoTitle, children }: PostProps):JSX.Element =
 	const { contentType } = useContentType();
 
 	// 로그인한 사용자 닉네임 가져오기
-	const { info } = useMyPageInfo();
+	// const { info } = useMyPageInfo();
 
 	// 팝업 상태 관리
 	const [ isPopupOpen, setIsPopupOpen ] = useState(false); 
@@ -42,9 +42,9 @@ const Post = ({ post, postTitle, infoTitle, children }: PostProps):JSX.Element =
 	};
 	
 	// 스터디에 참여했거나 강퇴당했거나 본인일때 참여 신청 막기
-	const studyId = !isBootcampPost(post) && post.studyId;
-	const { data: memberList = [] } = useStudyGetMembers(Number(studyId), "LEADER,NORMAL,PENDING,KICK");
-	const isAlreadyInStudy = memberList?.some((member) => member.nickname === info?.nickName);
+	// const studyId = !isBootcampPost(post) && post.studyId;
+	// const { data: memberList = [] } = useStudyGetMembers(Number(studyId), "LEADER,NORMAL,PENDING,KICK");
+	// const isAlreadyInStudy = memberList?.some((member) => member.nickname === info?.nickName);
 
   
   return(
@@ -79,11 +79,11 @@ const Post = ({ post, postTitle, infoTitle, children }: PostProps):JSX.Element =
 				<Link to={`/${contentType}`}>
 				<FormButton type="button" className="!w-[80px] bg-black6">목록</FormButton>
 				</Link>
-				{!isAlreadyInStudy && (
+				{
 					<FormButton type="button" className="!w-[150px] bg-myBlue" onClick={() => setIsPopupOpen(true)}>
 						참여신청
 					</FormButton>
-				)}
+				}
 				{/* 참가 신청 팝업 */}
 				{!isBootcampPost(post) && isPopupOpen && (
 					<StudyJoinPopup post={post} onClose={() => setIsPopupOpen(false)} />

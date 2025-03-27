@@ -18,7 +18,7 @@ const stackStyles: Record<string, {color: string; img: string}> = {
     "Elasticsearch": {color: "border-[#000000] text-[#000000]", img:"/tech_logo/elasticsearch.png"},
     "Express.js": {color: "border-[#323330] text-[#323330]", img:"/tech_logo/expressjs.png"},
     "Firebase": {color: "border-[#000000] text-[#000000]", img:"/tech_logo/firebase.png"},
-    "Flask": {color: "border-[#000000] text-[#000000]", img:"/tech_logo/elasticsearch.png"},
+    "Flask": {color: "border-[#000000] text-[#000000]", img:"/tech_logo/flask.png"},
     "Google Cloud Platform": {color: "border-[#000000] text-[#000000]", img:"/tech_logo/googlecloud.png"},
     "IBM Cloud": {color: "border-[#000000] text-[#000000]", img:"/tech_logo/ibmcloud.png"},
     "Jenkins": {color: "border-[#000000] text-[#000000]", img:"/tech_logo/jenkins.png"},
