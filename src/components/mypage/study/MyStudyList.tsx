@@ -12,7 +12,7 @@ const MyStudyList = (): JSX.Element => {
                 내 스터디
                 <span className="inline-block ml-1 text-myBlue">{studyList?.length}</span>
             </strong>
-            <div className="max-h-117 overflow-x-hidden overflow-y-scroll">
+            <div className="max-h-122 overflow-x-hidden overflow-y-scroll">
                 <div className="border border-gray5 bg-white">
                     {studyList?.map((study, index) => (
                         <Link 

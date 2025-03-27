@@ -29,7 +29,7 @@ const MyLikes = ():JSX.Element => {
                 좋아요한 게시글
                 <span className="inline-block ml-1 text-myBlue">{myLikes.length}</span>
             </strong>
-            <div className="max-h-117 overflow-x-hidden overflow-y-scroll">
+            <div className="max-h-122 overflow-x-hidden overflow-y-scroll">
                 <div className="border border-gray5 bg-white">
                     {
                         myLikes.length > 0 ? (

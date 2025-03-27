@@ -11,7 +11,7 @@ const Point = () : JSX.Element =>{
     return (
         <>
             <strong className="block nexon-bold text-xl text-black4 mb-2">포인트</strong>
-            <div className="flex flex-col border border-gray5 bg-white min-h-[490px] max-h-123">
+            <div className="flex flex-col border border-gray5 bg-white min-h-[490px] max-h-122">
                 <div className="flex items-center justify-between py-7 px-7 ">
                     <div>
                         <em className="block nexon text-black6 mr-2 mb-1">
