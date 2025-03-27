@@ -8,10 +8,11 @@ interface TechSelectProps {
     onChangeSelectedStacks: (stacks: string[]) => void;
 }
 
-const TechSelectBox = ({ selectedStacks, onChangeSelectedStacks }: TechSelectProps): JSX.Element => {
+const TechSelectBox = ({ availableStacks, selectedStacks, onChangeSelectedStacks }: TechSelectProps): JSX.Element => {
     // 기술스택 리스트 가져오기
     const { skillName } = useBootcampSkillName();
 
+    console.log(availableStacks);
 
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
