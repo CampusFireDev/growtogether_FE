@@ -108,7 +108,8 @@ const CommentList = ({ postId }: CommentProps): JSX.Element => {
         <div key={key} className="relative flex flex-col justify-between">
           <div className="flex justify-between mb-10">
             <div className="flex items-center gap-2">
-              <img src="/images/profile.png" alt="" className="w-7 h-7" />
+              {/* <img src="/images/profile.png" alt="" className="w-7 h-7" /> */}
+              <div className="w-7 h-7 rounded-full overflow-hidden bg-gray5"></div>
               <span className="text-[13px] nexon-bold text-black6">{comment.author}</span>
               { isOwnComment && <img src="/images/owncomment.png" className="mr-2"></img> }
               <span className="text-[13px] nexon-medium text-black9">{formatDate(comment.createdAt)}</span>

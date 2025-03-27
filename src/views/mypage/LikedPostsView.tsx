@@ -1,9 +1,9 @@
-import LikedPostList from "../../components/mypage/likePosts/LikedPostList";
+import MyLikds from "../../components/mypage/likePosts/MyLikes";
 
 const LikedPostsView = (): JSX.Element => {
     return (
         <>
-            <LikedPostList />
+            <MyLikds />
         </>
     )
 }
