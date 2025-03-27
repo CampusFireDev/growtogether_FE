@@ -70,9 +70,9 @@ const Post = ({ post, postTitle, infoTitle, children }: PostProps):JSX.Element =
 		
 			{/* 후기 / 모집글 작성*/}
 			<div className="border-b border-gray5 py-5">
-			<p className="nexon-bold text-black4 text-[14px] lg:text-[17px] mb-3">{infoTitle}</p>
-			<p className="nexon-bold text-[14px] lg:text-[17px] ">{post.title}</p>
-			<p className="text-[13px] lg:text-[15px] my-2">{post.content}</p>
+				<p className="nexon-bold text-black4 text-[14px] lg:text-[17px] mb-3">{infoTitle}</p>
+				{/* <p className="nexon-bold text-[14px] lg:text-[17px] ">{post.title}</p> */}
+				<p className="text-[13px] lg:text-[15px] my-2">{post.content}</p>
 			</div>
 
 			{/* 좋아요, 목록 버튼*/}
